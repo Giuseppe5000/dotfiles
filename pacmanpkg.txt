@@ -44,7 +44,7 @@ qbittorrent
 qt5ct
 rclone
 scrcpy
-simple-scan
+skanlite
 telegram-desktop
 thunderbird
 tor
