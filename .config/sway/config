@@ -242,9 +242,10 @@ for_window [app_id="org.gnome.Calculator"] floating enable
 assign [app_id="^firefox$"] 2
 assign [class="^discord$"] 3
 assign [class="^Spotify$"] 4
+assign [app_id="^thunderbird$"] 5
+
+include /etc/sway/config.d/*
 
 bar {
     swaybar_command waybar
 }
-
-include /etc/sway/config.d/*
