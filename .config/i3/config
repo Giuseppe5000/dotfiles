@@ -1,17 +1,13 @@
 # i3 config file (v4)
 
+# Variables
 set $mod Mod4
 set $background ~/Immagini/background.jpg
+set $term alacritty
+set $menu rofi -show drun -display-drun ">" -icon-theme "Papirus" -show-icons -theme android_notification.rasi
 
 # Font
 font pango:DejaVu Sans Mono 8
-
-# Start XDG autostart .desktop files using dex. See also
-# https://wiki.archlinux.org/index.php/XDG_Autostart
-#exec --no-startup-id dex --autostart --environment i3
-
-# Polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
@@ -57,8 +53,10 @@ exec --no-startup-id "xinput --set-prop 10 'libinput Accel Speed' -1"
 exec --no-startup-id unclutter
 
 # Borders
-default_border none
+default_border pixel
 default_floating_border none
+smart_borders on
+client.focused "#000000" "#9900cc" "#000000"
 
 # Audio
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -79,13 +77,13 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # Terminal
-bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+Return exec --no-startup-id $term
 
 # kill focused window
 bindsym $mod+q kill
 
 # Rofi
-bindsym $mod+d exec --no-startup-id rofi -show drun -display-drun ">" -icon-theme "Papirus" -show-icons -theme android_notification.rasi 
+bindsym $mod+d exec --no-startup-id $menu 
 
 # change focus
 bindsym $mod+h focus left
@@ -134,8 +132,9 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# focus the child container
-#bindsym $mod+d focus child
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
 
 # Exit
 set $mode_system (l) lock, (e) logout, (r) reboot, (s) shutdown
@@ -154,42 +153,29 @@ bindsym $mod+Shift+e mode "$mode_system"
 
 bindsym $mod+Mod1+l exec --no-startup-id $i3lockwall
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
-
 # switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -227,15 +213,35 @@ bindsym $mod+n exec --no-startup-id dolphin
 # Clipboard menu
 bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -theme android_notification.rasi
 
-# Inner gaps for all windows: space between two adjacent windows (or split containers).
+# Gaps
 gaps inner 5px
-
-# Outer gaps for all windows: space along the screen edges.
 gaps outer 2px
-
 smart_gaps on
 
 # Floating windows
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
-for_window [class="File-roller"] floating enable
+
+# Apps workspace
+assign [class="^firefox$"] 2
+assign [class="^discord$"] 3
+assign [class="^Spotify$"] 4
+assign [class="^thunderbird$"] 5
+
+# i3bar configuration
+bar {
+    position top
+    strip_workspace_numbers yes
+    tray_padding 1
+    font pango:Economica, FontAwesome 10
+    separator_symbol " "    
+    colors {
+        background #323232
+        statusline #ffffff
+        focused_workspace  #9900cc #9900cc    #ffffff
+        active_workspace   #323232 #323232    #ffffff
+        inactive_workspace #323232 #323232    #ffffff
+    }
+
+    status_command i3status
+}
