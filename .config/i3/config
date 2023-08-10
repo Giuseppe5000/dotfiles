@@ -40,7 +40,12 @@ exec --no-startup-id /usr/lib/kdeconnectd
 # Background wallpaper
 exec_always --no-startup-id feh --bg-scale $background
 
+# Notes
+exec --no-startup-id $term -T Scratchpad -e nvim .notes
+for_window [title="Scratchpad"] move scratchpad
+
 # Keyboard layout
+exec --no-startup-id "setxkbmap -layout us"
 #exec --no-startup-id "setxkbmap -layout it"
 
 # Keyboard led
