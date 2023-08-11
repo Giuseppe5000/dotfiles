@@ -241,10 +241,10 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 
 # Apps workspace
-assign [class="^firefox$"] 2
-assign [class="^discord$"] 3
-assign [class="^Spotify$"] 4
-assign [class="^thunderbird$"] 5
+assign [class="^firefox$"] $ws2
+assign [class="^discord$"] $ws3
+assign [class="^Spotify$"] $ws4
+assign [class="^thunderbird$"] $ws5
 
 # i3bar configuration
 bar {
