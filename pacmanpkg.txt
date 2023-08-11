@@ -74,13 +74,13 @@ virt-manager
 
 # Sway
 cliphist
+rofi-lbonn-wayland
 swappy
 sway
 swaybg
 swayidle
 swaylock-effects
 waybar
-wofi
 
 # i3
 dunst
@@ -90,7 +90,6 @@ i3-wm
 i3lock
 i3status
 picom
-rofi
 unclutter
 xss-lock
 

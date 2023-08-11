@@ -8,7 +8,7 @@ set {
     $up k
     $right l
     $term alacritty
-    $menu wofi -S drun -I -b -p ''
+    $menu rofi -show drun
     $background ~/Immagini/background.jpg
     $lock swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color bb00cc --key-hl-color 880033 --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --grace 2 --fade-in 0.2
 }
@@ -225,7 +225,7 @@ bindsym $mod+Shift+s exec grim -g "$(slurp)" - | swappy -f -
 bindsym $mod+n exec dolphin
 
 # Clipboard menu
-bindsym $mod+c exec cliphist list | wofi -S dmenu -b -p '' | cliphist decode | wl-copy
+bindsym $mod+c exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
 
 # Gaps
 gaps inner 5px
@@ -235,7 +235,6 @@ smart_gaps on
 # Floating windows
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
-for_window [class="File-roller"] floating enable
 for_window [app_id="org.gnome.Calculator"] floating enable
 
 # Apps workspace
