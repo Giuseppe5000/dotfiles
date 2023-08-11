@@ -7,7 +7,7 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'ryanoasis/vim-devicons' -- nerd-fonts required
-Plug 'joshdick/onedark.vim'
+Plug 'dracula/vim'
 Plug 'mhinz/vim-startify'
 
 -- LSP
@@ -36,7 +36,7 @@ vim.cmd([[
 
 -- Colorscheme
 vim.cmd.syntax('on')
-vim.cmd.colorscheme('onedark')
+vim.cmd.colorscheme('dracula')
 vim.opt.termguicolors = true
 
 -- Font
@@ -60,7 +60,7 @@ vim.api.nvim_create_autocmd('TermOpen', {
 })
 
 -- Airline
-vim.g['airline_theme'] = 'onedark'
+vim.g['airline_theme'] = 'dracula'
 vim.g['airline_powerline_fonts'] = 1
 vim.g['airline_section_c'] = '%t'
 vim.cmd('let g:airline_section_z = airline#section#create(["%p%%", " ℅:%v"])')
