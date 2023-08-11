@@ -12,6 +12,7 @@ paru -S --needed $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' pacmanpkg.txt)
 
 # Configs
 mv .config/* $HOME/.config
+sudo mv etc/* /etc
 
 # Cursor
 mv .icons $HOME
