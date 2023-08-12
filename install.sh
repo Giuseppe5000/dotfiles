@@ -23,3 +23,4 @@ mv background.jpg $HOME/Immagini
 # ZSH
 mv .zshenv $HOME
 mv .zshrc $HOME
+mv .p10k.zsh $HOME
