@@ -24,3 +24,6 @@ mv background.jpg $HOME/Immagini
 mv .zshenv $HOME
 mv .zshrc $HOME
 mv .p10k.zsh $HOME
+
+# Notes
+touch $HOME/.notes

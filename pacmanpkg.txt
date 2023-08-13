@@ -2,6 +2,7 @@ alacritty
 ark
 baobab
 blueman
+btop
 chromium
 cups
 discord
@@ -15,7 +16,6 @@ gnome-disk-utility
 gnome-themes-extra
 gst-libav
 helvum
-htop
 iptables
 kdeconnect
 kdegraphics-thumbnailers
