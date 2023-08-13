@@ -65,6 +65,14 @@ exec /usr/lib/kdeconnectd
 # Firefox
 exec firefox
 
+# GTK settings
+exec {
+    gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
+    gsettings set org.gnome.desktop.interface cursor-theme 'default'
+    gsettings set org.gnome.desktop.interface cursor-size 24
+    gsettings set org.gnome.desktop.wm.preferences button-layout ''
+}
+
 # Notes
 exec $term -T Scratchpad -e nvim .notes
 for_window [title="Scratchpad"] move scratchpad
