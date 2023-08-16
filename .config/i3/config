@@ -5,20 +5,26 @@ set $mod Mod4
 set $background ~/Immagini/background.jpg
 set $term alacritty
 set $menu rofi -show drun
+set $i3lockwall i3lock -i $background
+
+# Background wallpaper
+exec_always --no-startup-id feh --bg-scale $background
 
 # Font
 font pango:DejaVu Sans Mono 8
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-set $i3lockwall i3lock -i $background
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $i3lockwall --nofork
 exec --no-startup-id xset dpms 0 0 300
 
 # Polkit
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-# Greenclip
+# Dunst notifications
+exec --no-startup-id dunst
+
+# Clipboard
 exec --no-startup-id greenclip daemon>/dev/null
 exec --no-startup-id greenclip clear
 
@@ -28,17 +34,14 @@ exec --no-startup-id greenclip clear
 # Compositor
 exec --no-startup-id picom
 
-# Dunst notifications
-exec --no-startup-id dunst
-
 # KeepassXC
 exec --no-startup-id keepassxc
 
 # Kdeconnect 
 exec --no-startup-id /usr/lib/kdeconnectd
 
-# Background wallpaper
-exec_always --no-startup-id feh --bg-scale $background
+# Firefox
+exec --no-startup-id firefox
 
 # Notes
 exec --no-startup-id $term -T Scratchpad -e nvim .notes

@@ -1,7 +1,6 @@
 configuration {
   display-drun: "";
   modi: "drun";
-  font: "Fira Code Nerd Font Medium 11";
   show-icons: true;
   icon-theme: "Papirus";
 }
