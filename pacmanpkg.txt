@@ -13,7 +13,6 @@ firewalld
 git
 gnome-calculator
 gnome-disk-utility
-gnome-themes-extra
 gst-libav
 helvum
 iptables
