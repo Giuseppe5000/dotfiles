@@ -37,7 +37,6 @@ pipewire-audio
 pipewire-jack
 pipewire-pulse
 polkit-gnome
-pyright
 python-pip
 qbittorrent
 qt5ct
@@ -100,7 +99,6 @@ code-marketplace
 desmume
 gamemode
 heroic-games-launcher-bin
-paru
 prismlauncher-qt5-bin
 proton-ge-custom-bin
 sc-controller
