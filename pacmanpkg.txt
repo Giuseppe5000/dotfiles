@@ -19,6 +19,8 @@ iptables
 kdeconnect
 kdegraphics-thumbnailers
 keepassxc
+kodi
+kodi-addon-inputstream-adaptive
 krita
 kvantum
 libreoffice-fresh
@@ -28,6 +30,7 @@ ly
 mpv
 neofetch
 neovim
+noto-fonts-emoji
 network-manager-applet
 obs-studio
 papirus-icon-theme
@@ -37,6 +40,7 @@ pipewire-audio
 pipewire-jack
 pipewire-pulse
 polkit-gnome
+powerline-fonts
 python-pip
 qbittorrent
 qt5ct
@@ -48,12 +52,18 @@ thunderbird
 tor
 torbrowser-launcher
 ttf-dejavu-nerd
+ttf-font-awesome
 v4l2loopback-dkms
 wget
+wireless_tools
 wl-clipboard
+wpa_supplicant
+xclip
 xdg-desktop-portal
 xdg-desktop-portal-wlr
+xdg-user-dirs
 xournalpp
+xorg-xinput
 xorg-xwayland
 zram-generator
 zsh
@@ -85,9 +95,10 @@ dunst
 feh
 flameshot
 i3-wm
-i3lock
+i3lock-color
 i3status
 picom
+rofi-greenclip
 unclutter
 xss-lock
 

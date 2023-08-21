@@ -5,7 +5,7 @@ set $mod Mod4
 set $background ~/Immagini/background.jpg
 set $term alacritty
 set $menu rofi -show drun
-set $i3lockwall i3lock -i $background
+set $i3lockwall i3lock --blur 5 --clock --indicator --ring-color bb00cc --line-color ffffffff --inside-color 00000000 --separator-color ffffffff --time-color ffffffff --date-color ffffffff
 
 # Background wallpaper
 exec_always --no-startup-id feh --bg-scale $background
