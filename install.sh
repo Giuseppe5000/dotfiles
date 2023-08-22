@@ -24,8 +24,11 @@ mv .icons $HOME
 # Theme
 mv .themes $HOME
 
+# Create user dirs
+xdg-user-dirs-update
+
 # Wallpaper
-mv background.jpg $HOME/Immagini
+mv background.jpg $HOME/Pictures
 
 # ZSH
 mv .zshenv $HOME
@@ -34,9 +37,6 @@ mv .p10k.zsh $HOME
 
 # Notes
 touch $HOME/.notes
-
-# Create user dirs
-xdg-user-dirs-update
 
 # Enable display manager
 sudo systemctl enable ly

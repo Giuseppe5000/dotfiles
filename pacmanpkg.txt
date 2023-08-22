@@ -30,8 +30,9 @@ ly
 mpv
 neofetch
 neovim
-noto-fonts-emoji
+networkmanager
 network-manager-applet
+noto-fonts-emoji
 obs-studio
 papirus-icon-theme
 pipewire
@@ -56,15 +57,9 @@ ttf-font-awesome
 v4l2loopback-dkms
 wget
 wireless_tools
-wl-clipboard
 wpa_supplicant
-xclip
-xdg-desktop-portal
-xdg-desktop-portal-wlr
 xdg-user-dirs
 xournalpp
-xorg-xinput
-xorg-xwayland
 zram-generator
 zsh
 zsh-autosuggestions
@@ -89,6 +84,10 @@ swaybg
 swayidle
 swaylock-effects
 waybar
+wl-clipboard
+xdg-desktop-portal
+xdg-desktop-portal-wlr
+xorg-xwayland
 
 # i3
 dunst
@@ -100,6 +99,8 @@ i3status
 picom
 rofi-greenclip
 unclutter
+xclip
+xorg-xinput
 xss-lock
 
 # Games and AUR
