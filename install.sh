@@ -38,5 +38,6 @@ mv .p10k.zsh $HOME
 # Notes
 touch $HOME/.notes
 
-# Enable display manager
+# Enable display manager and networkmanager
 sudo systemctl enable ly
+sudo systemctl enable NetworkManager

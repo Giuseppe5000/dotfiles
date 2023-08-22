@@ -9,7 +9,7 @@ set {
     $right l
     $term alacritty
     $menu rofi -show drun
-    $background ~/Immagini/background.jpg
+    $background ~/Pictures/background.jpg
     $lock swaylock
 }
 

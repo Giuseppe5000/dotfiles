@@ -15,6 +15,7 @@ gnome-calculator
 gnome-disk-utility
 gst-libav
 helvum
+intel-ucode
 iptables
 kdeconnect
 kdegraphics-thumbnailers
@@ -74,6 +75,11 @@ nvidia-settings
 nvidia-utils
 qemu-desktop
 virt-manager
+
+# Laptop
+fprintd
+imagemagick
+iw
 
 # Sway
 cliphist
