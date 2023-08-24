@@ -57,3 +57,6 @@ font:
 
 window:
   opacity: 0.85
+
+mouse:
+    hide_when_typing: true
