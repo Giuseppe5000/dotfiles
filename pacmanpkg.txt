@@ -36,6 +36,7 @@ network-manager-applet
 noto-fonts-emoji
 obs-studio
 papirus-icon-theme
+pavucontrol
 pipewire
 pipewire-alsa
 pipewire-audio
