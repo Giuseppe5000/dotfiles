@@ -25,10 +25,10 @@ mv .icons $HOME
 mv .themes $HOME
 
 # Create user dirs
-xdg-user-dirs-update
+LC_ALL=it_IT.UTF-8 xdg-user-dirs-update --force
 
 # Wallpaper
-mv background.jpg $HOME/Pictures
+mv background.jpg $HOME/Immagini
 
 # ZSH
 mv .zshenv $HOME
