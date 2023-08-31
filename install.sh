@@ -41,3 +41,6 @@ touch $HOME/.notes
 # Enable display manager and networkmanager
 sudo systemctl enable ly
 sudo systemctl enable NetworkManager
+
+# Enable firewalld
+sudo systemctl enable firewalld

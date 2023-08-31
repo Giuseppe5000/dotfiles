@@ -20,8 +20,6 @@ iptables
 kdeconnect
 kdegraphics-thumbnailers
 keepassxc
-kodi
-kodi-addon-inputstream-adaptive
 krita
 kvantum
 libreoffice-fresh
