@@ -29,7 +29,7 @@ exec --no-startup-id greenclip daemon>/dev/null
 exec --no-startup-id greenclip clear
 
 # Monitor
-exec --no-startup-id xrandr --output DP-0 --mode 1920x1080 --rate 143.99
+exec_always --no-startup-id xrandr --output DP-0 --mode 1920x1080 --rate 143.99
 
 # Compositor
 exec --no-startup-id picom
@@ -48,13 +48,13 @@ exec --no-startup-id $term -T Scratchpad -e nvim .notes
 for_window [title="Scratchpad"] move scratchpad
 
 # Keyboard layout
-exec --no-startup-id "setxkbmap -layout it"
+exec_always --no-startup-id "setxkbmap -layout it"
 
 # Keyboard led
-exec --no-startup-id "xset led"
+exec_always --no-startup-id "xset led"
 
 # Mouse speed
-exec --no-startup-id "xinput --set-prop 10 'libinput Accel Speed' -1"
+exec_always --no-startup-id "xinput --set-prop 10 'libinput Accel Speed' -1"
 
 # Hide the mouse after some time
 exec --no-startup-id unclutter
