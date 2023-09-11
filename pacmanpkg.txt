@@ -104,6 +104,7 @@ i3status
 picom
 rofi-greenclip
 unclutter
+xautolock
 xclip
 xorg-xinput
 xss-lock
