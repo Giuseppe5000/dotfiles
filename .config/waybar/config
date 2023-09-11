@@ -22,9 +22,6 @@
         "sway/workspaces",
         "sway/mode"
     ],
-    "modules-center": [
-        "sway/window"
-    ],
     "modules-right": [
         "cpu",
         "memory",
@@ -96,12 +93,6 @@
 
     "sway/mode": {
         "format": "<span style=\"italic\"> {}</span>", // Icon: expand-arrows-alt
-        "tooltip": false
-    },
-
-    "sway/window": {
-        "format": "{}",
-        "max-length": 120,
         "tooltip": false
     },
 
