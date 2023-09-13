@@ -1,23 +1,37 @@
 -- Plugins
-local Plug = vim.fn['plug#']
-vim.call('plug#begin', '~/.local/share/nvim/plugged')
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+vim.g.mapleader = " "
 
-Plug 'vim-airline/vim-airline'
-Plug 'preservim/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary'
-Plug 'ryanoasis/vim-devicons' -- nerd-fonts required
-Plug 'dracula/vim'
-Plug 'mhinz/vim-startify'
+require("lazy").setup({
+    'vim-airline/vim-airline',
+    'preservim/nerdtree',
+    'tpope/vim-fugitive',
+    'lewis6991/gitsigns.nvim',
+    'tpope/vim-commentary',
+    'ryanoasis/vim-devicons', -- nerd-fonts required
+    'dracula/vim',
+    'RRethy/vim-illuminate',
+    'nvim-telescope/telescope.nvim', tag = '0.1.2',
+    'nvim-lua/plenary.nvim', -- telescope dependency
 
--- LSP
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'L3MON4D3/LuaSnip'
-
-vim.call('plug#end')
+    -- LSP
+    'neovim/nvim-lspconfig',
+    'hrsh7th/nvim-cmp',
+    'hrsh7th/cmp-nvim-lsp',
+    'saadparwaiz1/cmp_luasnip',
+    'L3MON4D3/LuaSnip'
+})
 
 -- Generic
 vim.opt.number = true
@@ -64,8 +78,8 @@ vim.g['airline_theme'] = 'dracula'
 vim.g['airline_powerline_fonts'] = 1
 vim.g['airline_section_c'] = '%t'
 vim.cmd('let g:airline_section_z = airline#section#create(["%p%%", " ℅:%v"])')
-vim.g['airline#extensions#tabline#enabled'] = 1
-vim.g['airline#extensions#tabline#show_close_button'] = 0
+vim.g['airline#extensions#tabline#enabled'] = 2
+vim.g['airline#extensions#tabline#show_close_button'] = 1
 vim.g['airline#extensions#tabline#tabs_label'] = ''
 vim.g['airline#extensions#tabline#buffers_label'] = ''
 vim.g['airline#extensions#tabline#fnamemod'] = ':t'
@@ -80,24 +94,25 @@ vim.g['airline#extensions#tabline#show_tab_type'] = 0
 vim.keymap.set('n', '<C-t>', ':NERDTreeToggle<CR>')
 vim.g['NERDTreeMinimalUI'] = 1
 
--- Startify
-vim.cmd([[
-    let s:startify_ascii_header = [
-    \ '                                       ██           ',
-    \ '                                                    ',
-    \ ' ███▄    █  ▓█████ ▒█████   ██▒   █▓  ██▓ ███▄ ▄███▓',
-    \ ' ██ ▀█   █  ▓█   ▀▒██▒  ██▒▓██░   █▒▒▓██▒▓██▒▀█▀ ██▒',
-    \ '▓██  ▀█ ██▒ ▒███  ▒██░  ██▒ ▓██  █▒░▒▒██▒▓██    ▓██░',
-    \ '▓██▒  ▐▌██▒ ▒▓█  ▄▒██   ██░  ▒██ █░░░░██░▒██    ▒██ ',
-    \ '▒██░   ▓██░▒░▒████░ ████▓▒░   ▒▀█░  ░░██░▒██▒   ░██▒',
-    \ '░ ▒░   ▒ ▒ ░░░ ▒░ ░ ▒░▒░▒░    ░ ▐░   ░▓  ░ ▒░   ░  ░',
-    \ '░ ░░   ░ ▒░░ ░ ░    ░ ▒ ▒░    ░ ░░  ░ ▒ ░░  ░      ░',
-    \ '   ░   ░ ░     ░  ░ ░ ░ ▒       ░░  ░ ▒ ░░      ░ ',
-    \ '         ░ ░   ░      ░ ░        ░    ░         ░ ',
-    \ '',
-    \]
-    let g:startify_custom_header = map(s:startify_ascii_header + startify#fortune#quote(), '"   ".v:val')
-    let g:startify_lists = [{'type': 'files', 'header': ['   Recently used']}]
-]])
+-- Gitsigns
+require('gitsigns').setup()
+
+-- Vim-illuminate default configuration
+require('illuminate').configure({
+    filetypes_denylist = {
+        'dirvish',
+        'fugitive',
+        'nerdtree'
+    }
+})
+
+-- change the highlight style
+vim.api.nvim_set_hl(0, "IlluminatedWordText", { link = "Visual" })
+vim.api.nvim_set_hl(0, "IlluminatedWordRead", { link = "Visual" })
+vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { link = "Visual" })
+
+-- Telescope
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 
 require('lsp')
