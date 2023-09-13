@@ -18,6 +18,9 @@ mv .config/* $HOME/.config
 sudo rm /etc/ly/config.ini
 sudo mv etc/ly/config.ini /etc/ly/
 
+# NetworkManager MAC randomization conf
+sudo mv etc/NetworkManager/conf.d/wifi_rand_mac.conf /etc/NetworkManager/conf.d/
+
 # Cursor
 mv .icons $HOME
 
@@ -38,9 +41,7 @@ mv .p10k.zsh $HOME
 # Notes
 touch $HOME/.notes
 
-# Enable display manager and networkmanager
+# Enable some services
 sudo systemctl enable ly
 sudo systemctl enable NetworkManager
-
-# Enable firewalld
 sudo systemctl enable firewalld
