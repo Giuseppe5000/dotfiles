@@ -76,6 +76,7 @@ qemu-desktop
 virt-manager
 
 # Laptop
+brightnessctl
 fprintd
 imagemagick
 iw
