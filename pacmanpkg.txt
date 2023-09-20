@@ -95,13 +95,13 @@ xdg-desktop-portal-wlr
 xorg-xwayland
 
 # i3
-dunst
 feh
 flameshot
 i3-wm
 i3lock-color
 i3status
 picom
+rofi
 rofi-greenclip
 unclutter
 xautolock
@@ -109,7 +109,11 @@ xclip
 xorg-xinput
 xss-lock
 
-# Games and AUR
+# i3/Sway
+dunst
+gromit-mpx
+
+# Other
 an-anime-game-launcher-bin
 brlaser
 cemu
