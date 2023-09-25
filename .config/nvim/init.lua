@@ -22,8 +22,10 @@ require("lazy").setup({
     'ryanoasis/vim-devicons', -- nerd-fonts required
     'dracula/vim',
     'RRethy/vim-illuminate',
-    'nvim-telescope/telescope.nvim', tag = '0.1.2',
-    'nvim-lua/plenary.nvim', -- telescope dependency
+    {
+    'nvim-telescope/telescope.nvim', tag = '0.1.3',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+    },
 
     -- LSP
     'neovim/nvim-lspconfig',
