@@ -1,0 +1,193 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: Giuseppe
+#+STARTUP: fold
+
+* Packages
+
+** MELPA repo
+#+begin_src elisp :tangle yes
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (package-initialize)
+#+end_src
+** Evil mode
+#+begin_src elisp :tangle yes
+  (setq evil-want-keybinding nil)
+
+  (use-package evil
+    :ensure t
+    :init (evil-mode 1))  
+  (evil-set-undo-system 'undo-redo)
+
+  (use-package evil-collection
+    :ensure t
+    :init (evil-collection-init 'org))  
+#+end_src
+** Which-key
+#+begin_src elisp :tangle yes
+  (use-package which-key
+    :ensure t
+    :init (which-key-mode 1))
+#+end_src
+** IDO
+#+begin_src elisp :tangle yes
+  (ido-mode 1)
+  (use-package ido-vertical-mode
+    :ensure t
+    :init (ido-vertical-mode 1))
+#+end_src
+** Beacon
+#+begin_src elisp :tangle yes
+  (use-package beacon
+    :ensure t
+    :init (beacon-mode 1))
+#+end_src
+** Vterm
+#+begin_src elisp :tangle yes
+  (use-package vterm
+    :ensure t)
+#+end_src
+** Magit
+#+begin_src elisp :tangle yes
+  (use-package magit
+    :ensure t)
+#+end_src
+** Projectile
+#+begin_src elisp :tangle yes
+  (use-package projectile
+    :ensure t
+    :init
+    (projectile-mode +1)
+    :bind (:map projectile-mode-map
+		("C-c p" . projectile-command-map)))
+#+end_src
+** Diff-hl
+#+begin_src elisp :tangle yes
+  (use-package diff-hl
+    :ensure t
+    :init (global-diff-hl-mode 1))
+#+end_src
+** Evil-commentary
+#+begin_src elisp :tangle yes
+  (use-package evil-commentary
+    :ensure t
+    :init (evil-commentary-mode 1))
+#+end_src
+** LSP
+#+begin_src elisp :tangle yes
+  (use-package lsp-mode
+    :init
+    (setq lsp-keymap-prefix "C-c l")
+    :hook (
+	   (c++-mode . lsp)
+	   (c-mode . lsp)
+	   ;; which-key integration
+	   (lsp-mode . lsp-enable-which-key-integration))
+    :commands lsp)
+#+end_src
+*** C/C++
+#+begin_src elisp :tangle yes
+  (use-package eglot
+    :ensure t)
+  (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+  (add-hook 'c-mode-hook 'eglot-ensure)
+  (add-hook 'c++-mode-hook 'eglot-ensure)
+
+  (use-package company
+    :ensure t)
+  (add-hook 'c++-mode-hook #'company-mode)
+  (add-hook 'c-mode-hook #'company-mode)
+#+end_src
+** Nyan cat 
+#+begin_src elisp :tangle yes
+  (use-package nyan-mode
+    :ensure t
+    :init (nyan-mode 1))
+#+end_src
+** Org Superstar
+#+begin_src elisp :tangle yes
+  (use-package org-superstar
+    :ensure t)
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+#+end_src
+** Doom mode-line
+#+begin_src elisp :tangle yes
+  (use-package doom-modeline
+    :ensure t
+    :init (doom-modeline-mode 1))
+#+end_src
+** Doom theme
+#+begin_src elisp :tangle yes
+  (use-package doom-themes
+    :ensure t
+    :config
+    ;; Global settings (defaults)
+    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+	  doom-themes-enable-italic t) ; if nil, italics is universally disabled
+    (load-theme 'doom-one t)
+
+    ;; Enable flashing mode-line on errors
+    (doom-themes-visual-bell-config)
+    ;; Enable custom neotree theme (all-the-icons must be installed!)
+    (doom-themes-neotree-config)
+
+    (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+    (doom-themes-treemacs-config)
+    ;; Corrects (and improves) org-mode's native fontification.
+    (doom-themes-org-config))
+#+end_src
+
+
+* General
+
+** Remove menus
+#+begin_src elisp :tangle yes
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (setq inhibit-startup-screen t)
+#+end_src
+** Cursorline
+#+begin_src elisp :tangle yes
+  (global-hl-line-mode 1)
+#+end_src
+** Numbers
+#+begin_src elisp :tangle yes
+  (global-display-line-numbers-mode 1)
+#+end_src
+** Org-agenda
+#+begin_src elisp :tangle yes
+  (setq org-agenda-files (list "~/.agenda.org"))
+#+end_src
+** Default vterm shell
+#+begin_src elisp :tangle yes  
+  (setq vterm-shell "/bin/bash")
+#+end_src
+
+** Backup
+
+ Write backups to ~/.emacs.d/backup/
+
+#+begin_src elisp :tangle yes
+  (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+	backup-by-copying      t  ; Don't de-link hard links
+	version-control        t  ; Use version numbers on backups
+	delete-old-versions    t  ; Automatically delete excess backups:
+	kept-new-versions      20 ; how many of the newest versions to keep
+	kept-old-versions      5) ; and how many of the old
+#+end_src
+
+
+* Custom functions
+
+** Tangle
+
+ Automatic export org conf in elisp
+
+#+begin_src elisp :tangle yes
+  (defun custom/tangle-emacs-conf()
+    (when (equal (buffer-file-name) (expand-file-name "~/.emacs.org"))
+    (org-babel-tangle)
+  ))
+  (add-hook 'after-save-hook #'custom/tangle-emacs-conf)
+#+end_src

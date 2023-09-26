@@ -50,6 +50,10 @@ rclone
 scrcpy
 skanlite
 telegram-desktop
+texlive-binextra
+texlive-latex
+texlive-latexextra
+texlive-plaingeneric
 thunderbird
 tor
 torbrowser-launcher

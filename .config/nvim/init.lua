@@ -57,7 +57,6 @@ vim.opt.termguicolors = true
 
 -- Font
 vim.opt.encoding = 'UTF-8'
-vim.opt.guifont = 'DejaVu Sans Mono:h10'
 
 -- Tabs
 vim.opt.tabstop = 4
