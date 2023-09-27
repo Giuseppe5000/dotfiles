@@ -48,3 +48,5 @@ touch $HOME/.notes
 sudo systemctl enable ly
 sudo systemctl enable NetworkManager
 sudo systemctl enable firewalld
+systemctl --user enable emacs
+systemctl --user enable offlineimaps

@@ -28,12 +28,14 @@ linux-headers
 libpipewire
 ly
 mpv
+mu
 neofetch
 neovim
 networkmanager
 network-manager-applet
 noto-fonts-emoji
 obs-studio
+offlineimap
 papirus-icon-theme
 pavucontrol
 pipewire
@@ -54,7 +56,6 @@ texlive-binextra
 texlive-latex
 texlive-latexextra
 texlive-plaingeneric
-thunderbird
 tor
 torbrowser-launcher
 ttf-dejavu-nerd

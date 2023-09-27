@@ -21,7 +21,7 @@
 
   (use-package evil-collection
     :ensure t
-    :init (evil-collection-init 'org))  
+    :init (evil-collection-init '(org magit mu4e doc-view)))  
 #+end_src
 ** Which-key
 #+begin_src elisp :tangle yes
@@ -97,6 +97,101 @@
     :ensure t)
   (add-hook 'c++-mode-hook #'company-mode)
   (add-hook 'c-mode-hook #'company-mode)
+#+end_src
+** Mu4e
+#+begin_src elisp :tangle yes
+  (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+
+  (require 'mu4e)
+
+  ;; Set keybind to enter mu4
+  (global-set-key (kbd "C-x y") 'mu4e)
+
+  (setq mu4e-user-mail-address-list '("giuseppetutino1@gmail.com"
+				      "onepiecegiuseppe@hotmail.it"))
+
+  ;; viewing options
+  (setq mu4e-view-show-addresses t)
+  ;; Do not leave message open after it has been sent
+  (setq message-kill-buffer-on-exit t)
+  ;; Don't ask for a 'context' upon opening mu4e
+  (setq mu4e-context-policy 'pick-first)
+  ;; Don't ask to quit
+  (setq mu4e-confirm-quit nil)
+
+  (setq mu4e-maildir-shortcuts
+	'(("/GmailAccount/INBOX" . ?g)
+	  ("/HotmailAccount/INBOX" . ?h)
+	  ))
+
+  ;; attachments go here
+  (setq mu4e-attachment-dir  "~/Scaricati")
+
+  ;; Mail auto refresh
+  (run-with-timer 0 (* 5 60) 'mu4e-update-mail-and-index 1)
+#+end_src
+
+Contexts conf settings
+
+#+begin_src elisp :tangle yes
+  (setq mu4e-contexts
+	`(
+	  ,(make-mu4e-context
+	    :name "Gmail Account"
+	    :match-func (lambda (msg)
+			  (when msg
+			    (mu4e-message-contact-field-matches
+			     msg '(:from :to :cc :bcc) "giuseppetutino1@gmail.com")))
+
+	    :vars '(
+		    (mu4e-trash-folder . "/GmailAccount/[Gmail].Cestino")
+		    (mu4e-refile-folder . "/GmailAccount/[Gmail].Tutti i messaggi")
+		    (mu4e-drafts-folder . "/GmailAccount/[Gmail].Bozze")
+		    (mu4e-sent-folder . "/GmailAccount/[Gmail].Posta inviata")
+		    (user-mail-address  . "giuseppetutino1@gmail.com")
+		    (user-full-name . "Giuseppe Tutino")
+		    (smtpmail-smtp-user . "giuseppetutino1")
+		    (smtpmail-local-domain . "gmail.com")
+		    (smtpmail-default-smtp-server . "smtp.gmail.com")
+		    (smtpmail-smtp-server . "smtp.gmail.com")
+		    (smtpmail-smtp-service . 587)
+		    ))
+
+	  ,(make-mu4e-context
+	    :name "Hotmail Account"
+	    :match-func (lambda (msg) (when msg
+					(string-prefix-p "/HotmailAccount" (mu4e-message-field msg :maildir))))
+	    :vars '(
+		    (mu4e-trash-folder . "/HotmailAccount/Junk")
+		    (mu4e-refile-folder . "/HotmailAccount/Archivio")
+		    (mu4e-drafts-folder . "/HotmailAccount/Drafts")
+		    (mu4e-sent-folder . "/HotmailAccount/Sent")
+		    (user-mail-address . "onepiecegiuseppe@hotmail.it")
+		    (smtpmail-smtp-user . "onepiecegiuseppe")
+		    (smtpmail-local-domain . "outlook.it")
+		    (smtpmail-default-smtp-server . "outlook.it")
+		    (smtpmail-smtp-server . "smtp.outlook.it")
+		    (smtpmail-smtp-service . 587)
+		    ))
+	  ))
+
+  ;; Set how email is to be sent
+  (setq send-mail-function (quote smtpmail-send-it))
+#+end_src
+
+*** Mu4e alert
+#+begin_src elisp :tangle yes
+  (use-package mu4e-alert
+    :ensure t)
+  
+  (setq mu4e-alert-interesting-mail-query
+	(concat
+	 "flag:unread AND maildir:/GmailAccount/INBOX "
+	 "OR "
+	 "flag:unread AND maildir:/HotmailAccount/INBOX "
+	 ))
+
+  (mu4e-alert-enable-mode-line-display)
 #+end_src
 ** Nyan cat 
 #+begin_src elisp :tangle yes
