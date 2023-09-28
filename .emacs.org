@@ -18,10 +18,18 @@
     :ensure t
     :init (evil-mode 1))  
   (evil-set-undo-system 'undo-redo)
-
+#+end_src
+*** Evil collection
+#+begin_src elisp :tangle yes
   (use-package evil-collection
     :ensure t
-    :init (evil-collection-init '(org magit mu4e doc-view)))  
+    :init (evil-collection-init '(org magit mu4e doc-view newsticker)))  
+#+end_src
+*** Evil commentary
+#+begin_src elisp :tangle yes
+  (use-package evil-commentary
+    :ensure t
+    :init (evil-commentary-mode 1))
 #+end_src
 ** Which-key
 #+begin_src elisp :tangle yes
@@ -29,7 +37,7 @@
     :ensure t
     :init (which-key-mode 1))
 #+end_src
-** IDO
+** IDO vertical
 #+begin_src elisp :tangle yes
   (ido-mode 1)
   (use-package ido-vertical-mode
@@ -45,7 +53,9 @@
 ** Vterm
 #+begin_src elisp :tangle yes
   (use-package vterm
-    :ensure t)
+    :ensure t
+    :config
+    (setq vterm-shell "/bin/bash"))
 #+end_src
 ** Magit
 #+begin_src elisp :tangle yes
@@ -66,12 +76,6 @@
   (use-package diff-hl
     :ensure t
     :init (global-diff-hl-mode 1))
-#+end_src
-** Evil-commentary
-#+begin_src elisp :tangle yes
-  (use-package evil-commentary
-    :ensure t
-    :init (evil-commentary-mode 1))
 #+end_src
 ** LSP
 #+begin_src elisp :tangle yes
@@ -193,6 +197,15 @@ Contexts conf settings
 
   (mu4e-alert-enable-mode-line-display)
 #+end_src
+** ChatGPT shell
+#+begin_src elisp :tangle yes
+  (use-package chatgpt-shell
+    :ensure t
+    :custom
+    ((chatgpt-shell-openai-key
+      (lambda ()
+	(auth-source-pass-get 'secret "openai-key")))))
+#+end_src
 ** Nyan cat 
 #+begin_src elisp :tangle yes
   (use-package nyan-mode
@@ -219,12 +232,10 @@ Contexts conf settings
     ;; Global settings (defaults)
     (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
 	  doom-themes-enable-italic t) ; if nil, italics is universally disabled
-    (load-theme 'doom-one t)
+    (load-theme 'doom-tokyo-night t)
 
     ;; Enable flashing mode-line on errors
     (doom-themes-visual-bell-config)
-    ;; Enable custom neotree theme (all-the-icons must be installed!)
-    (doom-themes-neotree-config)
 
     (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
     (doom-themes-treemacs-config)
@@ -254,11 +265,6 @@ Contexts conf settings
 #+begin_src elisp :tangle yes
   (setq org-agenda-files (list "~/.agenda.org"))
 #+end_src
-** Default vterm shell
-#+begin_src elisp :tangle yes  
-  (setq vterm-shell "/bin/bash")
-#+end_src
-
 ** Backup
 
  Write backups to ~/.emacs.d/backup/
@@ -270,6 +276,16 @@ Contexts conf settings
 	delete-old-versions    t  ; Automatically delete excess backups:
 	kept-new-versions      20 ; how many of the newest versions to keep
 	kept-old-versions      5) ; and how many of the old
+#+end_src
+
+** Newsticker
+#+begin_src elisp :tangle yes
+  (setq newsticker-url-list '(
+			   ("Linux Freedom" "https://www.lffl.org/feed" nil nil nil)
+			   ("Arch Linux" "https://www.archlinux.org/feeds/news/" nil nil nil)
+			   ("Steam" "https://store.steampowered.com/feeds/news/collection/steam" nil nil nil)
+			   ("Free Games" "https://steamcommunity.com/groups/freegamesfinders/rss/" nil nil nil)
+			   ))
 #+end_src
 
 
