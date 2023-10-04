@@ -16,14 +16,14 @@
 
   (use-package evil
     :ensure t
-    :init (evil-mode 1))  
-  (evil-set-undo-system 'undo-redo)
+    :init (evil-mode 1)  
+    :config (evil-set-undo-system 'undo-redo))
 #+end_src
 *** Evil collection
 #+begin_src elisp :tangle yes
   (use-package evil-collection
     :ensure t
-    :init (evil-collection-init '(org magit mu4e doc-view newsticker)))  
+    :init (evil-collection-init '(org magit mu4e doc-view newsticker neotree)))  
 #+end_src
 *** Evil commentary
 #+begin_src elisp :tangle yes
@@ -52,6 +52,38 @@
     (setq vterm-shell "/usr/bin/zsh")
     (setq kill-buffer-query-functions nil))
 #+end_src
+*** Vterm toggle
+#+begin_src elisp :tangle yes
+  (use-package vterm-toggle
+    :ensure t)
+  (global-set-key (kbd "C-x C-<return>") 'vterm-toggle)
+#+end_src
+
+ Show vterm buffer in bottom side
+
+ #+begin_src  elisp :tangle yes
+   (setq vterm-toggle-fullscreen-p nil)
+   (add-to-list 'display-buffer-alist
+		'((lambda (buffer-or-name _)
+		    (let ((buffer (get-buffer buffer-or-name)))
+		      (with-current-buffer buffer
+			(or (equal major-mode 'vterm-mode)
+			    (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
+		  (display-buffer-reuse-window display-buffer-at-bottom)
+		  ;;(display-buffer-reuse-window display-buffer-in-direction)
+		  ;;display-buffer-in-direction/direction/dedicated is added in emacs27
+		  ;;(direction . bottom)
+		  ;;(dedicated . t) ;dedicated is supported in emacs27
+		  (reusable-frames . visible)
+		  (window-height . 0.3)))
+ #+end_src
+ 
+** Neotree
+#+begin_src elisp :tangle yes
+  (use-package neotree
+    :ensure t)
+  (global-set-key (kbd "C-c t") 'neotree-toggle)
+#+End_src
 ** Magit
 #+begin_src elisp :tangle yes
   (use-package magit
@@ -204,8 +236,8 @@ Contexts conf settings
 ** Org Superstar
 #+begin_src elisp :tangle yes
   (use-package org-superstar
-    :ensure t)
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+    :ensure t
+    :hook (org-mode . (lambda () (org-superstar-mode 1))))
 #+end_src
 ** Doom modeline
 #+begin_src elisp :tangle yes
@@ -295,6 +327,17 @@ Contexts conf settings
   (setq scroll-step 1)
 #+end_src
 
+** Scratch message
+#+begin_src elisp :tangle yes
+  (setq initial-scratch-message ";; Scratch buffer\n\n")
+#+end_src
+
+** Indentation
+#+begin_src elisp :tangle yes
+  (setq c-default-style "linux"
+	c-basic-offset 2)
+#+end_src
+
 
 * Custom functions
 
@@ -316,6 +359,4 @@ Contexts conf settings
     (interactive)
     (mapcar 'kill-buffer (buffer-list))
     (delete-other-windows))
-
-  (global-set-key (kbd "C-x K") 'nuke-all-buffers)
 #+end_src
