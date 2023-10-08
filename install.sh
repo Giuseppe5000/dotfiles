@@ -17,6 +17,9 @@ mv .config/* $HOME/.config
 # Emacs
 mv .emacs.org $HOME
 
+# GnuPG
+mv .gnupg $HOME
+
 # Ly
 sudo rm /etc/ly/config.ini
 sudo mv etc/ly/config.ini /etc/ly/

@@ -23,7 +23,7 @@
 #+begin_src elisp :tangle yes
   (use-package evil-collection
     :ensure t
-    :init (evil-collection-init '(org magit mu4e doc-view newsticker neotree vterm)))  
+    :init (evil-collection-init)) 
 #+end_src
 *** Evil commentary
 #+begin_src elisp :tangle yes
