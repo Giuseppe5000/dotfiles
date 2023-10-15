@@ -45,6 +45,7 @@ pipewire-jack
 pipewire-pulse
 polkit-gnome
 powerline-fonts
+python-lsp-server
 python-pip
 qbittorrent
 qt5ct
@@ -89,6 +90,7 @@ iw
 
 # Sway
 cliphist
+emacs-wayland
 rofi-lbonn-wayland
 swappy
 sway
@@ -102,6 +104,7 @@ xdg-desktop-portal-wlr
 xorg-xwayland
 
 # i3
+emacs
 feh
 flameshot
 i3-wm

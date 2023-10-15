@@ -31,6 +31,12 @@
     :ensure t
     :init (evil-commentary-mode 1))
 #+end_src
+** Auto-package-update
+#+begin_src elisp :tangle yes
+  (use-package auto-package-update
+    :ensure t
+    :config (auto-package-update-maybe))
+#+end_src
 ** Which-key
 #+begin_src elisp :tangle yes
   (use-package which-key
@@ -108,27 +114,31 @@
 ** LSP
 #+begin_src elisp :tangle yes
   (use-package lsp-mode
+    :ensure t
     :init
     (setq lsp-keymap-prefix "C-c l")
     :hook (
-	   (c++-mode . lsp)
+	   (c++-mode . lsp) ;; Requires clang
 	   (c-mode . lsp)
 	   ;; which-key integration
 	   (lsp-mode . lsp-enable-which-key-integration))
     :commands lsp)
-#+end_src
-*** C/C++
-#+begin_src elisp :tangle yes
-  (use-package eglot
-    :ensure t)
-  (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
-  (add-hook 'c-mode-hook 'eglot-ensure)
-  (add-hook 'c++-mode-hook 'eglot-ensure)
+
+  (use-package lsp-ui
+    :ensure t
+    :hook (lsp-mode . lsp-ui-mode))
 
   (use-package company
     :ensure t)
-  (add-hook 'c++-mode-hook #'company-mode)
-  (add-hook 'c-mode-hook #'company-mode)
+#+end_src
+*** Python
+
+Requires python-lsp-server
+
+#+begin_src elisp :tangle yes
+  (use-package python-mode
+    :ensure t
+    :hook (python-mode . lsp-deferred))
 #+end_src
 ** Mu4e
 #+begin_src elisp :tangle yes
@@ -368,5 +378,7 @@ Contexts conf settings
   (defun kill-all-buffers ()
     (interactive)
     (mapcar 'kill-buffer (buffer-list))
-    (delete-other-windows))
+    (delete-other-windows)
+    (cd "~")
+    (eglot-shutdown-all))
 #+end_src
