@@ -44,9 +44,6 @@ mv .zshenv $HOME
 mv .zshrc $HOME
 mv .p10k.zsh $HOME
 
-# Notes
-touch $HOME/.notes
-
 # Enable some services
 sudo systemctl enable ly
 sudo systemctl enable NetworkManager

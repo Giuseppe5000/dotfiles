@@ -73,10 +73,6 @@ exec {
     gsettings set org.gnome.desktop.wm.preferences button-layout ''
 }
 
-# Notes
-exec $term -T Scratchpad -e nvim .notes
-for_window [title="Scratchpad"] move scratchpad
-
 # Borders
 default_border pixel
 default_floating_border none

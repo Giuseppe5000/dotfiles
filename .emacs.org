@@ -1,17 +1,18 @@
 #+TITLE: Emacs Configuration
 #+AUTHOR: Giuseppe
+#+PROPERTY: header-args :tangle yes
 #+STARTUP: fold
 
 * Packages
 
 ** MELPA repo
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (require 'package)
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
   (package-initialize)
 #+end_src
 ** Evil mode
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (setq evil-want-keybinding nil)
 
   (use-package evil
@@ -20,31 +21,31 @@
     :config (evil-set-undo-system 'undo-redo))
 #+end_src
 *** Evil collection
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package evil-collection
     :ensure t
     :init (evil-collection-init)) 
 #+end_src
 *** Evil commentary
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package evil-commentary
     :ensure t
     :init (evil-commentary-mode 1))
 #+end_src
 ** Auto-package-update
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package auto-package-update
     :ensure t
     :config (auto-package-update-maybe))
 #+end_src
 ** Which-key
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package which-key
     :ensure t
     :init (which-key-mode 1))
 #+end_src
 ** IDO vertical
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (ido-mode 1)
   (use-package ido-vertical-mode
     :ensure t
@@ -52,7 +53,7 @@
     :config (setq ido-vertical-define-keys 'C-n-and-C-p-only))
 #+end_src
 ** Vterm
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package vterm
     :ensure t
     :config
@@ -60,7 +61,7 @@
     (setq kill-buffer-query-functions nil))
 #+end_src
 *** Vterm toggle
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package vterm-toggle
     :ensure t)
   (global-set-key (kbd "C-x C-<return>") 'vterm-toggle)
@@ -68,7 +69,7 @@
 
  Show vterm buffer in bottom side
 
- #+begin_src  elisp :tangle yes
+ #+begin_src elisp
    (setq vterm-toggle-fullscreen-p nil)
    (add-to-list 'display-buffer-alist
 		'((lambda (buffer-or-name _)
@@ -86,18 +87,18 @@
  #+end_src
  
 ** Neotree
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package neotree
     :ensure t)
   (global-set-key (kbd "C-c t") 'neotree-toggle)
 #+End_src
 ** Magit
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package magit
     :ensure t)
 #+end_src
 ** Projectile
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package projectile
     :ensure t
     :init
@@ -106,13 +107,13 @@
 		("C-c p" . projectile-command-map)))
 #+end_src
 ** Diff-hl
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package diff-hl
     :ensure t
     :init (global-diff-hl-mode 1))
 #+end_src
 ** LSP
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package lsp-mode
     :ensure t
     :init
@@ -135,13 +136,13 @@
 
 Requires python-lsp-server
 
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package python-mode
     :ensure t
     :hook (python-mode . lsp-deferred))
 #+end_src
 ** Mu4e
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 
   (require 'mu4e)
@@ -175,7 +176,7 @@ Requires python-lsp-server
 
 Contexts conf settings
 
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (setq mu4e-contexts
 	`(
 	  ,(make-mu4e-context
@@ -222,7 +223,7 @@ Contexts conf settings
 #+end_src
 
 *** Mu4e alert
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package mu4e-alert
     :ensure t)
   
@@ -236,7 +237,7 @@ Contexts conf settings
   (mu4e-alert-enable-mode-line-display)
 #+end_src
 ** ChatGPT shell
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package chatgpt-shell
     :ensure t
     :custom
@@ -245,20 +246,20 @@ Contexts conf settings
 	(auth-source-pass-get 'secret "openai-key")))))
 #+end_src
 ** Org Superstar
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package org-superstar
     :ensure t
     :hook (org-mode . (lambda () (org-superstar-mode 1))))
 #+end_src
 ** Doom modeline
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package doom-modeline
     :ensure t
     :config (setq column-number-mode t)
     :init (doom-modeline-mode 1))
 #+end_src
 ** Doom theme
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (use-package doom-themes
     :ensure t
     :config
@@ -278,25 +279,26 @@ Contexts conf settings
 * General
 
 ** Remove menus
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
   (menu-bar-mode -1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
   (setq inhibit-startup-screen t)
 #+end_src
 ** Cursorline
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
   (global-hl-line-mode 1)
 #+end_src
 ** Org-agenda
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
   (setq org-agenda-files (list "~/Documenti/agenda.org"))
+  (global-set-key (kbd "C-c a") 'org-agenda)
 #+end_src
 ** Backup
 
  Write backups to ~/.emacs.d/backup/
 
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
   (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
 	backup-by-copying      t  ; Don't de-link hard links
 	version-control        t  ; Use version numbers on backups
@@ -306,7 +308,7 @@ Contexts conf settings
 #+end_src
 
 ** Newsticker
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (setq newsticker-url-list-defaults nil) 
 
   (setq newsticker-url-list '(
@@ -337,23 +339,23 @@ Contexts conf settings
 #+end_src
 
 ** Scroll-step
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (setq scroll-step 1)
 #+end_src
 
 ** Scratch message
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (setq initial-scratch-message ";; Scratch buffer\n\n")
 #+end_src
 
 ** Indentation
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (setq c-default-style "linux"
 	c-basic-offset 2)
 #+end_src
 
 ** Opacity
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (set-frame-parameter nil 'alpha-background 98)
   (add-to-list 'default-frame-alist '(alpha-background . 98))
 #+end_src
@@ -365,7 +367,7 @@ Contexts conf settings
 
  Automatic export org conf in elisp
 
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (defun custom/tangle-emacs-conf()
     (when (equal (buffer-file-name) (expand-file-name "~/.emacs.org"))
     (org-babel-tangle)
@@ -374,7 +376,7 @@ Contexts conf settings
 #+end_src
 
 ** Kill all buffers
-#+begin_src elisp :tangle yes
+#+begin_src elisp
   (defun kill-all-buffers ()
     (interactive)
     (mapcar 'kill-buffer (buffer-list))

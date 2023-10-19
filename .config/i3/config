@@ -46,10 +46,6 @@ exec --no-startup-id /usr/lib/kdeconnectd
 # Firefox
 exec --no-startup-id firefox
 
-# Notes
-exec --no-startup-id $term -T Scratchpad -e nvim .notes
-for_window [title="Scratchpad"] move scratchpad
-
 # Keyboard layout
 exec_always --no-startup-id "setxkbmap -layout it"
 
