@@ -53,3 +53,4 @@ sudo systemctl enable NetworkManager
 sudo systemctl enable firewalld
 systemctl --user enable emacs
 systemctl --user enable offlineimaps
+systemctl --user enable syncthing

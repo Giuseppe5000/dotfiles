@@ -30,7 +30,6 @@ ly
 mpv
 mu
 neofetch
-neovim
 networkmanager
 network-manager-applet
 noto-fonts-emoji
@@ -52,6 +51,7 @@ qt5ct
 rclone
 scrcpy
 skanlite
+syncthing
 telegram-desktop
 texlive-binextra
 texlive-latex
@@ -80,6 +80,7 @@ nvidia
 nvidia-settings
 nvidia-utils
 qemu-desktop
+vim
 virt-manager
 
 # Laptop

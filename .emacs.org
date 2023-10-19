@@ -290,7 +290,7 @@ Contexts conf settings
 #+end_src
 ** Org-agenda
 #+begin_src elisp :tangle yes
-  (setq org-agenda-files (list "~/.agenda.org"))
+  (setq org-agenda-files (list "~/Documenti/agenda.org"))
 #+end_src
 ** Backup
 
@@ -379,6 +379,5 @@ Contexts conf settings
     (interactive)
     (mapcar 'kill-buffer (buffer-list))
     (delete-other-windows)
-    (cd "~")
-    (eglot-shutdown-all))
+    (cd "~"))
 #+end_src
