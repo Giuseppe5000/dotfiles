@@ -65,6 +65,9 @@ exec /usr/lib/kdeconnectd
 # Firefox
 exec firefox
 
+# Gcal sync
+exec_always ~/Documenti/Other/scripts/gcal.sh
+
 # GTK settings
 exec {
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'

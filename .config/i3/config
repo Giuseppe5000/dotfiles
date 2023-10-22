@@ -46,6 +46,9 @@ exec --no-startup-id /usr/lib/kdeconnectd
 # Firefox
 exec --no-startup-id firefox
 
+# Gcal sync
+exec_always --no-startup-id ~/Documenti/Other/scripts/gcal.sh
+
 # Keyboard layout
 exec_always --no-startup-id "setxkbmap -layout it"
 
@@ -230,7 +233,7 @@ bindsym $mod+Shift+s exec --no-startup-id flameshot gui
 bindsym $mod+n exec --no-startup-id dolphin
 
 # Emacs
-bindsym $mod+m exec --no-startup-id emacsclient --create-frame
+bindsym $mod+m exec --no-startup-id emacsclient -c
 
 # Clipboard menu
 bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard

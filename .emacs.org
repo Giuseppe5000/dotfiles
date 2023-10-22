@@ -291,8 +291,15 @@ Contexts conf settings
 #+end_src
 ** Org-agenda
 #+begin_src elisp 
-  (setq org-agenda-files (list "~/Documenti/agenda.org"))
+  (setq org-agenda-files (list "~/Documenti/agenda.org" "~/Documenti/.gcal.org"))
   (global-set-key (kbd "C-c a") 'org-agenda)
+  (setq calendar-week-start-day 1
+	calendar-day-name-array ["Domenica" "Lunedì" "Martedì" "Mercoledì"
+				 "Giovedì" "Venerdì" "Sabato"]
+	calendar-month-name-array ["Gennaio" "Febbraio" "Marzo" "Aprile"
+				   "Maggio" "Giugno" "Luglio" "Agosto"
+				   "Settembre" "Ottobre" "Novembre"
+				   "Dicembre"])
 #+end_src
 ** Backup
 
