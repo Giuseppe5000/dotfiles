@@ -231,6 +231,9 @@ bindsym $mod+Shift+s exec grim -g "$(slurp)" - | swappy -f -
 # File manager
 bindsym $mod+n exec dolphin
 
+# Emacs
+bindsym $mod+m exec emacsclient -c
+
 # Clipboard menu
 bindsym $mod+c exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
 

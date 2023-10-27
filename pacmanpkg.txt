@@ -7,6 +7,7 @@ chromium
 cups
 discord
 dolphin
+emacs
 ffmpegthumbs
 firefox
 firewalld
@@ -62,6 +63,7 @@ torbrowser-launcher
 ttf-dejavu-nerd
 ttf-font-awesome
 v4l2loopback-dkms
+vim
 wget
 wireless_tools
 wpa_supplicant
@@ -73,14 +75,12 @@ zsh-autosuggestions
 zsh-theme-powerlevel10k
 
 # Workstation
-code
 broadcom-wl
 dnsmasq
 nvidia
 nvidia-settings
 nvidia-utils
 qemu-desktop
-vim
 virt-manager
 
 # Laptop
@@ -91,7 +91,6 @@ iw
 
 # Sway
 cliphist
-emacs-wayland
 rofi-lbonn-wayland
 swappy
 sway
@@ -105,9 +104,9 @@ xdg-desktop-portal-wlr
 xorg-xwayland
 
 # i3
-emacs
 feh
 flameshot
+gromit-mpx
 i3-wm
 i3lock-color
 i3status
@@ -122,7 +121,6 @@ xss-lock
 
 # i3/Sway
 dunst
-gromit-mpx
 
 # Other
 an-anime-game-launcher-bin

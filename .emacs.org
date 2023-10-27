@@ -389,4 +389,6 @@ Contexts conf settings
     (mapcar 'kill-buffer (buffer-list))
     (delete-other-windows)
     (cd "~"))
+
+  (defalias 'kab 'kill-all-buffers)
 #+end_src
