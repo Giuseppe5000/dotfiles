@@ -1,11 +1,11 @@
 alacritty
 ark
+armcord
 baobab
 blueman
 btop
 chromium
 cups
-discord
 dolphin
 emacs
 ffmpegthumbs

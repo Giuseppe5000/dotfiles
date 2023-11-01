@@ -1,7 +1,6 @@
 #+TITLE: Emacs Configuration
 #+AUTHOR: Giuseppe
 #+PROPERTY: header-args :tangle yes
-#+STARTUP: fold
 
 * Packages
 
@@ -255,7 +254,7 @@ Contexts conf settings
 #+begin_src elisp
   (use-package doom-modeline
     :ensure t
-    :config (setq column-number-mode t)
+    :config (setq column-number-mode t doom-modeline-modal nil)
     :init (doom-modeline-mode 1))
 #+end_src
 ** Doom theme
@@ -289,7 +288,7 @@ Contexts conf settings
 #+begin_src elisp 
   (global-hl-line-mode 1)
 #+end_src
-** Org-agenda
+** Org
 #+begin_src elisp 
   (setq org-agenda-files (list "~/Documenti/agenda.org" "~/Documenti/.gcal.org"))
   (global-set-key (kbd "C-c a") 'org-agenda)
@@ -300,6 +299,7 @@ Contexts conf settings
 				   "Maggio" "Giugno" "Luglio" "Agosto"
 				   "Settembre" "Ottobre" "Novembre"
 				   "Dicembre"])
+  (setq org-startup-folded t)
 #+end_src
 ** Backup
 
