@@ -96,15 +96,6 @@
   (use-package magit
     :ensure t)
 #+end_src
-** Projectile
-#+begin_src elisp
-  (use-package projectile
-    :ensure t
-    :init
-    (projectile-mode +1)
-    :bind (:map projectile-mode-map
-		("C-c p" . projectile-command-map)))
-#+end_src
 ** Diff-hl
 #+begin_src elisp
   (use-package diff-hl
@@ -113,32 +104,19 @@
 #+end_src
 ** LSP
 #+begin_src elisp
-  (use-package lsp-mode
-    :ensure t
-    :init
-    (setq lsp-keymap-prefix "C-c l")
-    :hook (
-	   (c++-mode . lsp) ;; Requires clang
-	   (c-mode . lsp)
-	   ;; which-key integration
-	   (lsp-mode . lsp-enable-which-key-integration))
-    :commands lsp)
-
-  (use-package lsp-ui
-    :ensure t
-    :hook (lsp-mode . lsp-ui-mode))
-
+  (use-package eglot
+    :ensure t)
+  
   (use-package company
     :ensure t)
-#+end_src
-*** Python
 
-Requires python-lsp-server
+  (add-hook 'c++-mode-hook 'eglot-ensure) ;; clangd required
+  (add-hook 'c++-mode-hook 'company-mode)
 
-#+begin_src elisp
-  (use-package python-mode
+  (use-package python-mode ;; pyright required
     :ensure t
-    :hook (python-mode . lsp-deferred))
+    :hook ((python-mode . eglot-ensure)
+	   (python-mode . company-mode)))
 #+end_src
 ** Mu4e
 #+begin_src elisp
@@ -235,15 +213,6 @@ Contexts conf settings
 
   (mu4e-alert-enable-mode-line-display)
 #+end_src
-** ChatGPT shell
-#+begin_src elisp
-  (use-package chatgpt-shell
-    :ensure t
-    :custom
-    ((chatgpt-shell-openai-key
-      (lambda ()
-	(auth-source-pass-get 'secret "openai-key")))))
-#+end_src
 ** Org Superstar
 #+begin_src elisp
   (use-package org-superstar
@@ -266,9 +235,6 @@ Contexts conf settings
     (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
 	  doom-themes-enable-italic t) ; if nil, italics is universally disabled
     (load-theme 'doom-tokyo-night t)
-
-    ;; Enable custom neotree theme
-    ;;    (doom-themes-neotree-config)
 
     ;; Corrects (and improves) org-mode's native fontification.
     (doom-themes-org-config))
@@ -345,11 +311,6 @@ Contexts conf settings
 	   "Repubblica")))
 #+end_src
 
-** Scroll-step
-#+begin_src elisp
-  (setq scroll-step 1)
-#+end_src
-
 ** Scratch message
 #+begin_src elisp
   (setq initial-scratch-message ";; Scratch buffer\n\n")
@@ -388,6 +349,7 @@ Contexts conf settings
     (interactive)
     (mapcar 'kill-buffer (buffer-list))
     (delete-other-windows)
+    (eglot-shutdown-all)
     (cd "~"))
 
   (defalias 'kab 'kill-all-buffers)

@@ -45,7 +45,7 @@ pipewire-jack
 pipewire-pulse
 polkit-gnome
 powerline-fonts
-python-lsp-server
+pyright
 python-pip
 qbittorrent
 qt5ct
