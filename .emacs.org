@@ -12,22 +12,22 @@
 #+end_src
 ** Evil mode
 #+begin_src elisp
-  (setq evil-want-keybinding nil)
-
   (use-package evil
     :ensure t
-    :init (evil-mode 1)  
-    :config (evil-set-undo-system 'undo-redo))
+    :init (setq evil-want-keybinding nil)
+    :config (evil-set-undo-system 'undo-redo) (evil-mode 1))
 #+end_src
 *** Evil collection
 #+begin_src elisp
   (use-package evil-collection
+    :after evil
     :ensure t
-    :init (evil-collection-init)) 
+    :config (evil-collection-init))
 #+end_src
 *** Evil commentary
 #+begin_src elisp
   (use-package evil-commentary
+    :after evil
     :ensure t
     :init (evil-commentary-mode 1))
 #+end_src
@@ -36,12 +36,6 @@
   (use-package auto-package-update
     :ensure t
     :config (auto-package-update-maybe))
-#+end_src
-** Which-key
-#+begin_src elisp
-  (use-package which-key
-    :ensure t
-    :init (which-key-mode 1))
 #+end_src
 ** IDO vertical
 #+begin_src elisp
@@ -66,24 +60,20 @@
   (global-set-key (kbd "C-x C-<return>") 'vterm-toggle)
 #+end_src
 
- Show vterm buffer in bottom side
+Show vterm buffer in bottom side
 
- #+begin_src elisp
-   (setq vterm-toggle-fullscreen-p nil)
-   (add-to-list 'display-buffer-alist
-		'((lambda (buffer-or-name _)
-		    (let ((buffer (get-buffer buffer-or-name)))
-		      (with-current-buffer buffer
-			(or (equal major-mode 'vterm-mode)
-			    (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
-		  (display-buffer-reuse-window display-buffer-at-bottom)
-		  ;;(display-buffer-reuse-window display-buffer-in-direction)
-		  ;;display-buffer-in-direction/direction/dedicated is added in emacs27
-		  ;;(direction . bottom)
-		  ;;(dedicated . t) ;dedicated is supported in emacs27
-		  (reusable-frames . visible)
-		  (window-height . 0.3)))
- #+end_src
+#+begin_src elisp
+  (setq vterm-toggle-fullscreen-p nil)
+  (add-to-list 'display-buffer-alist
+	       '((lambda (buffer-or-name _)
+		   (let ((buffer (get-buffer buffer-or-name)))
+		     (with-current-buffer buffer
+		       (or (equal major-mode 'vterm-mode)
+			   (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
+		 (display-buffer-reuse-window display-buffer-at-bottom)
+		 (reusable-frames . visible)
+		 (window-height . 0.3)))
+#+end_src
  
 ** Neotree
 #+begin_src elisp
@@ -106,7 +96,7 @@
 #+begin_src elisp
   (use-package eglot
     :ensure t)
-  
+
   (use-package company
     :ensure t)
 
@@ -203,7 +193,7 @@ Contexts conf settings
 #+begin_src elisp
   (use-package mu4e-alert
     :ensure t)
-  
+
   (setq mu4e-alert-interesting-mail-query
 	(concat
 	 "flag:unread AND maildir:/GmailAccount/INBOX "
@@ -236,6 +226,8 @@ Contexts conf settings
 	  doom-themes-enable-italic t) ; if nil, italics is universally disabled
     (load-theme 'doom-tokyo-night t)
 
+    (doom-themes-neotree-config)
+
     ;; Corrects (and improves) org-mode's native fontification.
     (doom-themes-org-config))
 #+end_src
@@ -267,9 +259,13 @@ Contexts conf settings
 				   "Dicembre"])
   (setq org-startup-folded t)
 #+end_src
+** DocView
+#+begin_src elisp
+  (setq doc-view-continuous t)
+#+end_src
 ** Backup
 
- Write backups to ~/.emacs.d/backup/
+Write backups to ~/.emacs.d/backup/
 
 #+begin_src elisp 
   (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
@@ -322,6 +318,10 @@ Contexts conf settings
 	c-basic-offset 2)
 #+end_src
 
+** Pairs
+#+begin_src elisp
+  (electric-pair-mode 1)
+#+end_src
 ** Opacity
 #+begin_src elisp
   (set-frame-parameter nil 'alpha-background 98)
@@ -333,13 +333,13 @@ Contexts conf settings
 
 ** Tangle
 
- Automatic export org conf in elisp
+Automatic export org conf in elisp
 
 #+begin_src elisp
   (defun custom/tangle-emacs-conf()
     (when (equal (buffer-file-name) (expand-file-name "~/.emacs.org"))
-    (org-babel-tangle)
-  ))
+      (org-babel-tangle)
+      ))
   (add-hook 'after-save-hook #'custom/tangle-emacs-conf)
 #+end_src
 
