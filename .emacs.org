@@ -31,6 +31,16 @@
     :ensure t
     :init (evil-commentary-mode 1))
 #+end_src
+*** Org-agenda fix
+#+begin_src elisp
+  (add-hook 'org-agenda-mode-hook
+	    (lambda ()
+	      (local-set-key "k" 'org-agenda-previous-line)
+	      (local-set-key "j" 'org-agenda-next-line)
+	      (local-set-key (kbd "C-k") 'org-agenda-capture)
+	      (local-set-key (kbd "C-j") 'org-agenda-goto-date)
+	      ))
+#+end_src
 ** Auto-package-update
 #+begin_src elisp
   (use-package auto-package-update
@@ -42,8 +52,12 @@
   (ido-mode 1)
   (use-package ido-vertical-mode
     :ensure t
-    :init (ido-vertical-mode 1)
-    :config (setq ido-vertical-define-keys 'C-n-and-C-p-only))
+    :init (ido-vertical-mode 1))
+
+  (add-hook 'ido-setup-hook (lambda ()
+			      (define-key ido-completion-map (kbd "C-j") 'ido-next-match)
+			      (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)
+			      ))
 #+end_src
 ** Vterm
 #+begin_src elisp
@@ -75,12 +89,6 @@ Show vterm buffer in bottom side
 		 (window-height . 0.3)))
 #+end_src
  
-** Neotree
-#+begin_src elisp
-  (use-package neotree
-    :ensure t)
-  (global-set-key (kbd "C-c t") 'neotree-toggle)
-#+End_src
 ** Magit
 #+begin_src elisp
   (use-package magit
@@ -98,6 +106,7 @@ Show vterm buffer in bottom side
     :ensure t)
 
   (use-package company
+    :config (setq company-idle-delay 0)
     :ensure t)
 
   (add-hook 'c++-mode-hook 'eglot-ensure) ;; clangd required
@@ -220,8 +229,6 @@ Contexts conf settings
     (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
 	  doom-themes-enable-italic t) ; if nil, italics is universally disabled
     (load-theme 'doom-tokyo-night t)
-
-    (doom-themes-neotree-config)
 
     ;; Corrects (and improves) org-mode's native fontification.
     (doom-themes-org-config))
@@ -349,12 +356,12 @@ Automatic export org conf in elisp
 
 ** Kill all buffers
 #+begin_src elisp
-  (defun kill-all-buffers ()
+  (defun custom/kill-all-buffers()
     (interactive)
     (mapc 'kill-buffer (buffer-list))
     (delete-other-windows)
     (eglot-shutdown-all)
     (cd "~"))
 
-  (defalias 'kab 'kill-all-buffers)
+  (defalias 'kab 'custom/kill-all-buffers)
 #+end_src
