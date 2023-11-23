@@ -49,29 +49,22 @@
 #+end_src
 ** IDO vertical
 #+begin_src elisp
-  (ido-mode 1)
   (use-package ido-vertical-mode
     :ensure t
-    :init (ido-vertical-mode 1))
-
-  (add-hook 'ido-setup-hook (lambda ()
-			      (define-key ido-completion-map (kbd "C-j") 'ido-next-match)
-			      (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)
-			      ))
+    :hook (ido-setup . (lambda () (define-key ido-completion-map (kbd "C-j") 'ido-next-match) (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)))
+    :init (ido-mode 1) (ido-vertical-mode 1))
 #+end_src
 ** Vterm
 #+begin_src elisp
   (use-package vterm
     :ensure t
-    :config
-    (setq vterm-shell "/usr/bin/zsh")
-    (setq kill-buffer-query-functions nil))
+    :config (setq vterm-shell "/usr/bin/zsh" kill-buffer-query-functions nil))
 #+end_src
 *** Vterm toggle
 #+begin_src elisp
   (use-package vterm-toggle
-    :ensure t)
-  (global-set-key (kbd "C-x C-<return>") 'vterm-toggle)
+    :ensure t
+    :config (global-set-key (kbd "C-x C-<return>") 'vterm-toggle))
 #+end_src
 
 Show vterm buffer in bottom side
@@ -94,6 +87,13 @@ Show vterm buffer in bottom side
   (use-package magit
     :ensure t)
 #+end_src
+*** Magit-todos
+#+begin_src elisp
+  (use-package magit-todos
+    :after magit
+    :ensure t
+    :config (magit-todos-mode 1))
+#+end_src
 ** Diff-hl
 #+begin_src elisp
   (use-package diff-hl
@@ -101,18 +101,21 @@ Show vterm buffer in bottom side
     :init (global-diff-hl-mode 1))
 #+end_src
 ** LSP
+
+Require clangd and pyright
+
 #+begin_src elisp
   (use-package eglot
+    :ensure t
+    :hook (c++-mode . eglot-ensure)
     :ensure t)
 
   (use-package company
+    :ensure t
     :config (setq company-idle-delay 0)
-    :ensure t)
+    :hook (c++-mode . company-mode))
 
-  (add-hook 'c++-mode-hook 'eglot-ensure) ;; clangd required
-  (add-hook 'c++-mode-hook 'company-mode)
-
-  (use-package python-mode ;; pyright required
+  (use-package python-mode
     :ensure t
     :hook ((python-mode . eglot-ensure)
 	   (python-mode . company-mode)))
@@ -196,22 +199,20 @@ Contexts conf settings
 *** Mu4e alert
 #+begin_src elisp
   (use-package mu4e-alert
-    :ensure t)
-
-  (setq mu4e-alert-interesting-mail-query
-	(concat
-	 "flag:unread AND maildir:/GmailAccount/INBOX "
-	 "OR "
-	 "flag:unread AND maildir:/HotmailAccount/INBOX "
-	 ))
-
-  (mu4e-alert-enable-mode-line-display)
+    :ensure t
+    :config (setq mu4e-alert-interesting-mail-query
+		  (concat
+		   "flag:unread AND maildir:/GmailAccount/INBOX "
+		   "OR "
+		   "flag:unread AND maildir:/HotmailAccount/INBOX "
+		   ))
+    :init (mu4e-alert-enable-mode-line-display))
 #+end_src
 ** Org Superstar
 #+begin_src elisp
   (use-package org-superstar
     :ensure t
-    :hook (org-mode . (lambda () (org-superstar-mode 1))))
+    :hook (org-mode . org-superstar-mode))
 #+end_src
 ** Doom modeline
 #+begin_src elisp
@@ -246,8 +247,9 @@ Contexts conf settings
 #+end_src
 ** Org
 #+begin_src elisp 
-  (setq org-agenda-files (list "~/Documenti/agenda.org" "~/Documenti/.gcal.org"))
   (global-set-key (kbd "C-c a") 'org-agenda)
+  (setq org-startup-folded t)
+  (setq org-agenda-files (list "~/Documenti/agenda.org" "~/Documenti/.gcal.org"))
   (setq calendar-week-start-day 1
 	calendar-day-name-array ["Domenica" "Lunedì" "Martedì" "Mercoledì"
 				 "Giovedì" "Venerdì" "Sabato"]
@@ -255,7 +257,6 @@ Contexts conf settings
 				   "Maggio" "Giugno" "Luglio" "Agosto"
 				   "Settembre" "Ottobre" "Novembre"
 				   "Dicembre"])
-  (setq org-startup-folded t)
 #+end_src
 ** Dired
 #+begin_src elisp
