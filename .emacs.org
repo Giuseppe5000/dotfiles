@@ -326,6 +326,7 @@ Write backups to ~/.emacs.d/backup/
   (electric-pair-mode)
   (global-hl-line-mode)
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  (setq auto-window-vscroll nil)
 #+end_src
 
 
