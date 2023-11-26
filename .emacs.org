@@ -107,18 +107,13 @@ Require clangd and pyright
 #+begin_src elisp
   (use-package eglot
     :ensure t
-    :hook (c++-mode . eglot-ensure)
-    :ensure t)
+    :hook (c++-mode . eglot-ensure) (python-mode . eglot-ensure))
 
   (use-package company
+    :after eglot
     :ensure t
     :config (setq company-idle-delay 0)
-    :hook (c++-mode . company-mode))
-
-  (use-package python-mode
-    :ensure t
-    :hook ((python-mode . eglot-ensure)
-	   (python-mode . company-mode)))
+    :hook (eglot-managed-mode . company-mode))
 #+end_src
 ** Mu4e
 #+begin_src elisp
