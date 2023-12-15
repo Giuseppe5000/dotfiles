@@ -4,6 +4,7 @@ armcord
 baobab
 blueman
 btop
+calcurse
 chromium
 cups
 dolphin
@@ -28,13 +29,11 @@ linux-headers
 libpipewire
 ly
 mpv
-mu
 neofetch
 networkmanager
 network-manager-applet
 noto-fonts-emoji
 obs-studio
-offlineimap
 papirus-icon-theme
 pavucontrol
 pipewire
@@ -90,7 +89,6 @@ iw
 
 # Sway
 cliphist
-emacs-wayland
 rofi-lbonn-wayland
 swappy
 sway
@@ -104,7 +102,6 @@ xdg-desktop-portal-wlr
 xorg-xwayland
 
 # i3
-emacs-nativecomp
 feh
 flameshot
 gromit-mpx

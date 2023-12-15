@@ -1,7 +1,7 @@
 # Colors (Dracula)
 colors:
   primary:
-    background: '#282a36'
+    background: '#282828'
     foreground: '#f8f8f2'
     bright_foreground: '#ffffff'
   cursor:
@@ -72,7 +72,7 @@ font:
   size: 10
 
 window:
-  opacity: 0.85
+  opacity: 0.99
 
 mouse:
     hide_when_typing: true

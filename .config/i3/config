@@ -2,7 +2,7 @@
 
 # Variables
 set $mod Mod4
-set $background ~/Immagini/Wallpapers/*
+set $background ~/Immagini/Wallpapers/Gojo.jpg
 set $term alacritty
 set $menu rofi -show drun
 set $i3lockwall i3lock --blur 5 --clock --indicator --ring-color bb00cc --line-color ffffffff --inside-color 00000000 --separator-color ffffffff --time-color ffffffff --date-color ffffffff
@@ -17,9 +17,6 @@ font pango:DejaVu Sans Mono 8
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $i3lockwall --nofork
 exec --no-startup-id xset dpms 0 0 300
-
-# Auto suspend
-exec --no-startup-id xautolock -time 30 -locker "systemctl suspend"
 
 # Polkit
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -46,7 +43,8 @@ exec --no-startup-id /usr/lib/kdeconnectd
 # Firefox
 exec --no-startup-id firefox
 
-# Gcal sync
+# Calendar
+exec_always --no-startup-id rm -rf .local/share/calcurse/notes && rm .local/share/calcurse/apts
 exec_always --no-startup-id ~/Documenti/Other/scripts/gcal.sh
 
 # Keyboard layout
@@ -253,9 +251,8 @@ for_window [class=.*] border pixel
 
 # Apps workspace
 assign [class="^firefox$"] $ws2
-assign [class="^discord$"] $ws3
+assign [class="^ArmCord$"] $ws3
 assign [class="^Spotify$"] $ws4
-assign [class="^thunderbird$"] $ws5
 
 # i3bar configuration
 bar {

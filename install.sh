@@ -14,9 +14,6 @@ paru -S --needed $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' pacmanpkg.txt)
 mkdir $HOME/.config
 mv .config/* $HOME/.config
 
-# Emacs
-mv .emacs.org $HOME
-
 # GnuPG
 mv .gnupg $HOME
 
@@ -48,6 +45,4 @@ mv .p10k.zsh $HOME
 sudo systemctl enable ly
 sudo systemctl enable NetworkManager
 sudo systemctl enable firewalld
-systemctl --user enable emacs
-systemctl --user enable offlineimaps
 systemctl --user enable syncthing
