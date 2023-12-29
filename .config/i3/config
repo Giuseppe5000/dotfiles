@@ -230,9 +230,6 @@ bindsym $mod+Shift+s exec --no-startup-id flameshot gui
 # File manager
 bindsym $mod+n exec --no-startup-id dolphin
 
-# Emacs
-bindsym $mod+m exec --no-startup-id emacsclient -c
-
 # Clipboard menu
 bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
 

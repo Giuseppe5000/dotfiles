@@ -1,11 +1,9 @@
 " Plugin settings
-let g:ale_completion_enabled = 1
 let NERDTreeMinimalUI = 1
 nnoremap <C-t> :NERDTreeToggle<CR>
 
 " Plugins
 call plug#begin()
-    Plug 'dense-analysis/ale'
     Plug 'preservim/nerdtree'
     Plug 'tpope/vim-commentary'
     Plug 'morhetz/gruvbox'
@@ -26,7 +24,6 @@ set mouse=a
 " Term
 set splitbelow
 set termwinsize=10x0
-set shell=bash
 
 " Search
 set incsearch
