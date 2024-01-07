@@ -5,7 +5,7 @@ set $mod Mod4
 set $background ~/Immagini/Wallpapers/Gojo.jpg
 set $term alacritty
 set $menu rofi -show drun
-set $i3lockwall i3lock --blur 5 --clock --indicator --ring-color bb00cc --line-color ffffffff --inside-color 00000000 --separator-color ffffffff --time-color ffffffff --date-color ffffffff
+set $i3lockwall i3lock --blur 5 --clock --indicator --ring-color 323232 --line-color ffffffff --inside-color 00000000 --separator-color ffffffff --time-color ffffffff --date-color ffffffff
 
 # Background wallpaper
 exec_always --no-startup-id feh --bg-scale --randomize $background
@@ -17,6 +17,9 @@ font pango:DejaVu Sans Mono 8
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $i3lockwall --nofork
 exec --no-startup-id xset dpms 0 0 300
+
+# Auto suspend
+# exec --no-startup-id xautolock -time 30 -locker "systemctl suspend"
 
 # Polkit
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -63,7 +66,7 @@ exec --no-startup-id unclutter
 default_border pixel
 default_floating_border none
 smart_borders on
-client.focused "#000000" "#9900cc" "#000000"
+client.focused "#000000" "#ffffff" "#000000"
 
 # Audio
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -261,10 +264,10 @@ bar {
     colors {
         background #323232
         statusline #ffffff
-        focused_workspace  #9900cc #9900cc #ffffff
+        focused_workspace  #808080 #808080 #ffffff
         active_workspace   #323232 #323232 #ffffff
         inactive_workspace #323232 #323232 #ffffff
-        urgent_workspace   #808080 #808080 #ffffff
+        urgent_workspace   #cc3300 #cc3300 #ffffff
     }
 
     status_command i3status

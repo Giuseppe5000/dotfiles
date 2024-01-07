@@ -1,6 +1,6 @@
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_STYLE_OVERRIDE="kvantum"
-export GTK_THEME="Dracula"
+export GTK_THEME="Adwaita-dark"
 export XCURSOR_PATH=${XCURSOR_PATH}:~/.icons
 export XCURSOR_SIZE=24
 export GPG_TTY=$(tty)
