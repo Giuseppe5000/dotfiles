@@ -31,9 +31,6 @@ sudo mv etc/NetworkManager/conf.d/wifi_rand_mac.conf /etc/NetworkManager/conf.d/
 # Cursor
 mv .icons $HOME
 
-# Theme
-mv .themes $HOME
-
 # Create user dirs
 LC_ALL=it_IT.UTF-8 xdg-user-dirs-update --force
 
