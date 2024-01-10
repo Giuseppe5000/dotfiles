@@ -52,11 +52,6 @@ rclone
 scrcpy
 skanlite
 syncthing
-telegram-desktop
-texlive-binextra
-texlive-latex
-texlive-latexextra
-texlive-plaingeneric
 tor
 torbrowser-launcher
 ttf-dejavu-nerd
