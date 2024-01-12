@@ -16,6 +16,7 @@ gnome-calculator
 gnome-disk-utility
 gnome-themes-extra
 gst-libav
+gvim
 gwenview
 helvum
 intel-ucode
@@ -52,12 +53,12 @@ rclone
 scrcpy
 skanlite
 syncthing
+telegram-desktop
 tor
 torbrowser-launcher
 ttf-dejavu-nerd
 ttf-font-awesome
 v4l2loopback-dkms
-vim
 wget
 wireless_tools
 wpa_supplicant

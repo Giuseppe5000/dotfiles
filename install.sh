@@ -47,3 +47,6 @@ sudo systemctl enable ly
 sudo systemctl enable NetworkManager
 sudo systemctl enable firewalld
 systemctl --user enable syncthing
+
+# Set zsh as default shell
+chsh -s /usr/bin/zsh

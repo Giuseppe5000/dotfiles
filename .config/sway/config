@@ -9,7 +9,7 @@ set {
     $right l
     $term alacritty
     $menu rofi -show drun
-    $background ~/Immagini/background.jpg
+    $background ~/Immagini/Goku.jpg
     $lock swaylock
 }
 
@@ -80,7 +80,7 @@ exec {
 default_border pixel
 default_floating_border none
 smart_borders on
-client.focused "#000000" "#9900cc" "#000000"
+client.focused "#000000" "#ffffff" "#000000"
 
 # Audio
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -136,11 +136,6 @@ bindsym $mod+v splitv
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -231,9 +226,6 @@ bindsym $mod+Shift+s exec grim -g "$(slurp)" - | swappy -f -
 # File manager
 bindsym $mod+n exec dolphin
 
-# Emacs
-bindsym $mod+m exec emacsclient -c
-
 # Clipboard menu
 bindsym $mod+c exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
 
@@ -249,9 +241,7 @@ for_window [app_id="org.gnome.Calculator"] floating enable
 
 # Apps workspace
 assign [app_id="^firefox$"] 2
-assign [class="^discord$"] 3
-assign [class="^Spotify$"] 4
-assign [app_id="^thunderbird$"] 5
+assign [class="^ArmCord$"] 3
 
 include /etc/sway/config.d/*
 
