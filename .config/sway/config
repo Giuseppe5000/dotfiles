@@ -60,7 +60,7 @@ exec cliphist wipe
 exec keepassxc
 
 # Kdeconnect 
-exec /usr/lib/kdeconnectd
+# exec /usr/lib/kdeconnectd
 
 # Firefox
 exec firefox

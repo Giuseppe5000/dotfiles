@@ -86,7 +86,9 @@ iw
 
 # Sway
 cliphist
+grim
 rofi-lbonn-wayland
+slurp
 swappy
 sway
 swaybg

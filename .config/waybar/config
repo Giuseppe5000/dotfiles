@@ -16,7 +16,7 @@
     "position": "top",
 
     // If height property would be not present, it'd be calculated dynamically
-    "height": 30,
+    "height": 25,
 
     "modules-left": [
         "sway/workspaces",
@@ -99,7 +99,7 @@
     "sway/workspaces": {
         "all-outputs": false,
         "disable-scroll": true,
-        "format": "{icon}{name}",
+        "format": "{icon}    {name}    ",
         "format-icons": {
             "urgent": "",
             "default": ""
