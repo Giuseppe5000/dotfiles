@@ -20,6 +20,7 @@ set autochdir
 set clipboard=unnamedplus
 set encoding=utf-8
 set mouse=a
+set scrolloff=6
 
 " Term
 set splitbelow
@@ -28,11 +29,13 @@ set termwinsize=10x0
 " Search
 set incsearch
 set hlsearch
+set ignorecase
 
 " Indent
 set autoindent
 set smartindent
 set expandtab
+set smarttab
 set shiftwidth=4
 set tabstop=4
 
@@ -51,11 +54,3 @@ set statusline +=%=
 set statusline +=\ \ Column:\ %c     "column
 set statusline +=\ \ %p%%\ \ \       "percentage
 set laststatus=2
-
-" Mappings
-inoremap jj <esc>
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>

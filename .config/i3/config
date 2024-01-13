@@ -2,10 +2,10 @@
 
 # Variables
 set $mod Mod4
-set $background ~/Immagini/Wallpapers/Gojo.jpg
+set $background ~/Immagini/Wallpapers/Sukuna.jpg
 set $term alacritty
 set $menu rofi -show drun
-set $i3lockwall i3lock --blur 5 --clock --indicator --ring-color 323232 --line-color ffffffff --inside-color 00000000 --separator-color ffffffff --time-color ffffffff --date-color ffffffff
+set $i3lockwall i3lock --blur 5 --clock --indicator --ring-color 808080 --line-color 000000 --inside-color 00000088 --separator-color 00000000 --time-color ffffffff --date-color ffffffff
 
 # Background wallpaper
 exec_always --no-startup-id feh --bg-scale --randomize $background
@@ -41,7 +41,7 @@ exec --no-startup-id picom
 exec --no-startup-id keepassxc
 
 # Kdeconnect 
-exec --no-startup-id /usr/lib/kdeconnectd
+# exec --no-startup-id /usr/lib/kdeconnectd
 
 # Firefox
 exec --no-startup-id firefox
@@ -57,7 +57,7 @@ exec_always --no-startup-id "setxkbmap -layout it"
 exec_always --no-startup-id "xset led"
 
 # Mouse speed
-exec_always --no-startup-id "xinput --set-prop 10 'libinput Accel Speed' -1"
+exec_always --no-startup-id "xinput --set-prop 9 'libinput Accel Speed' -1"
 
 # Hide the mouse after some time
 exec --no-startup-id unclutter
@@ -127,11 +127,6 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
