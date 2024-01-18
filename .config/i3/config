@@ -57,7 +57,8 @@ exec_always --no-startup-id "setxkbmap -layout it"
 exec_always --no-startup-id "xset led"
 
 # Mouse speed
-exec_always --no-startup-id "xinput --set-prop 9 'libinput Accel Speed' -1"
+set $mouse_id $(xinput|grep 'USB OPTICAL MOUSE'|grep -Eo '[0-9]{1,2}'|head -1)
+exec_always --no-startup-id "xinput --set-prop $mouse_id 'libinput Accel Speed' -1"
 
 # Hide the mouse after some time
 exec --no-startup-id unclutter

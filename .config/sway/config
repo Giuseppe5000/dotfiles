@@ -9,7 +9,7 @@ set {
     $right l
     $term alacritty
     $menu rofi -show drun
-    $background ~/Immagini/Goku.jpg
+    $background ~/Immagini/background.png
     $lock swaylock
 }
 
@@ -66,6 +66,7 @@ exec keepassxc
 exec firefox
 
 # Gcal sync
+exec_always rm -rf .local/share/calcurse/notes && rm .local/share/calcurse/apts
 exec_always ~/Documenti/Other/scripts/gcal.sh
 
 # GTK settings

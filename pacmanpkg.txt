@@ -6,6 +6,7 @@ blueman
 btop
 calcurse
 chromium
+clang
 cups
 dolphin
 ffmpegthumbs

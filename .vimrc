@@ -39,6 +39,9 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
+" Format
+autocmd FileType c,cpp setlocal equalprg=clang-format
+
 " Theme
 set background=dark
 set termguicolors
