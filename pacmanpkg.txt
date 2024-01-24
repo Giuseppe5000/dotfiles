@@ -1,4 +1,3 @@
-alacritty
 ark
 armcord
 baobab
@@ -12,6 +11,7 @@ dolphin
 ffmpegthumbs
 firefox
 firewalld
+fzf
 git
 gnome-calculator
 gnome-disk-utility
@@ -25,6 +25,7 @@ iptables
 kdeconnect
 kdegraphics-thumbnailers
 keepassxc
+kitty
 krita
 kvantum
 libreoffice-fresh

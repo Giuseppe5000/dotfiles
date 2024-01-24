@@ -1,9 +1,11 @@
-alias ls='ls --color=auto'
+alias ls='ls --hyperlink=auto --color=auto'
 alias grep='grep --color=auto'
 alias clean='paru -Rsn $(paru -Qdtq)'
+alias vi='vim'
 
 autoload -Uz compinit
 compinit
+KEYTIMEOUT=1
 
 echo -e "\033];zsh - $PWD \007"
 
@@ -11,7 +13,6 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 bindkey -e
-DISABLE_AUTO_TITLE="true"
 
 # Autosuggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
