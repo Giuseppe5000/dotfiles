@@ -7,7 +7,7 @@ set {
     $down j
     $up k
     $right l
-    $term alacritty
+    $term kitty
     $menu rofi -show drun
     $background ~/Immagini/background.png
     $lock swaylock

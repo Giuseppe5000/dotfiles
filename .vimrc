@@ -1,9 +1,15 @@
-" Plugin settings
+" NerdTree
 let NERDTreeMinimalUI = 1
 nnoremap <C-t> :NERDTreeToggle<CR>
 
+" YCM (installed with --clangd-completer)
+let g:ycm_min_num_of_chars_for_completion = 3
+let mapleader = "\<Space>"
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
+
 " Plugins
 call plug#begin()
+    Plug 'ycm-core/YouCompleteMe'
     Plug 'preservim/nerdtree'
     Plug 'tpope/vim-commentary'
     Plug 'morhetz/gruvbox'
@@ -54,6 +60,8 @@ set statusline +=\ %<%F              "full path
 set statusline +=\ %y                "file type
 set statusline +=%m                  "modified flag
 set statusline +=%=
+set statusline +=\ \ Errors:\ %{youcompleteme#GetErrorCount()}
+set statusline +=\ \ Warnings:\ %{youcompleteme#GetWarningCount()}
 set statusline +=\ \ Column:\ %c     "column
 set statusline +=\ \ %p%%\ \ \       "percentage
 set laststatus=2
