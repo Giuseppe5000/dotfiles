@@ -1,20 +1,19 @@
 " YCM (installed with --clangd-completer)
+let mapleader = '\<Space>'
 let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let mapleader = '\<Space>'
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
+let g:ycm_key_list_stop_completion = ['<CR>']
 
 " FZF
 let g:fzf_layout = {'down':'~40%'}
-nnoremap <silent> <C-f> :Files<CR>'
 
 " Plugins
 call plug#begin()
-    Plug 'ycm-core/YouCompleteMe'
-    Plug 'junegunn/fzf.vim'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-commentary'
-    Plug 'morhetz/gruvbox'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 " General
@@ -32,10 +31,22 @@ set encoding=utf-8
 set mouse=a
 set scrolloff=6
 
+" Mappings
+nnoremap <C-enter> :term<cr>
+nnoremap <C-t> :Lex<cr>
+nnoremap <C-b> :Buffers<cr>
+nnoremap <C-f> :Files<cr>'
+nnoremap <leader>jd :YcmCompleter GoTo<cr>
+
+" Explorer
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_liststyle = 3
+let g:netrw_winsize = 12
+let g:netrw_banner = 0
+
 " Term
 set term=kitty
 set splitbelow
-nnoremap <C-Enter> :tab term<CR>
 
 " Search
 set incsearch
@@ -50,7 +61,11 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-" Format
+" Folding
+set foldmethod=indent
+set nofoldenable
+
+" C/C++ format
 autocmd FileType c,cpp setlocal equalprg=clang-format
 
 " Theme
@@ -60,19 +75,19 @@ colorscheme gruvbox
 hi Normal guibg=NONE ctermbg=NONE
 
 " Status line
-highlight NameColor ctermbg=239 ctermfg=white
-highlight FileTypeColor ctermbg=239 ctermfg=green
-highlight ModifiedColor ctermbg=239 ctermfg=green
-highlight ErrorsColor ctermbg=239 ctermfg=red
-highlight WarningsColor ctermbg=239 ctermfg=yellow
-highlight Default ctermbg=239 ctermfg=white
+hi NameColor ctermbg=239 ctermfg=white
+hi FileTypeColor ctermbg=239 ctermfg=green
+hi ModifiedColor ctermbg=239 ctermfg=green
+hi ErrorsColor ctermbg=239 ctermfg=red
+hi WarningsColor ctermbg=239 ctermfg=yellow
+hi DefaultColor ctermbg=239 ctermfg=white
 
 set statusline=
 set statusline+=%#NameColor#
 set statusline+=\ %<%F
 set statusline+=%#FileTypeColor#
 set statusline+=\ %y
-set statusline+=%#Default#
+set statusline+=%#DefaultColor#
 set statusline+=\ %{FugitiveStatusline()}
 set statusline+=%#ModifiedColor#
 set statusline+=\ %m
@@ -81,7 +96,7 @@ set statusline+=%#ErrorsColor#
 set statusline+=\ \ E:\ %{youcompleteme#GetErrorCount()}
 set statusline+=%#WarningsColor#
 set statusline+=\ \ W:\ %{youcompleteme#GetWarningCount()}
-set statusline+=%#Default#
+set statusline+=%#DefaultColor#
 set statusline+=\ \ TotL:\ %L
 set statusline+=\ \ Col:\ %c
 set statusline+=\ \ %p%%\ 
