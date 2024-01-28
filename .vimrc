@@ -21,7 +21,7 @@ filetype plugin indent on
 syntax on
 set nocompatible
 set autoread
-set number
+set number relativenumber
 set cursorline
 set autochdir
 set wildmenu
@@ -97,7 +97,21 @@ set statusline+=\ \ E:\ %{youcompleteme#GetErrorCount()}
 set statusline+=%#WarningsColor#
 set statusline+=\ \ W:\ %{youcompleteme#GetWarningCount()}
 set statusline+=%#DefaultColor#
-set statusline+=\ \ TotL:\ %L
-set statusline+=\ \ Col:\ %c
+set statusline+=\ \ (\%l,\%c)
 set statusline+=\ \ %p%%\ 
 set laststatus=2
+
+" GPG encrypted files
+augroup encrypted
+  au!
+  autocmd BufReadPre,FileReadPre *.gpg set viminfo=
+  autocmd BufReadPre,FileReadPre *.gpg set noswapfile
+  autocmd BufReadPre,FileReadPre *.gpg set bin
+  autocmd BufReadPre,FileReadPre *.gpg let ch_save = &ch|set ch=2
+  autocmd BufReadPost,FileReadPost *.gpg '[,']!gpg --decrypt 2> /dev/null
+  autocmd BufReadPost,FileReadPost *.gpg set nobin
+  autocmd BufReadPost,FileReadPost *.gpg let &ch = ch_save|unlet ch_save
+  autocmd BufReadPost,FileReadPost *.gpg execute ":doautocmd BufReadPost " . expand("%:r")
+  autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2>/dev/null
+  autocmd BufWritePost,FileWritePost *.gpg u
+augroup END

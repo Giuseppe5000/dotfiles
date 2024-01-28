@@ -45,6 +45,10 @@ input type:touchpad {
     middle_emulation enabled
 }
 
+input type:keyboard {
+  xkb_options ctrl:nocaps
+}
+
 # Polkit
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 

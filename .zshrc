@@ -12,7 +12,9 @@ echo -e "\033];zsh - $PWD \007"
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-bindkey -e
+
+bindkey "^K" up-line-or-history
+bindkey "^J" down-line-or-history
 
 # Autosuggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

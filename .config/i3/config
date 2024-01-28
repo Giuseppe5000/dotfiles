@@ -52,6 +52,7 @@ exec_always --no-startup-id ~/Documenti/Other/scripts/gcal.sh
 
 # Keyboard layout
 exec_always --no-startup-id "setxkbmap -layout it"
+exec_always --no-startup-id "setxkbmap -option 'ctrl:swapcaps'"
 
 # Keyboard led
 exec_always --no-startup-id "xset led"
