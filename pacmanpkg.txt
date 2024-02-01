@@ -1,6 +1,7 @@
 ark
 armcord
 baobab
+bat
 blueman
 btop
 calcurse
@@ -13,6 +14,7 @@ firefox
 firewalld
 fzf
 git
+git-delta
 gnome-calculator
 gnome-disk-utility
 gnome-themes-extra
@@ -28,9 +30,9 @@ keepassxc
 kitty
 krita
 kvantum
+libpipewire
 libreoffice-fresh
 linux-headers
-libpipewire
 ly
 mpv
 neofetch

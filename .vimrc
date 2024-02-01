@@ -1,5 +1,4 @@
 " YCM (installed with --clangd-completer)
-let mapleader = '\<Space>'
 let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_key_list_stop_completion = ['<CR>']
@@ -12,26 +11,28 @@ call plug#begin()
 Plug 'ycm-core/YouCompleteMe'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary'
-Plug 'morhetz/gruvbox'
 call plug#end()
 
 " General
+set nocompatible
 filetype plugin indent on
 syntax on
-set nocompatible
 set autoread
 set number relativenumber
 set cursorline
 set autochdir
+set noswapfile
+set splitbelow
 set wildmenu
 set wildoptions=pum
 set clipboard=unnamedplus
 set encoding=utf-8
 set mouse=a
 set scrolloff=6
+set updatetime=1000
 
 " Mappings
+let mapleader = "\<Space>"
 nnoremap <C-enter> :term<cr>
 nnoremap <C-t> :Lex<cr>
 nnoremap <C-b> :Buffers<cr>
@@ -46,7 +47,6 @@ let g:netrw_banner = 0
 
 " Term
 set term=kitty
-set splitbelow
 
 " Search
 set incsearch
@@ -71,7 +71,7 @@ autocmd FileType c,cpp setlocal equalprg=clang-format
 " Theme
 set background=dark
 set termguicolors
-colorscheme gruvbox
+colorscheme habamax
 hi Normal guibg=NONE ctermbg=NONE
 
 " Status line
