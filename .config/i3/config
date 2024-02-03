@@ -52,7 +52,8 @@ exec_always --no-startup-id ~/Documenti/Other/scripts/gcal.sh
 
 # Keyboard layout
 exec_always --no-startup-id "setxkbmap -layout it"
-exec_always --no-startup-id "setxkbmap -option 'ctrl:swapcaps'"
+exec_always --no-startup-id "setxkbmap -option 'ctrl:nocaps'"
+exec_always --no-startup-id "xset r rate 250"
 
 # Keyboard led
 exec_always --no-startup-id "xset led"

@@ -41,7 +41,7 @@ battery all {
 }
 
 tztime local {
-    format = " %A %e %B   %H:%M"
+    format = " %A %d %B   %H:%M"
 }
 
 cpu_usage {
@@ -54,8 +54,6 @@ cpu_temperature 0 {
 
 memory {
     format = " %used"
-    threshold_degraded = "10%"
-    format_degraded = "MEMORY: %free"
 }
 
 volume master {

@@ -23,6 +23,7 @@ set cursorline
 set autochdir
 set noswapfile
 set splitbelow
+set list
 set wildmenu
 set wildoptions=pum
 set clipboard=unnamedplus
@@ -30,14 +31,17 @@ set encoding=utf-8
 set mouse=a
 set scrolloff=6
 set updatetime=1000
+set belloff=all
+set lcs=space:·
 
 " Mappings
 let mapleader = "\<Space>"
-nnoremap <C-enter> :term<cr>
-nnoremap <C-t> :Lex<cr>
-nnoremap <C-b> :Buffers<cr>
-nnoremap <C-f> :Files<cr>'
-nnoremap <leader>jd :YcmCompleter GoTo<cr>
+nn <C-enter> :term<cr>
+nn <C-t> :Lex<cr>
+nn <C-b> :Buffers<cr>
+nn <C-f> :Files<cr>'
+nn <leader>jd :YcmCompleter GoTo<cr>
+im <C-c> <Esc>
 
 " Explorer
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
@@ -66,7 +70,7 @@ set foldmethod=indent
 set nofoldenable
 
 " C/C++ format
-autocmd FileType c,cpp setlocal equalprg=clang-format
+au FileType c,cpp setlocal equalprg=clang-format
 
 " Theme
 set background=dark
@@ -102,16 +106,16 @@ set statusline+=\ \ %p%%\
 set laststatus=2
 
 " GPG encrypted files
-augroup encrypted
-  au!
-  autocmd BufReadPre,FileReadPre *.gpg set viminfo=
-  autocmd BufReadPre,FileReadPre *.gpg set noswapfile
-  autocmd BufReadPre,FileReadPre *.gpg set bin
-  autocmd BufReadPre,FileReadPre *.gpg let ch_save = &ch|set ch=2
-  autocmd BufReadPost,FileReadPost *.gpg '[,']!gpg --decrypt 2> /dev/null
-  autocmd BufReadPost,FileReadPost *.gpg set nobin
-  autocmd BufReadPost,FileReadPost *.gpg let &ch = ch_save|unlet ch_save
-  autocmd BufReadPost,FileReadPost *.gpg execute ":doautocmd BufReadPost " . expand("%:r")
-  autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2>/dev/null
-  autocmd BufWritePost,FileWritePost *.gpg u
-augroup END
+aug encrypted
+    au!
+    au BufReadPre,FileReadPre *.gpg set viminfo=
+    au BufReadPre,FileReadPre *.gpg set noswapfile
+    au BufReadPre,FileReadPre *.gpg set bin
+    au BufReadPre,FileReadPre *.gpg let ch_save = &ch|set ch=2
+    au BufReadPost,FileReadPost *.gpg '[,']!gpg --decrypt 2> /dev/null
+    au BufReadPost,FileReadPost *.gpg set nobin
+    au BufReadPost,FileReadPost *.gpg let &ch = ch_save|unlet ch_save
+    au BufReadPost,FileReadPost *.gpg execute ":doautocmd BufReadPost " . expand("%:r")
+    au BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2>/dev/null
+    au BufWritePost,FileWritePost *.gpg u
+aug END
