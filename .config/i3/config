@@ -10,9 +10,6 @@ set $i3lockwall i3lock --blur 5 --clock --indicator --ring-color 808080 --line-c
 # Background wallpaper
 exec_always --no-startup-id feh --bg-scale --randomize $background
 
-# Font
-font pango:DejaVu Sans Mono 8
-
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $i3lockwall --nofork
@@ -257,7 +254,7 @@ bar {
     position top
     strip_workspace_numbers yes
     tray_padding 1
-    font pango:Economica, FontAwesome 10
+    font pango:DejaVuSansMNerdFont Regular 10
     separator_symbol " "    
     colors {
         background #323232

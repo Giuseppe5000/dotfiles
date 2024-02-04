@@ -41,7 +41,7 @@ battery all {
 }
 
 tztime local {
-    format = " %A %d %B   %H:%M"
+    format = " %A %d %B  %H:%M"
 }
 
 cpu_usage {

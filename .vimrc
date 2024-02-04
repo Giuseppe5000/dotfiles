@@ -43,12 +43,6 @@ nn <C-f> :Files<cr>'
 nn <leader>jd :YcmCompleter GoTo<cr>
 im <C-c> <Esc>
 
-" Explorer
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_liststyle = 3
-let g:netrw_winsize = 12
-let g:netrw_banner = 0
-
 " Term
 set term=kitty
 
@@ -71,6 +65,22 @@ set nofoldenable
 
 " C/C++ format
 au FileType c,cpp setlocal equalprg=clang-format
+
+" Explorer
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_liststyle = 3
+let g:netrw_winsize = 12
+let g:netrw_banner = 0
+
+function! NetrwMapping()
+    nm <buffer> h -
+    nm <buffer> l <CR>
+    nm <buffer> C gn
+endfunction
+aug netrw_mapping
+    au!
+    au filetype netrw call NetrwMapping()
+aug END
 
 " Theme
 set background=dark
