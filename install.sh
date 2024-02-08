@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Sudo check
+if ! $(sudo -l &> /dev/null); then
+    echo 'Error: root privileges are needed to run this script'
+    exit -1
+fi
+
 # Paru
 sudo pacman -S --needed base-devel
 git clone https://aur.archlinux.org/paru.git
@@ -23,8 +29,7 @@ mv .clang-format $HOME
 mv .gnupg $HOME
 
 # Ly
-sudo rm /etc/ly/config.ini
-sudo mv etc/ly/config.ini /etc/ly/
+sudo mv etc/ly/config.ini /etc/ly/config.ini
 
 # NetworkManager MAC randomization conf
 sudo mv etc/NetworkManager/conf.d/wifi_rand_mac.conf /etc/NetworkManager/conf.d/

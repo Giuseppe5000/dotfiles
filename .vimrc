@@ -72,11 +72,11 @@ let g:netrw_liststyle = 3
 let g:netrw_winsize = 12
 let g:netrw_banner = 0
 
-function! NetrwMapping()
+fu! NetrwMapping()
     nm <buffer> h -
     nm <buffer> l <CR>
     nm <buffer> C gn
-endfunction
+endf
 aug netrw_mapping
     au!
     au filetype netrw call NetrwMapping()
