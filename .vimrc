@@ -1,18 +1,3 @@
-" YCM (installed with --clangd-completer)
-let g:ycm_min_num_of_chars_for_completion = 3
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_list_stop_completion = ['<CR>']
-
-" FZF
-let g:fzf_layout = {'down':'~40%'}
-
-" Plugins
-call plug#begin()
-Plug 'ycm-core/YouCompleteMe'
-Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'
-call plug#end()
-
 " General
 set nocompatible
 filetype plugin indent on
@@ -35,12 +20,8 @@ set belloff=all
 set lcs=space:·
 
 " Mappings
-let mapleader = "\<Space>"
 nn <C-enter> :term<cr>
 nn <C-t> :Lex<cr>
-nn <C-b> :Buffers<cr>
-nn <C-f> :Files<cr>'
-nn <leader>jd :YcmCompleter GoTo<cr>
 im <C-c> <Esc>
 
 " Term
@@ -92,8 +73,6 @@ hi Normal guibg=NONE ctermbg=NONE
 hi NameColor ctermbg=239 ctermfg=white
 hi FileTypeColor ctermbg=239 ctermfg=green
 hi ModifiedColor ctermbg=239 ctermfg=green
-hi ErrorsColor ctermbg=239 ctermfg=red
-hi WarningsColor ctermbg=239 ctermfg=yellow
 hi DefaultColor ctermbg=239 ctermfg=white
 
 set statusline=
@@ -101,15 +80,9 @@ set statusline+=%#NameColor#
 set statusline+=\ %<%F
 set statusline+=%#FileTypeColor#
 set statusline+=\ %y
-set statusline+=%#DefaultColor#
-set statusline+=\ %{FugitiveStatusline()}
 set statusline+=%#ModifiedColor#
 set statusline+=\ %m
 set statusline+=%=
-set statusline+=%#ErrorsColor#
-set statusline+=\ \ E:\ %{youcompleteme#GetErrorCount()}
-set statusline+=%#WarningsColor#
-set statusline+=\ \ W:\ %{youcompleteme#GetWarningCount()}
 set statusline+=%#DefaultColor#
 set statusline+=\ \ (\%l,\%c)
 set statusline+=\ \ %p%%\ 

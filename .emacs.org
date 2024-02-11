@@ -1,0 +1,130 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: Giuseppe
+#+PROPERTY: header-args :tangle yes
+
+* Packages
+** MELPA repo
+#+begin_src emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (package-initialize)
+  (setq package-native-compile t)
+#+end_src
+** Evil
+#+begin_src emacs-lisp
+  (use-package evil
+    :ensure t
+    :init (setq evil-want-keybinding nil)
+    :config (evil-set-undo-system 'undo-redo) (evil-mode 1))
+
+  (use-package evil-collection
+    :after evil
+    :ensure t
+    :config (evil-collection-init) (evil-collection-define-key 'normal 'dired-mode-map
+				     "h" 'dired-up-directory
+				     "l" 'dired-find-file))
+#+end_src
+** IDO vertical
+#+begin_src emacs-lisp
+  (use-package ido-vertical-mode
+    :ensure t
+    :defer t
+    :hook (ido-setup . (lambda () (define-key ido-completion-map (kbd "C-j") 'ido-next-match) (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)))
+    :init (ido-mode 1) (ido-vertical-mode 1))
+#+end_src
+** Magit
+#+begin_src emacs-lisp
+  (use-package magit
+    :ensure t
+    :defer t)
+#+end_src
+** LSP
+#+begin_src emacs-lisp
+  (use-package eglot
+    :ensure t
+    :hook (c++-mode . eglot-ensure))
+
+  (use-package company
+    :after eglot
+    :ensure t
+    :config (setq company-idle-delay 0)
+    :hook (eglot-managed-mode . company-mode))
+#+end_src
+** Vterm
+#+begin_src emacs-lisp
+  (use-package vterm
+    :ensure t
+    :config (setq vterm-shell "/usr/bin/bash" kill-buffer-query-functions nil))
+
+  (use-package vterm-toggle
+    :after vterm
+    :ensure t
+    :config (global-set-key (kbd "C-<return>") 'vterm-toggle))
+  (setq vterm-toggle-fullscreen-p nil)
+  (add-to-list 'display-buffer-alist
+	       '((lambda (buffer-or-name _)
+		   (let ((buffer (get-buffer buffer-or-name)))
+		     (with-current-buffer buffer
+		       (or (equal major-mode 'vterm-mode)
+			   (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
+		 (display-buffer-reuse-window display-buffer-at-bottom)
+		 (reusable-frames . visible)
+		 (window-height . 0.3)))
+#+end_src
+** Theme
+#+begin_src emacs-lisp
+  (use-package gruber-darker-theme
+    :ensure t
+    :config (load-theme 'gruber-darker t))
+#+end_src
+** Org bullets
+#+begin_src emacs-lisp
+  (use-package org-bullets
+    :ensure t
+    :hook (org-mode . org-bullets-mode))
+#+end_src
+* General
+** Remove menus
+#+begin_src emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (setq inhibit-startup-screen t)
+#+end_src
+** Performance
+#+begin_src emacs-lisp
+  (setq gc-cons-threshold most-positive-fixnum)
+  (setq gc-cons-threshold (* 100 1024 1024))
+#+end_src
+** Style
+#+begin_src emacs-lisp
+  (set-frame-font "IosevkaTerm NFM 12" nil t)
+  (setq c-default-style "linux" c-basic-offset 2)
+  (setq whitespace-style '(face tabs spaces trailing space-before-tab indentation space-after-tab space-mark tab-mark))
+  (add-hook 'prog-mode-hook #'whitespace-mode)
+  (set-frame-parameter nil 'alpha-background 98)
+  (add-to-list 'default-frame-alist '(alpha-background . 98))
+  (setq display-line-numbers-type 'relative)
+  (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+  (column-number-mode 1)
+  (size-indication-mode 1)
+#+end_src
+** Backup files
+#+begin_src emacs-lisp
+  (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+	backup-by-copying      t  ; Don't de-link hard links
+	version-control        t  ; Use version numbers on backups
+	delete-old-versions    t  ; Automatically delete excess backups:
+	kept-new-versions      20 ; how many of the newest versions to keep
+	kept-old-versions      5) ; and how many of the old
+#+end_src
+** Misc
+#+begin_src emacs-lisp
+  (setq org-startup-folded t)
+  (setq auto-save-default nil)
+  (setq dired-listing-switches "-lhAX --group-directories-first")
+  (setq use-short-answers 1)
+  (setq doc-view-continuous t)
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+#+end_src
+

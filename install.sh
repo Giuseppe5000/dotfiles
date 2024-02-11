@@ -20,9 +20,11 @@ paru -S --needed $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' pacmanpkg.txt)
 mkdir $HOME/.config
 mv .config/* $HOME/.config
 
+# Emacs config
+mv .emacs.org $HOME
+
 # Vim config
 mv .vimrc $HOME
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 mv .clang-format $HOME
 
 # GnuPG
