@@ -44,7 +44,6 @@ exec --no-startup-id keepassxc
 exec --no-startup-id firefox
 
 # Calendar
-exec_always --no-startup-id rm -rf .local/share/calcurse/notes && rm .local/share/calcurse/apts
 exec_always --no-startup-id ~/Documenti/Other/scripts/gcal.sh
 
 # Keyboard layout

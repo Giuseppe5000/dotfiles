@@ -1,10 +1,8 @@
 ark
 armcord
 baobab
-bat
 blueman
 btop
-calcurse
 chromium
 clang
 cups
@@ -12,9 +10,7 @@ dolphin
 ffmpegthumbs
 firefox
 firewalld
-fzf
 git
-git-delta
 gnome-calculator
 gnome-disk-utility
 gnome-themes-extra
@@ -36,10 +32,12 @@ linux-headers
 ly
 mpv
 neofetch
-networkmanager
 network-manager-applet
+networkmanager
+notmuch
 noto-fonts-emoji
 obs-studio
+offlineimap
 papirus-icon-theme
 pavucontrol
 pipewire
@@ -106,6 +104,7 @@ xdg-desktop-portal-wlr
 xorg-xwayland
 
 # i3
+emacs-nativecomp
 feh
 flameshot
 gromit-mpx

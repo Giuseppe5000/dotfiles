@@ -21,8 +21,8 @@
     :after evil
     :ensure t
     :config (evil-collection-init) (evil-collection-define-key 'normal 'dired-mode-map
-				     "h" 'dired-up-directory
-				     "l" 'dired-find-file))
+                                     "h" 'dired-up-directory
+                                     "l" 'dired-find-file))
 #+end_src
 ** IDO vertical
 #+begin_src emacs-lisp
@@ -42,6 +42,7 @@
 #+begin_src emacs-lisp
   (use-package eglot
     :ensure t
+    :defer t
     :hook (c++-mode . eglot-ensure))
 
   (use-package company
@@ -50,26 +51,10 @@
     :config (setq company-idle-delay 0)
     :hook (eglot-managed-mode . company-mode))
 #+end_src
-** Vterm
+** Notmuch
 #+begin_src emacs-lisp
-  (use-package vterm
-    :ensure t
-    :config (setq vterm-shell "/usr/bin/bash" kill-buffer-query-functions nil))
-
-  (use-package vterm-toggle
-    :after vterm
-    :ensure t
-    :config (global-set-key (kbd "C-<return>") 'vterm-toggle))
-  (setq vterm-toggle-fullscreen-p nil)
-  (add-to-list 'display-buffer-alist
-	       '((lambda (buffer-or-name _)
-		   (let ((buffer (get-buffer buffer-or-name)))
-		     (with-current-buffer buffer
-		       (or (equal major-mode 'vterm-mode)
-			   (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
-		 (display-buffer-reuse-window display-buffer-at-bottom)
-		 (reusable-frames . visible)
-		 (window-height . 0.3)))
+  (use-package notmuch
+    :ensure t)
 #+end_src
 ** Theme
 #+begin_src emacs-lisp
@@ -96,11 +81,21 @@
   (setq gc-cons-threshold most-positive-fixnum)
   (setq gc-cons-threshold (* 100 1024 1024))
 #+end_src
+** Term
+#+begin_src emacs-lisp
+  (defun term-split ()
+    (interactive)
+    (split-window-vertically)
+    (other-window 1)
+    (term "/usr/bin/bash")
+    )
+#+end_src
 ** Style
 #+begin_src emacs-lisp
   (set-frame-font "IosevkaTerm NFM 12" nil t)
-  (setq c-default-style "linux" c-basic-offset 2)
+  (setq c-default-style "linux" c-basic-offset 4)
   (setq whitespace-style '(face tabs spaces trailing space-before-tab indentation space-after-tab space-mark tab-mark))
+  (setq-default indent-tabs-mode nil)
   (add-hook 'prog-mode-hook #'whitespace-mode)
   (set-frame-parameter nil 'alpha-background 98)
   (add-to-list 'default-frame-alist '(alpha-background . 98))
@@ -112,11 +107,11 @@
 ** Backup files
 #+begin_src emacs-lisp
   (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
-	backup-by-copying      t  ; Don't de-link hard links
-	version-control        t  ; Use version numbers on backups
-	delete-old-versions    t  ; Automatically delete excess backups:
-	kept-new-versions      20 ; how many of the newest versions to keep
-	kept-old-versions      5) ; and how many of the old
+        backup-by-copying      t  ; Don't de-link hard links
+        version-control        t  ; Use version numbers on backups
+        delete-old-versions    t  ; Automatically delete excess backups:
+        kept-new-versions      20 ; how many of the newest versions to keep
+        kept-old-versions      5) ; and how many of the old
 #+end_src
 ** Misc
 #+begin_src emacs-lisp
@@ -125,6 +120,9 @@
   (setq dired-listing-switches "-lhAX --group-directories-first")
   (setq use-short-answers 1)
   (setq doc-view-continuous t)
+  (setq org-agenda-files (list "~/Documenti/.gcal.org"))
+  (setq native-comp-async-report-warnings-errors nil)
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  (global-set-key (kbd "C-g") 'evil-normal-state)
 #+end_src
 
