@@ -7,7 +7,7 @@ if ! $(sudo -l &> /dev/null); then
 fi
 
 # Install all packets
-xargs sudo apt -y install <  $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' aptpkg.txt)
+sudo apt -y install $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' aptpkg.txt)
 
 # Configs
 mkdir $HOME/.config
