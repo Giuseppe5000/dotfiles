@@ -1,3 +1,4 @@
+export PATH="$HOME/.local/bin:$PATH"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_STYLE_OVERRIDE="kvantum"
 export GTK_THEME="Adwaita-dark"
