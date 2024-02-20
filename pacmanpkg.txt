@@ -6,6 +6,7 @@ btop
 chromium
 clang
 cups
+dex
 dolphin
 ffmpegthumbs
 firefox
@@ -30,10 +31,11 @@ libpipewire
 libreoffice-fresh
 linux-headers
 ly
+mate-polkit
 mpv
 neofetch
-network-manager-applet
 networkmanager
+network-manager-applet
 notmuch
 noto-fonts-emoji
 obs-studio
@@ -45,7 +47,6 @@ pipewire-alsa
 pipewire-audio
 pipewire-jack
 pipewire-pulse
-polkit-gnome
 powerline-fonts
 pyright
 python-pip

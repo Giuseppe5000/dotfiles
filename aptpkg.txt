@@ -5,6 +5,7 @@ btop
 chromium
 clang
 cups
+dex
 dolphin
 ffmpegthumbs
 firefox-esr
@@ -38,8 +39,6 @@ obs-studio
 offlineimap
 papirus-icon-theme
 pavucontrol
-pipewire
-pipewire
 pipewire-alsa
 pipewire-audio
 pipewire-jack
