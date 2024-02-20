@@ -1,6 +1,8 @@
 ark
 baobab
 blueman
+broadcom-sta-common
+broadcom-sta-dkms
 btop
 chromium
 clang
@@ -39,6 +41,7 @@ obs-studio
 offlineimap
 papirus-icon-theme
 pavucontrol
+pinentry-gnome3
 pipewire-alsa
 pipewire-audio
 pipewire-jack

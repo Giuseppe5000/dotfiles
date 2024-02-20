@@ -24,7 +24,7 @@ mv .clang-format $HOME
 mv .gnupg $HOME
 
 # NetworkManager MAC randomization conf
-sudo mv etc/NetworkManager/conf.d/wifi_rand_mac.conf /etc/NetworkManager/conf.d/
+# sudo mv etc/NetworkManager/conf.d/wifi_rand_mac.conf /etc/NetworkManager/conf.d/
 
 # Cursor
 mv .icons $HOME
@@ -42,7 +42,7 @@ mv .p10k.zsh $HOME
 
 # Greenclip
 mkdir -p $HOME/.local/bin
-wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip -o $HOME/.local/bin/greenclip
+wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip -O $HOME/.local/bin/greenclip
 chmod +x $HOME/.local/bin/greenclip
 
 # Powerlevel10k
