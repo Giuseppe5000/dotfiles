@@ -1,16 +1,15 @@
-ark
 baobab
 blueman
-broadcom-sta-common
-broadcom-sta-dkms
 btop
 chromium
 clang
 cups
 dex
-dolphin
+eog
 ffmpegthumbs
+file-roller
 firefox-esr
+firewall-config
 firewalld
 fonts-dejavu
 fonts-font-awesome
@@ -21,11 +20,8 @@ gnome-calculator
 gnome-disk-utility
 gnome-themes-extra
 gstreamer1.0-libav
-gwenview
 intel-microcode
 iptables
-kdeconnect
-kdegraphics-thumbnailers
 keepassxc
 kitty
 krita
@@ -33,6 +29,7 @@ libreoffice
 linux-headers-amd64
 mate-polkit
 mpv
+nemo
 neofetch
 network-manager
 nm-tray
@@ -59,7 +56,7 @@ telegram-desktop
 tor
 torbrowser-launcher
 v4l2loopback-dkms
-vim
+vim-gtk3
 wget
 wireless-tools
 wpasupplicant
@@ -69,6 +66,8 @@ zsh
 zsh-autosuggestions
 
 # Workstation
+broadcom-sta-common
+broadcom-sta-dkms
 dnsmasq
 firmware-misc-nonfree
 nvidia-driver
@@ -83,7 +82,7 @@ emacs
 feh
 flameshot
 gromit-mpx
-i3lock
+i3lock-fancy
 i3status
 i3-wm
 picom

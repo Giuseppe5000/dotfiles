@@ -1,4 +1,3 @@
-ark
 armcord
 baobab
 blueman
@@ -7,8 +6,8 @@ chromium
 clang
 cups
 dex
-dolphin
 ffmpegthumbs
+file-roller
 firefox
 firewalld
 git
@@ -17,12 +16,9 @@ gnome-disk-utility
 gnome-themes-extra
 gst-libav
 gvim
-gwenview
 helvum
 intel-ucode
 iptables
-kdeconnect
-kdegraphics-thumbnailers
 keepassxc
 kitty
 krita
@@ -33,6 +29,7 @@ linux-headers
 ly
 mate-polkit
 mpv
+nemo
 neofetch
 networkmanager
 network-manager-applet
