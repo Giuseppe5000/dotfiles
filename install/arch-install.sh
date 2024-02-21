@@ -1,4 +1,6 @@
 #!/bin/bash
+cd $(dirname $0)
+cd ..
 
 # Sudo check
 if ! $(sudo -l &> /dev/null); then
