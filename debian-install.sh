@@ -61,6 +61,9 @@ fc-cache -f
 sudo systemctl enable NetworkManager
 sudo systemctl enable firewalld
 systemctl --user enable syncthing
+sudo cp /usr/share/doc/offlineimap3/examples/systemd/offlineimap.service /etc/systemd/user/
+systemctl --user enable offlineimap
+
 
 # Set zsh as default shell
 chsh -s /usr/bin/zsh

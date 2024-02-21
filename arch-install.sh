@@ -47,7 +47,7 @@ mv Wallpapers $HOME/Pictures
 
 # ZSH
 mv .zshenv $HOME
-mv .zshrc $HOME
+mv .zshrc-arch $HOME/.zshrc
 mv .p10k.zsh $HOME
 
 # Enable some services
