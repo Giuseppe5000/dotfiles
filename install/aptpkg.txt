@@ -49,7 +49,7 @@ qbittorrent
 qt5ct
 qt5-style-kvantum
 rclone
-skanlite
+simple-scan
 syncthing
 systemd-zram-generator
 telegram-desktop

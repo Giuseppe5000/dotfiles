@@ -1,6 +1,4 @@
 #!/bin/bash
-cd $(dirname $0)
-cd ..
 
 # Sudo check
 if ! $(sudo -l &> /dev/null); then
@@ -17,6 +15,9 @@ cd ..
 
 # Install all packets
 paru -S --needed $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' pacmanpkg.txt)
+
+cd $(dirname $0)
+cd ..
 
 # Configs
 mkdir $HOME/.config

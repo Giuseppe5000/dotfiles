@@ -1,6 +1,4 @@
 #!/bin/bash
-cd $(dirname $0)
-cd ..
 
 # Sudo check
 if ! $(sudo -l &> /dev/null); then
@@ -10,6 +8,9 @@ fi
 
 # Install all packets
 sudo apt -y install $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' aptpkg.txt)
+
+cd $(dirname $0)
+cd ..
 
 # Configs
 mkdir $HOME/.config
@@ -64,6 +65,7 @@ sudo systemctl enable NetworkManager
 sudo systemctl enable firewalld
 systemctl --user enable syncthing
 sudo cp /usr/share/doc/offlineimap3/examples/systemd/offlineimap.service /etc/systemd/user/
+systemctl --user daemon-reload
 systemctl --user enable offlineimap
 
 

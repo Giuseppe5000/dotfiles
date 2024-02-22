@@ -6,6 +6,7 @@ chromium
 clang
 cups
 dex
+eog
 ffmpegthumbs
 file-roller
 firefox
@@ -51,7 +52,7 @@ qbittorrent
 qt5ct
 rclone
 scrcpy
-skanlite
+simple-scan
 syncthing
 telegram-desktop
 tor
