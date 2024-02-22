@@ -18,12 +18,10 @@ gnome-themes-extra
 gst-libav
 gvim
 helvum
-intel-ucode
 iptables
 keepassxc
 kitty
 krita
-kvantum
 libpipewire
 libreoffice-fresh
 linux-headers
@@ -49,7 +47,6 @@ powerline-fonts
 pyright
 python-pip
 qbittorrent
-qt5ct
 rclone
 scrcpy
 simple-scan
@@ -74,6 +71,7 @@ zsh-theme-powerlevel10k
 # Workstation
 broadcom-wl
 dnsmasq
+intel-ucode
 nvidia
 nvidia-settings
 nvidia-utils
@@ -84,10 +82,12 @@ virt-manager
 brightnessctl
 fprintd
 imagemagick
+intel-ucode
 iw
 
 # Sway
 cliphist
+dunst
 grim
 rofi-lbonn-wayland
 slurp
@@ -103,13 +103,14 @@ xdg-desktop-portal-wlr
 xorg-xwayland
 
 # i3
+dunst
 emacs-nativecomp
 feh
 flameshot
 gromit-mpx
-i3-wm
 i3lock-color
 i3status
+i3-wm
 picom
 rofi
 rofi-greenclip
@@ -118,9 +119,6 @@ xautolock
 xclip
 xorg-xinput
 xss-lock
-
-# i3/Sway
-dunst
 
 # Other
 an-anime-game-launcher-bin

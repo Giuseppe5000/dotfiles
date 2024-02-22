@@ -1,3 +1,4 @@
+adwaita-qt
 baobab
 blueman
 btop
@@ -20,7 +21,6 @@ gnome-calculator
 gnome-disk-utility
 gnome-themes-extra
 gstreamer1.0-libav
-intel-microcode
 iptables
 keepassxc
 kitty
@@ -46,8 +46,6 @@ pipewire-pulse
 python3
 python3-pip
 qbittorrent
-qt5ct
-qt5-style-kvantum
 rclone
 simple-scan
 syncthing
@@ -70,6 +68,7 @@ broadcom-sta-common
 broadcom-sta-dkms
 dnsmasq
 firmware-misc-nonfree
+intel-microcode
 nvidia-driver
 nvidia-driver-libs
 nvidia-settings

@@ -7,6 +7,7 @@ if ! $(sudo -l &> /dev/null); then
 fi
 
 # Install all packets
+sudo apt update
 sudo apt -y install $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' aptpkg.txt)
 
 cd $(dirname $0)
