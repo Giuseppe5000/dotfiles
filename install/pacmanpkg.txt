@@ -1,4 +1,4 @@
-armcord
+adwaita-qt5-git
 baobab
 blueman
 btop
@@ -17,7 +17,6 @@ gnome-disk-utility
 gnome-themes-extra
 gst-libav
 gvim
-helvum
 iptables
 keepassxc
 kitty
@@ -48,7 +47,6 @@ pyright
 python-pip
 qbittorrent
 rclone
-scrcpy
 simple-scan
 syncthing
 telegram-desktop

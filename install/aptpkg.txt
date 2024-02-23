@@ -26,6 +26,7 @@ keepassxc
 kitty
 krita
 libreoffice
+libreoffice-gtk3
 linux-headers-amd64
 mate-polkit
 mpv
