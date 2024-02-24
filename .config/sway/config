@@ -47,10 +47,11 @@ input type:touchpad {
 
 input type:keyboard {
   xkb_options ctrl:nocaps
+  repeat_delay 250
 }
 
 # Polkit
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec dex /etc/xdg/autostart/polkit-mate-authentication-agent-1.desktop
 
 # Dunst notifications
 exec dunst
@@ -63,14 +64,10 @@ exec cliphist wipe
 # KeepassXC
 exec keepassxc
 
-# Kdeconnect 
-# exec /usr/lib/kdeconnectd
-
 # Firefox
 exec firefox
 
 # Gcal sync
-exec_always rm -rf .local/share/calcurse/notes && rm .local/share/calcurse/apts
 exec_always ~/Documenti/Other/scripts/gcal.sh
 
 # GTK settings
@@ -229,7 +226,7 @@ bindgesture swipe:left workspace next
 bindsym $mod+Shift+s exec grim -g "$(slurp)" - | swappy -f - 
 
 # File manager
-bindsym $mod+n exec dolphin
+bindsym $mod+n exec nemo
 
 # Clipboard menu
 bindsym $mod+c exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
@@ -246,7 +243,6 @@ for_window [app_id="org.gnome.Calculator"] floating enable
 
 # Apps workspace
 assign [app_id="^firefox$"] 2
-assign [class="^ArmCord$"] 3
 
 include /etc/sway/config.d/*
 
