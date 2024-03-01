@@ -83,23 +83,6 @@ imagemagick
 intel-ucode
 iw
 
-# Sway
-cliphist
-dunst
-grim
-rofi-lbonn-wayland
-slurp
-swappy
-sway
-swaybg
-swayidle
-swaylock-effects
-waybar
-wl-clipboard
-xdg-desktop-portal
-xdg-desktop-portal-wlr
-xorg-xwayland
-
 # i3
 dunst
 emacs-nativecomp
@@ -117,6 +100,23 @@ xautolock
 xclip
 xorg-xinput
 xss-lock
+
+# Sway
+cliphist
+dunst
+grim
+rofi-lbonn-wayland
+slurp
+swappy
+sway
+swaybg
+swayidle
+swaylock-effects
+waybar
+wl-clipboard
+xdg-desktop-portal
+xdg-desktop-portal-wlr
+xorg-xwayland
 
 # Other
 an-anime-game-launcher-bin

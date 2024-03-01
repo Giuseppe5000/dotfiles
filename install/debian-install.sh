@@ -6,11 +6,16 @@ if ! $(sudo -l &> /dev/null); then
     exit -1
 fi
 
+cd $(dirname $0)
+
 # Install all packets
 sudo apt update
 sudo apt -y install $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' aptpkg.txt)
+if [[ $? > 0 ]]
+then
+    exit
+fi
 
-cd $(dirname $0)
 cd ..
 
 # Configs

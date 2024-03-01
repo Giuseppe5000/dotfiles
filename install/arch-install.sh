@@ -11,12 +11,12 @@ sudo pacman -S --needed base-devel
 git clone https://aur.archlinux.org/paru.git
 cd paru
 makepkg -si
-cd ..
+
+cd $(dirname $0)
 
 # Install all packets
 paru -S --needed $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' pacmanpkg.txt)
 
-cd $(dirname $0)
 cd ..
 
 # Configs
