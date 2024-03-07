@@ -97,9 +97,9 @@
 ** Style
 #+begin_src emacs-lisp
   (set-frame-font "IosevkaTerm NFM 12" nil t)
-  (setq c-default-style "linux" c-basic-offset 4)
-  (setq whitespace-style '(face tabs spaces trailing space-before-tab indentation space-after-tab space-mark tab-mark))
   (setq-default indent-tabs-mode nil)
+  (setq c-basic-offset 4)
+  (setq whitespace-style '(face tabs spaces trailing space-before-tab space-after-tab space-mark tab-mark))
   (add-hook 'prog-mode-hook #'whitespace-mode)
   (setq display-line-numbers-type 'relative)
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
