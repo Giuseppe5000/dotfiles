@@ -9,8 +9,8 @@ set {
     $right l
     $term kitty
     $menu rofi -show drun
-    $background ~/Immagini/background.png
-    $lock swaylock
+    $background ~/Immagini/Wallpapers/OnePiece.jpg
+    $lock swaylock -f -c 000000
 }
 
 # Background wallpaper
@@ -219,11 +219,11 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Gestures
-bindgesture swipe:right workspace prev
-bindgesture swipe:left workspace next
+#bindgesture swipe:right workspace prev
+#bindgesture swipe:left workspace next
 
 # Screenshots
-bindsym $mod+Shift+s exec grim -g "$(slurp)" - | swappy -f - 
+bindsym $mod+Shift+s exec flameshot gui
 
 # File manager
 bindsym $mod+n exec nemo
