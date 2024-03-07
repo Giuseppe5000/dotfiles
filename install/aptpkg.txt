@@ -82,6 +82,7 @@ fprintd
 imagemagick
 intel-microcode
 iw
+libpam-fprintd
 
 # i3
 dunst

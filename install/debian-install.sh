@@ -58,10 +58,14 @@ ln -s $PWD/.zshenv $HOME/.zshenv
 ln -s $PWD/.zshrc-debian $HOME/.zshrc
 ln -s $PWD/.p10k.zsh $HOME/.p10k.zsh
 
-# Greenclip
+# Greenclip (i3)
 mkdir -p $HOME/.local/bin
 wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip -O $HOME/.local/bin/greenclip
 chmod +x $HOME/.local/bin/greenclip
+
+# Cliphist (sway)
+wget https://github.com/sentriz/cliphist/releases/download/v0.1.2/v0.1.2-linux-amd64 -O $HOME/.local/bin/cliphist
+chmod +x $HOME/.local/bin/cliphist
 
 # Powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.powerlevel10k
