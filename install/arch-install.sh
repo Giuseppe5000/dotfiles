@@ -19,19 +19,28 @@ paru -S --needed $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' pacmanpkg.txt)
 
 cd ..
 
-# Configs
-mkdir $HOME/.config
-mv .config/* $HOME/.config
+# XDG configs
+for dir in .config/*
+do
+    if [ -d "$dir" ] ; then
+        mkdir -p $HOME/$dir
+        for conf in $dir/*
+        do
+            ln -s $PWD/$conf $HOME/$conf
+        done
+    fi
+done
 
 # Emacs config
-mv .emacs.org $HOME
+ln -s $PWD/.emacs.org $HOME/.emacs.org
 
 # Vim config
-mv .vimrc $HOME
-mv .clang-format $HOME
+ln -s $PWD/.vimrc $HOME/.vimrc
+ln -s $PWD/.clang-format $HOME/.clang-format
 
 # GnuPG
-mv .gnupg $HOME
+mkdir -p $HOME/.gnupg
+ln -s $PWD/.gnupg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
 
 # Ly
 sudo mv etc/ly/config.ini /etc/ly/config.ini
@@ -49,9 +58,9 @@ xdg-user-dirs-update
 mv Wallpapers $HOME/Pictures
 
 # ZSH
-mv .zshenv $HOME
-mv .zshrc-arch $HOME/.zshrc
-mv .p10k.zsh $HOME
+ln -s $PWD/.zshenv $HOME/.zshenv
+ln -s $PWD/.zshrc-debian $HOME/.zshrc
+ln -s $PWD/.p10k.zsh $HOME/.p10k.zsh
 
 # Enable some services
 sudo systemctl enable ly

@@ -18,19 +18,28 @@ fi
 
 cd ..
 
-# Configs
-mkdir $HOME/.config
-mv .config/* $HOME/.config
+# XDG configs
+for dir in .config/*
+do
+    if [ -d "$dir" ] ; then
+        mkdir -p $HOME/$dir
+        for conf in $dir/*
+        do
+            ln -s $PWD/$conf $HOME/$conf
+        done
+    fi
+done
 
 # Emacs config
-mv .emacs.org $HOME
+ln -s $PWD/.emacs.org $HOME/.emacs.org
 
 # Vim config
-mv .vimrc $HOME
-mv .clang-format $HOME
+ln -s $PWD/.vimrc $HOME/.vimrc
+ln -s $PWD/.clang-format $HOME/.clang-format
 
 # GnuPG
-mv .gnupg $HOME
+mkdir -p $HOME/.gnupg
+ln -s $PWD/.gnupg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
 
 # NetworkManager MAC randomization conf
 # sudo mv etc/NetworkManager/conf.d/wifi_rand_mac.conf /etc/NetworkManager/conf.d/
@@ -45,9 +54,9 @@ xdg-user-dirs-update
 mv Wallpapers $HOME/Pictures
 
 # ZSH
-mv .zshenv $HOME
-mv .zshrc-debian $HOME/.zshrc
-mv .p10k.zsh $HOME
+ln -s $PWD/.zshenv $HOME/.zshenv
+ln -s $PWD/.zshrc-debian $HOME/.zshrc
+ln -s $PWD/.p10k.zsh $HOME/.p10k.zsh
 
 # Greenclip
 mkdir -p $HOME/.local/bin
@@ -73,7 +82,6 @@ systemctl --user enable syncthing
 sudo cp /usr/share/doc/offlineimap3/examples/systemd/offlineimap.service /etc/systemd/user/
 systemctl --user daemon-reload
 systemctl --user enable offlineimap
-
 
 # Set zsh as default shell
 chsh -s /usr/bin/zsh
