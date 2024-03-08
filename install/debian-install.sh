@@ -58,6 +58,10 @@ ln -s $PWD/.zshenv $HOME/.zshenv
 ln -s $PWD/.zshrc-debian $HOME/.zshrc
 ln -s $PWD/.p10k.zsh $HOME/.p10k.zsh
 
+# Firefox user.js
+timeout 10s firefox --headless # Gen profile folder
+ln -s $PWD/user.js $HOME/.mozilla/firefox/*.default-esr/user.js
+
 # Greenclip (i3)
 mkdir -p $HOME/.local/bin
 wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip -O $HOME/.local/bin/greenclip
