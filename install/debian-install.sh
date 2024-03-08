@@ -60,7 +60,8 @@ ln -s $PWD/.p10k.zsh $HOME/.p10k.zsh
 
 # Firefox user.js
 timeout 10s firefox --headless # Gen profile folder
-ln -s $PWD/user.js $HOME/.mozilla/firefox/*.default-esr/user.js
+PROFILE_PATH=$(grep '^Path=.*default-esr$' $HOME/.mozilla/firefox/profiles.ini | cut -c 6-)
+ln -s $PWD/user.js $HOME/.mozilla/firefox/$PROFILE_PATH/user.js
 
 # Greenclip (i3)
 mkdir -p $HOME/.local/bin
