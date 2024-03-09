@@ -8,7 +8,6 @@ set {
     $up k
     $right l
     $term kitty
-    $menu rofi -show drun
     $background ~/Immagini/Wallpapers/OnePiece.jpg
     $lock swaylock -f -c 000000
 }
@@ -104,7 +103,8 @@ bindsym $mod+Return exec $term
 bindsym $mod+q kill
 
 # Menu
-bindsym $mod+d exec $menu 
+bindsym $mod+d exec rofi -show drun
+bindsym $mod+Shift+d exec rofi -show run
 
 # change focus
 bindsym $mod+$left focus left

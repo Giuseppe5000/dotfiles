@@ -4,7 +4,6 @@
 set $mod Mod4
 set $background ~/Immagini/Wallpapers/OnePiece.jpg
 set $term kitty
-set $menu rofi -show drun
 set $i3lockwall i3lock-fancy
 #set $i3lockwall i3lock --blur 5 --clock --indicator --ring-color 808080 --line-color 000000 --inside-color 00000088 --separator-color 00000000 --time-color ffffffff --date-color ffffffff
 
@@ -93,7 +92,8 @@ bindsym $mod+Return exec --no-startup-id $term
 bindsym $mod+q kill
 
 # Rofi
-bindsym $mod+d exec --no-startup-id $menu 
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+Shift+d exec --no-startup-id rofi -show run
 
 # change focus
 bindsym $mod+h focus left
