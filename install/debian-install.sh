@@ -1,16 +1,10 @@
 #!/bin/bash
 
-# Sudo check
-if ! $(sudo -l &> /dev/null); then
-    echo 'Error: root privileges are needed to run this script'
-    exit -1
-fi
-
 cd $(dirname $0)
 
 # Install all packets
-sudo apt update
-sudo apt -y install $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' aptpkg.txt)
+su -c 'apt update'
+su -c 'apt -y install $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' aptpkg.txt)'
 if [[ $? > 0 ]]
 then
     exit
@@ -42,7 +36,7 @@ mkdir -p $HOME/.gnupg
 ln -s $PWD/.gnupg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
 
 # NetworkManager MAC randomization conf
-# sudo mv etc/NetworkManager/conf.d/wifi_rand_mac.conf /etc/NetworkManager/conf.d/
+# su -c 'mv etc/NetworkManager/conf.d/wifi_rand_mac.conf /etc/NetworkManager/conf.d/'
 
 # Cursor
 mv .icons $HOME
@@ -85,10 +79,10 @@ rm IosevkaTerm.tar.xz DejaVuSansMono.tar.xz
 fc-cache -f
 
 # Enable some services
-sudo systemctl enable NetworkManager
-sudo systemctl enable firewalld
+su -c 'systemctl enable NetworkManager'
+su -c 'systemctl enable firewalld'
 systemctl --user enable syncthing
-sudo cp /usr/share/doc/offlineimap3/examples/systemd/offlineimap.service /etc/systemd/user/
+su -c 'cp /usr/share/doc/offlineimap3/examples/systemd/offlineimap.service /etc/systemd/user/'
 systemctl --user daemon-reload
 systemctl --user enable offlineimap
 
