@@ -1,4 +1,5 @@
 adwaita-qt
+alacritty
 baobab
 blueman
 btop
@@ -23,7 +24,6 @@ gnome-themes-extra
 gstreamer1.0-libav
 iptables
 keepassxc
-kitty
 krita
 libreoffice
 libreoffice-gtk3
@@ -78,11 +78,15 @@ virt-manager
 
 # Laptop
 brightnessctl
+ethtool
 fprintd
 imagemagick
 intel-microcode
 iw
 libpam-fprintd
+smartmontools
+tlp
+tlp-rdw
 
 # i3
 dunst
