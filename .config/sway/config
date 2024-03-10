@@ -7,7 +7,7 @@ set {
     $down j
     $up k
     $right l
-    $term kitty
+    $term alacritty
     $background ~/Immagini/Wallpapers/OnePiece.jpg
     $lock swaylock -f -c 000000
 }

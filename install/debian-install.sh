@@ -3,8 +3,7 @@
 cd $(dirname $0)
 
 # Install all packets
-su -c 'apt update'
-su -c 'apt -y install $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' aptpkg.txt)'
+su -c 'apt update && apt -y install $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' aptpkg.txt)'
 if [[ $? > 0 ]]
 then
     exit

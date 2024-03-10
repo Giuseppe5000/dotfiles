@@ -132,5 +132,7 @@
   (setq doc-view-continuous t)
   (setq org-agenda-files (list "~/Documenti/.gcal.org"))
   (setq native-comp-async-report-warnings-errors nil)
+  (setq compile-command "")
+  (add-hook 'compilation-finish-functions 'switch-to-buffer-other-window 'compilation)
 #+end_src
 
