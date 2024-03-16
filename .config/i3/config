@@ -2,7 +2,7 @@
 
 # Variables
 set $mod Mod4
-set $background ~/Immagini/Wallpapers/OnePiece.jpg
+set $background ~/Immagini/Wallpapers/background.jpg
 set $term alacritty
 set $i3lockwall i3lock-fancy
 #set $i3lockwall i3lock --blur 5 --clock --indicator --ring-color 808080 --line-color 000000 --inside-color 00000088 --separator-color 00000000 --time-color ffffffff --date-color ffffffff
@@ -248,6 +248,7 @@ for_window [class=.*] border pixel
 # Apps workspace
 assign [class="^Firefox-esr$"] $ws2
 assign [class="^Chromium$"] $ws3
+assign [class="^mpv$"] $ws4
 
 # i3bar configuration
 bar {

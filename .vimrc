@@ -24,9 +24,6 @@ nn <C-enter> :term<cr>
 nn <C-t> :Lex<cr>
 im <C-c> <Esc>
 
-" Term
-set term=kitty
-
 " Search
 set incsearch
 set hlsearch
