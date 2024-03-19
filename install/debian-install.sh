@@ -48,7 +48,7 @@ mv Wallpapers $HOME/Pictures
 
 # ZSH
 ln -s $PWD/.zshenv $HOME/.zshenv
-ln -s $PWD/.zshrc-debian $HOME/.zshrc
+ln -s $PWD/.zshrc $HOME/.zshrc
 ln -s $PWD/.p10k.zsh $HOME/.p10k.zsh
 
 # Firefox user.js
