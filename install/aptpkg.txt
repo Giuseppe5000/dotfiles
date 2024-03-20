@@ -4,11 +4,9 @@ baobab
 blueman
 btop
 chromium
-clang
+clangd
 cups
-dex
 eog
-ffmpegthumbs
 file-roller
 firefox-esr
 firewall-config

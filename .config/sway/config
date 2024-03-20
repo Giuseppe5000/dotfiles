@@ -50,7 +50,7 @@ input type:keyboard {
 }
 
 # Polkit
-exec dex /etc/xdg/autostart/polkit-mate-authentication-agent-1.desktop
+exec /usr/libexec/polkit-mate-authentication-agent-1
 
 # Dunst notifications
 exec dunst
