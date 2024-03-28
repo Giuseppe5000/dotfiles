@@ -78,11 +78,9 @@ rm IosevkaTerm.tar.xz DejaVuSansMono.tar.xz
 fc-cache -f
 
 # Enable some services
-su -c 'systemctl enable NetworkManager'
-su -c 'systemctl enable firewalld'
-systemctl --user enable syncthing
-su -c 'cp /usr/share/doc/offlineimap3/examples/systemd/offlineimap.service /etc/systemd/user/'
+su -c 'systemctl enable NetworkManager && systemctl enable firewalld && cp /usr/share/doc/offlineimap3/examples/systemd/offlineimap.service /etc/systemd/user/'
 systemctl --user daemon-reload
+systemctl --user enable syncthing
 systemctl --user enable offlineimap
 
 # Set zsh as default shell

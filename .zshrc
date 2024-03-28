@@ -12,9 +12,6 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
-bindkey "^K" up-line-or-history
-bindkey "^J" down-line-or-history
-
 # Autosuggestions
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # p10k
