@@ -28,11 +28,11 @@ libreoffice-gtk3
 linux-headers-amd64
 mate-polkit
 mpv
+mu4e
 nemo
 neofetch
 network-manager
 nm-tray
-notmuch
 obs-studio
 offlineimap
 papirus-icon-theme
