@@ -10,6 +10,7 @@ set noswapfile
 set splitbelow
 set list
 set wildmenu
+set wildmode=full
 set wildoptions=pum
 set clipboard=unnamedplus
 set encoding=utf-8
@@ -18,9 +19,9 @@ set sj=-50
 set updatetime=1000
 set belloff=all
 set lcs=space:·
+set history=200
 
 " Mappings
-nn <C-enter> :term<cr>
 nn <C-t> :Lex<cr>
 im <C-c> <Esc>
 
@@ -60,6 +61,12 @@ aug netrw_mapping
     au filetype netrw call NetrwMapping()
 aug END
 
+" No arrows
+nm <Up> <Nop>
+nm <Down> <Nop>
+nm <Left> <Nop>
+nm <Right> <Nop>
+
 " Theme
 set background=dark
 set termguicolors
@@ -67,20 +74,20 @@ colorscheme habamax
 hi Normal guibg=NONE ctermbg=NONE
 
 " Status line
-hi NameColor ctermbg=239 ctermfg=white
-hi FileTypeColor ctermbg=239 ctermfg=green
-hi ModifiedColor ctermbg=239 ctermfg=green
-hi DefaultColor ctermbg=239 ctermfg=white
+hi White ctermbg=239 ctermfg=white
+hi Green ctermbg=239 ctermfg=green
 
 set statusline=
-set statusline+=%#NameColor#
+set statusline+=%#White#
 set statusline+=\ %<%F
-set statusline+=%#FileTypeColor#
+set statusline+=%#Green#
 set statusline+=\ %y
-set statusline+=%#ModifiedColor#
+set statusline+=%#White#
+set statusline+=\ %{FugitiveStatusline()}
+set statusline+=%#Green#
 set statusline+=\ %m
 set statusline+=%=
-set statusline+=%#DefaultColor#
+set statusline+=%#White#
 set statusline+=\ \ (\%l,\%c)
 set statusline+=\ \ %p%%\ 
 set laststatus=2
