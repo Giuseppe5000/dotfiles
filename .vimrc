@@ -5,21 +5,21 @@ syntax on
 set autoread
 set number relativenumber
 set cursorline
-set autochdir
 set noswapfile
-set splitbelow
-set list
 set wildmenu
 set wildmode=full
 set wildoptions=pum
+set path+=**
 set clipboard=unnamedplus
 set encoding=utf-8
 set mouse=a
 set sj=-50
 set updatetime=1000
 set belloff=all
+set list
 set lcs=space:·
 set history=200
+set complete=.,w,b,t
 
 " Mappings
 nn <C-t> :Lex<cr>
@@ -29,6 +29,7 @@ im <C-c> <Esc>
 set incsearch
 set hlsearch
 set ignorecase
+set smartcase
 
 " Indent
 set autoindent

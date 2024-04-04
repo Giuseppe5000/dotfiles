@@ -52,8 +52,11 @@ systemd-zram-generator
 telegram-desktop
 tor
 torbrowser-launcher
+universal-ctags
 v4l2loopback-dkms
+vim-fugitive
 vim-gtk3
+vim-ultisnips
 wget
 wireless-tools
 wpasupplicant
