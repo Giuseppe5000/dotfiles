@@ -73,6 +73,7 @@ set background=dark
 set termguicolors
 colorscheme habamax
 hi Normal guibg=NONE ctermbg=NONE
+hi MatchParen cterm=NONE ctermbg=green ctermfg=blue
 
 " Status line
 hi White ctermbg=239 ctermfg=white
@@ -83,9 +84,6 @@ set statusline+=%#White#
 set statusline+=\ %<%F
 set statusline+=%#Green#
 set statusline+=\ %y
-set statusline+=%#White#
-set statusline+=\ %{FugitiveStatusline()}
-set statusline+=%#Green#
 set statusline+=\ %m
 set statusline+=%=
 set statusline+=%#White#
