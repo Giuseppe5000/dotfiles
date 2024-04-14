@@ -14,7 +14,7 @@
 #+begin_src emacs-lisp
   (use-package evil
     :ensure t
-    :init (setq evil-want-keybinding nil)
+    :init (setq evil-want-keybinding nil) (setq evil-want-C-u-scroll t)
     :config (evil-set-undo-system 'undo-redo) (evil-mode 1))
 
   (use-package evil-collection
@@ -38,6 +38,16 @@
     :ensure t
     :defer t)
 #+end_src
+** Yasnippet
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :hook (prog-mode . yas-minor-mode))
+
+  (use-package yasnippet-snippets
+    :ensure t
+    :after yasnippet)
+#+end_src
 ** LSP
 #+begin_src emacs-lisp
   (use-package rust-mode
@@ -46,8 +56,7 @@
 
   (use-package eglot
     :ensure t
-    :defer t
-    :hook (c++-mode . eglot-ensure) (rust-mode . eglot-ensure))
+    :defer t)
 
   (use-package company
     :after eglot
