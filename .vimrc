@@ -43,9 +43,6 @@ set tabstop=4
 set foldmethod=indent
 set nofoldenable
 
-" C/C++ format
-au FileType c,cpp setlocal equalprg=clang-format
-
 " Explorer
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_liststyle = 3

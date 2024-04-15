@@ -55,7 +55,6 @@ torbrowser-launcher
 universal-ctags
 v4l2loopback-dkms
 vim-gtk3
-vim-ultisnips
 wget
 wireless-tools
 wpasupplicant

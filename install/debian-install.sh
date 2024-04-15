@@ -28,7 +28,6 @@ ln -s $PWD/.emacs.org $HOME/.emacs.org
 
 # Vim config
 ln -s $PWD/.vimrc $HOME/.vimrc
-ln -s $PWD/.clang-format $HOME/.clang-format
 
 # GnuPG
 mkdir -p $HOME/.gnupg
