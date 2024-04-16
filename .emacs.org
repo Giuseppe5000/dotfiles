@@ -42,11 +42,8 @@
 #+begin_src emacs-lisp
   (use-package yasnippet
     :ensure t
-    :hook (prog-mode . yas-minor-mode))
-
-  (use-package yasnippet-snippets
-    :ensure t
-    :after yasnippet)
+    :init (setq yas-snippet-dirs '("~/.dotfiles/emacs-snippets"))
+    :hook (prog-mode . yas-minor-mode) (org-mode . yas-minor-mode) (latex-mode . yas-minor-mode))
 #+end_src
 ** LSP
 #+begin_src emacs-lisp
@@ -135,6 +132,7 @@
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   (column-number-mode 1)
   (size-indication-mode 1)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 #+end_src
 ** Backup files
 #+begin_src emacs-lisp

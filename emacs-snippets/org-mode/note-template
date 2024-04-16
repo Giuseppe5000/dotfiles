@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: note-template
+# key: note-template
+# expand-env: ((yas-indent-line 'fixed))
+# --
+#+TITLE: Notes ${1:Materia}
+#+AUTHOR: Giuseppe
+#+STARTUP: latexpreview
+* Shortcuts
+{
+    C-c C-x l    latex preview toggle
+    \varnothing  $\varnothing$
+    \mathbb{R}   $\mathbb{R}$
+    \in          $\in$
+    \notin       $\notin$
+    \subset      $\subset$
+    \subseteq    $\subseteq$
+    \supset      $\supset$
+    \subseteq    $\subseteq$
+    \cup         $\cup$
+    \cap         $\cap$
+}
+
+
+* Lezione dd$0
