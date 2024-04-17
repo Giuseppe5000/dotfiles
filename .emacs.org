@@ -43,6 +43,7 @@
   (use-package yasnippet
     :ensure t
     :init (setq yas-snippet-dirs '("~/.dotfiles/emacs-snippets"))
+    :config (yas-reload-all)
     :hook (prog-mode . yas-minor-mode) (org-mode . yas-minor-mode) (latex-mode . yas-minor-mode))
 #+end_src
 ** LSP
@@ -107,6 +108,14 @@
   (scroll-bar-mode -1)
   (setq inhibit-startup-screen t)
 #+end_src
+** Org mode
+#+begin_src emacs-lisp
+  (setq org-preview-latex-image-directory "/tmp/")
+  (setq org-agenda-files (list "~/Documenti/.gcal.org" "~/Documenti/todo.org"))
+  (setq org-startup-folded t)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+  (add-hook 'org-mode-hook #'org-indent-mode)
+#+end_src
 ** Performance
 #+begin_src emacs-lisp
   (setq gc-cons-threshold most-positive-fixnum)
@@ -132,7 +141,6 @@
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   (column-number-mode 1)
   (size-indication-mode 1)
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 #+end_src
 ** Backup files
 #+begin_src emacs-lisp
@@ -149,15 +157,10 @@
   (global-set-key (kbd "C-g") 'evil-normal-state)
   (global-set-key (kbd "M-!") 'compile)
 #+end_src
-** Agenda
-#+begin_src emacs-lisp
-  (setq org-agenda-files (list "~/Documenti/.gcal.org" "~/Documenti/todo.org"))
-#+end_src
 ** Misc
 #+begin_src emacs-lisp
   (setenv "PATH" (concat (getenv "PATH") ":~/.cargo/bin"))
   (setq exec-path (append exec-path '("~/.cargo/bin")))
-  (setq org-startup-folded t)
   (setq auto-save-default nil)
   (setq dired-listing-switches "-lhAX --group-directories-first")
   (setq use-short-answers 1)

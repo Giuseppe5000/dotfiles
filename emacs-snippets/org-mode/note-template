@@ -6,20 +6,22 @@
 #+TITLE: Notes ${1:Materia}
 #+AUTHOR: Giuseppe
 #+STARTUP: latexpreview
+#+OPTIONS: \n:t
 * Shortcuts
-{
-    C-c C-x l    latex preview toggle
-    \varnothing  $\varnothing$
-    \mathbb{R}   $\mathbb{R}$
-    \in          $\in$
-    \notin       $\notin$
-    \subset      $\subset$
-    \subseteq    $\subseteq$
-    \supset      $\supset$
-    \subseteq    $\subseteq$
-    \cup         $\cup$
-    \cap         $\cap$
-}
+C-c C-x l     latex preview toggle
+\varnothing   $\varnothing$
+\mathbb{R}    $\mathbb{R}$
+\in           $\in$
+\notin        $\notin$
+\subset       $\subset$
+\subseteq     $\subseteq$
+\supset       $\supset$
+\subseteq     $\subseteq$
+\cup          $\cup$
+\cap          $\cap$
+\times        $\times$
+\overline{x}  $\overline{x}$
+\dot{=}       $\dot{=}$
 
 
 * Lezione dd$0
