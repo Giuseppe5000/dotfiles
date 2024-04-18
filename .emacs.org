@@ -48,10 +48,6 @@
 #+end_src
 ** LSP
 #+begin_src emacs-lisp
-  (use-package rust-mode
-    :ensure t
-    :defer t)
-
   (use-package eglot
     :ensure t
     :defer t)
@@ -87,18 +83,22 @@
 
   ;; don't keep message buffers around
   (setq message-kill-buffer-on-exit t)
+
+  ;; don't ask to quit
+  (setq mu4e-confirm-quit nil)
+#+end_src
+** Org bullets
+#+begin_src emacs-lisp
+  (use-package org-bullets
+    :ensure t
+    :config (setq org-bullets-bullet-list '("✜" "●" "◉" "○"))
+    :hook (org-mode . org-bullets-mode))
 #+end_src
 ** Theme
 #+begin_src emacs-lisp
   (use-package gruber-darker-theme
     :ensure t
     :config (load-theme 'gruber-darker t))
-#+end_src
-** Org bullets
-#+begin_src emacs-lisp
-  (use-package org-bullets
-    :ensure t
-    :hook (org-mode . org-bullets-mode))
 #+end_src
 * General
 ** Remove menus
@@ -110,11 +110,25 @@
 #+end_src
 ** Org mode
 #+begin_src emacs-lisp
-  (setq org-preview-latex-image-directory "/tmp/")
+  (setq org-preview-latex-image-directory "~/.emacs.d/latexpreview/")
   (setq org-agenda-files (list "~/Documenti/.gcal.org" "~/Documenti/todo.org"))
+  (setq org-agenda-time-grid nil)
   (setq org-startup-folded t)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
   (add-hook 'org-mode-hook #'org-indent-mode)
+  (add-hook 'after-init-hook (lambda () (org-agenda nil "n")))
+#+end_src
+*** Org Agenda evil-mode
+#+begin_src emacs-lisp
+  (add-hook 'org-agenda-mode-hook
+            (lambda ()
+              (local-set-key "k" 'org-agenda-previous-line)
+              (local-set-key "j" 'org-agenda-next-line)
+              (local-set-key "K" 'org-agenda-capture)
+              (local-set-key "J" 'org-agenda-goto-date)
+              (local-set-key (kbd "C-w C-w") 'evil-window-next)
+              (local-set-key (kbd "C-w o") 'delete-other-windows)
+              ))
 #+end_src
 ** Performance
 #+begin_src emacs-lisp
@@ -127,8 +141,7 @@
     (interactive)
     (split-window-vertically)
     (other-window 1)
-    (term "/usr/bin/bash")
-    )
+    (term "/usr/bin/bash"))
 #+end_src
 ** Style
 #+begin_src emacs-lisp
@@ -136,7 +149,6 @@
   (setq-default indent-tabs-mode nil)
   (setq c-basic-offset 4)
   (setq whitespace-style '(face tabs spaces trailing space-before-tab space-after-tab space-mark tab-mark))
-  (add-hook 'prog-mode-hook #'whitespace-mode)
   (setq display-line-numbers-type 'relative)
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   (column-number-mode 1)
@@ -167,6 +179,6 @@
   (setq doc-view-continuous t)
   (setq native-comp-async-report-warnings-errors nil)
   (setq compile-command "")
-  (add-hook 'compilation-finish-functions 'switch-to-buffer-other-window 'compilation)
+  (setq calendar-week-start-day 1)
 #+end_src
 
