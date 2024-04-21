@@ -111,12 +111,24 @@
 ** Org mode
 #+begin_src emacs-lisp
   (setq org-preview-latex-image-directory "~/.emacs.d/latexpreview/")
-  (setq org-agenda-files (list "~/Documenti/.gcal.org" "~/Documenti/todo.org"))
+  (setq org-agenda-files (list "~/Documenti/Org/Gcal.org" "~/Documenti/Org/Todo.org"))
   (setq org-agenda-time-grid nil)
   (setq org-startup-folded t)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+  (setq org-html-validation-link nil)
   (add-hook 'org-mode-hook #'org-indent-mode)
   (add-hook 'after-init-hook (lambda () (org-agenda nil "n")))
+#+end_src
+*** Org appearance
+#+begin_src emacs-lisp
+  (custom-set-faces
+   '(org-document-title ((t (:foreground "pale turquoise" :height 1.5))))
+   '(org-document-info ((t (:foreground "pale turquoise" :height 1.3))))
+   '(org-level-1 ((t (:inherit outline-1 :height 1.2))))
+   '(org-level-2 ((t (:inherit outline-2 :height 1.1))))
+   '(org-todo ((t (:foreground "red"  :bold t :height 0.9))))
+   '(org-done ((t (:foreground "PaleGreen" :height 0.9))))
+   )
 #+end_src
 *** Org Agenda evil-mode
 #+begin_src emacs-lisp
@@ -180,5 +192,6 @@
   (setq native-comp-async-report-warnings-errors nil)
   (setq compile-command "")
   (setq calendar-week-start-day 1)
+  (setq lpr-command "gtklp")
 #+end_src
 
