@@ -1,6 +1,6 @@
 #+TITLE: Emacs Configuration
 #+AUTHOR: Giuseppe
-#+PROPERTY: header-args :tangle yes
+#+PROPERTY: header-args :tangle ~/.emacs
 
 * Packages
 ** MELPA repo
@@ -112,8 +112,11 @@
 ** Org mode
 #+begin_src emacs-lisp
   (setq org-preview-latex-image-directory "~/.emacs.d/latexpreview/")
-  (setq org-agenda-files (list "~/Documenti/Org/Gcal.org" "~/Documenti/Org/Todo.org"))
+  (setq org-directory "~/Documenti/Org")
+  (setq org-agenda-files (list "~/Documenti/Org/Uni.org" "~/Documenti/Org/Todo.org"))
   (setq org-agenda-time-grid nil)
+  (setq org-agenda-start-on-weekday nil)
+  (setq org-agenda-start-day "+0d")
   (setq org-startup-folded t)
   (setq org-hide-emphasis-markers t)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
@@ -138,8 +141,8 @@
             (lambda ()
               (local-set-key "k" 'org-agenda-previous-line)
               (local-set-key "j" 'org-agenda-next-line)
-              (local-set-key "K" 'org-agenda-capture)
-              (local-set-key "J" 'org-agenda-goto-date)
+              (local-set-key "p" 'org-agenda-capture)
+              (local-set-key "n" 'org-agenda-goto-date)
               (local-set-key (kbd "C-w C-w") 'evil-window-next)
               (local-set-key (kbd "C-w o") 'delete-other-windows)
               ))
@@ -196,4 +199,3 @@
   (setq calendar-week-start-day 1)
   (setq lpr-command "gtklp")
 #+end_src
-
