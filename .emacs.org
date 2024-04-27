@@ -113,15 +113,33 @@
 #+begin_src emacs-lisp
   (setq org-preview-latex-image-directory "~/.emacs.d/latexpreview/")
   (setq org-directory "~/Documenti/Org")
-  (setq org-agenda-files (list "~/Documenti/Org/Uni.org" "~/Documenti/Org/Todo.org"))
-  (setq org-agenda-time-grid nil)
-  (setq org-agenda-start-on-weekday nil)
-  (setq org-agenda-start-day "+0d")
   (setq org-startup-folded t)
   (setq org-hide-emphasis-markers t)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
   (setq org-html-validation-link nil)
   (add-hook 'org-mode-hook #'org-indent-mode)
+#+end_src
+*** Agenda
+#+begin_src emacs-lisp
+  (setq org-agenda-files (list "~/Documenti/Org/Uni.org" "~/Documenti/Org/Todo.org"))
+  (setq org-agenda-start-on-weekday nil)
+  (setq org-agenda-start-day "+0d")
+  (setq org-agenda-time-grid '((daily today require-timed remove-match)
+                               (800 1000 1200 1400 1600 1800 2000)
+                               " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
+  (setq org-agenda-exporter-settings
+        '((ps-left-header (list 'org-agenda-write-buffer-name))
+          (ps-right-header
+           (list "/pagenumberstring load"
+                 (lambda () (format-time-string "%d/%m/%Y"))))
+          (ps-print-color-p t)
+          (ps-default-bg t)
+          (ps-font-size '(12 . 11))
+          (ps-left-margin 0)
+          (ps-right-margin 0)
+          (ps-bottom-margin 0)
+          (ps-top-margin 0)
+          (ps-print-header nil)))
   (add-hook 'after-init-hook (lambda () (org-agenda nil "n")))
 #+end_src
 *** Org appearance
@@ -162,6 +180,7 @@
 #+end_src
 ** Style
 #+begin_src emacs-lisp
+  (set-frame-parameter nil 'alpha-background 99)
   (set-frame-font "IosevkaTerm NFM 12" nil t)
   (setq-default indent-tabs-mode nil)
   (setq c-basic-offset 4)
