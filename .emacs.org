@@ -3,13 +3,14 @@
 #+PROPERTY: header-args :tangle ~/.emacs
 
 * Packages
-** MELPA repo
+** Repos
 #+begin_src emacs-lisp
   (require 'package)
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
   (setq package-archive-priorities '(("gnu" . 2)("melpa" . 1)))
   (package-initialize)
   (setq package-native-compile t)
+  (setq native-comp-async-report-warnings-errors nil)
 #+end_src
 ** Evil
 #+begin_src emacs-lisp
@@ -21,9 +22,11 @@
   (use-package evil-collection
     :after evil
     :ensure t
-    :config (evil-collection-init) (evil-collection-define-key 'normal 'dired-mode-map
-                                     "h" 'dired-up-directory
-                                     "l" 'dired-find-file))
+    :init (setq evil-collection-want-unimpaired-p nil)
+    :config (evil-collection-init)
+    (evil-collection-define-key 'normal 'dired-mode-map
+      "h" 'dired-up-directory
+      "l" 'dired-find-file))
 #+end_src
 ** IDO vertical
 #+begin_src emacs-lisp
@@ -126,7 +129,8 @@
   (setq org-agenda-start-day "+0d")
   (setq org-agenda-time-grid '((daily today require-timed remove-match)
                                (800 1000 1200 1400 1600 1800 2000)
-                               " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
+                               " --- " ""))
+  (setq org-agenda-current-time-string "← NOW")
   (setq org-agenda-exporter-settings
         '((ps-left-header (list 'org-agenda-write-buffer-name))
           (ps-right-header
@@ -164,6 +168,25 @@
               (local-set-key (kbd "C-w C-w") 'evil-window-next)
               (local-set-key (kbd "C-w o") 'delete-other-windows)
               ))
+#+end_src
+** Newsticker
+#+begin_src emacs-lisp
+  (setq newsticker-url-list-defaults nil)
+  (setq newsticker-url-list '(
+                              ("Debian News" "https://www.debian.org/News/news" nil nil nil)
+                              ("Free Games" "https://steamcommunity.com/groups/freegamesfinders/rss/" nil nil nil)
+                              ("Hardware Upgrade" "http://feeds.hwupgrade.it/rss_news.xml" nil nil nil)
+                              ("It's FOSS" "https://itsfoss.com/rss/" nil nil nil)
+                              ("Linux Journal" "https://www.linuxjournal.com/node/feed" nil nil nil)
+                              ("NixCraft" "https://www.cyberciti.com/atom/atom.xml" nil nil nil)
+                              ("Smart World" "https://www.androidworld.it/feed/" nil nil nil)
+                              ("Tom's HW Science" "https://www.tomshw.it/feed/scienze/no-offerte" nil nil nil)
+                              ("Tom's HW" "https://www.tomshw.it/feed/hardware/no-offerte" nil nil nil)))
+#+end_src
+** Dired
+#+begin_src emacs-lisp
+  (setq dired-listing-switches "-lhAX --group-directories-first")
+  (add-hook 'dired-mode-hook #'auto-revert-mode)
 #+end_src
 ** Performance
 #+begin_src emacs-lisp
@@ -210,11 +233,11 @@
   (setenv "PATH" (concat (getenv "PATH") ":~/.cargo/bin"))
   (setq exec-path (append exec-path '("~/.cargo/bin")))
   (setq auto-save-default nil)
-  (setq dired-listing-switches "-lhAX --group-directories-first")
   (setq use-short-answers 1)
   (setq doc-view-continuous t)
-  (setq native-comp-async-report-warnings-errors nil)
   (setq compile-command "")
   (setq calendar-week-start-day 1)
   (setq lpr-command "gtklp")
+  (setq vc-follow-symlinks t)
+  (setq use-dialog-box nil)
 #+end_src

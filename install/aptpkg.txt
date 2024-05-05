@@ -30,7 +30,6 @@ mate-polkit
 mpv
 mu4e
 nemo
-neofetch
 network-manager
 nm-tray
 obs-studio
@@ -42,6 +41,7 @@ pipewire-alsa
 pipewire-audio
 pipewire-jack
 pipewire-pulse
+printer-driver-brlaser
 python3
 python3-pip
 qbittorrent
