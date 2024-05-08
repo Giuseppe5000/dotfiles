@@ -223,8 +223,6 @@
   (defun org-agenda-timeblock ()
     (interactive)
     (org-timeblock)
-    (split-window-vertically)
-    (other-window 1)
     (org-agenda nil "t")
     (shrink-window-horizontally 50))
   (add-hook 'after-init-hook (lambda () (org-agenda-timeblock)))
