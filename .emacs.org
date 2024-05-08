@@ -91,6 +91,14 @@
   ;; don't ask to quit
   (setq mu4e-confirm-quit nil)
 #+end_src
+** Org timeblock
+#+begin_src emacs-lisp
+  (use-package org-timeblock
+    :ensure t
+    :defer t
+    :config (setq org-timeblock-span 7)
+    :hook (org-timeblock-mode . turn-off-evil-mode))
+#+end_src
 ** Org bullets
 #+begin_src emacs-lisp
   (use-package org-bullets
@@ -144,7 +152,6 @@
           (ps-bottom-margin 0)
           (ps-top-margin 0)
           (ps-print-header nil)))
-  (add-hook 'after-init-hook (lambda () (org-agenda nil "n")))
 #+end_src
 *** Org appearance
 #+begin_src emacs-lisp
@@ -172,16 +179,7 @@
 ** Newsticker
 #+begin_src emacs-lisp
   (setq newsticker-url-list-defaults nil)
-  (setq newsticker-url-list '(
-                              ("Debian News" "https://www.debian.org/News/news" nil nil nil)
-                              ("Free Games" "https://steamcommunity.com/groups/freegamesfinders/rss/" nil nil nil)
-                              ("Hardware Upgrade" "http://feeds.hwupgrade.it/rss_news.xml" nil nil nil)
-                              ("It's FOSS" "https://itsfoss.com/rss/" nil nil nil)
-                              ("Linux Journal" "https://www.linuxjournal.com/node/feed" nil nil nil)
-                              ("NixCraft" "https://www.cyberciti.com/atom/atom.xml" nil nil nil)
-                              ("Smart World" "https://www.androidworld.it/feed/" nil nil nil)
-                              ("Tom's HW Science" "https://www.tomshw.it/feed/scienze/no-offerte" nil nil nil)
-                              ("Tom's HW" "https://www.tomshw.it/feed/hardware/no-offerte" nil nil nil)))
+  (load "~/Documenti/.emacs/newsticker.el")
 #+end_src
 ** Dired
 #+begin_src emacs-lisp
@@ -192,14 +190,6 @@
 #+begin_src emacs-lisp
   (setq gc-cons-threshold most-positive-fixnum)
   (setq gc-cons-threshold (* 100 1024 1024))
-#+end_src
-** Term
-#+begin_src emacs-lisp
-  (defun term-split ()
-    (interactive)
-    (split-window-vertically)
-    (other-window 1)
-    (term "/usr/bin/bash"))
 #+end_src
 ** Style
 #+begin_src emacs-lisp
@@ -221,6 +211,23 @@
         delete-old-versions    t  ; Automatically delete excess backups:
         kept-new-versions      20 ; how many of the newest versions to keep
         kept-old-versions      5) ; and how many of the old
+#+end_src
+** Custom functions
+#+begin_src emacs-lisp
+  (defun term-split ()
+    (interactive)
+    (split-window-vertically)
+    (other-window 1)
+    (term "/usr/bin/bash"))
+
+  (defun org-agenda-timeblock ()
+    (interactive)
+    (org-timeblock)
+    (split-window-vertically)
+    (other-window 1)
+    (org-agenda nil "t")
+    (shrink-window-horizontally 50))
+  (add-hook 'after-init-hook (lambda () (org-agenda-timeblock)))
 #+end_src
 ** Keybind
 #+begin_src emacs-lisp
