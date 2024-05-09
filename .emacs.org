@@ -96,7 +96,7 @@
   (use-package org-timeblock
     :ensure t
     :defer t
-    :config (setq org-timeblock-span 7)
+    :config (setq org-timeblock-span (+ 1 (- 7 (string-to-number (shell-command-to-string "date +%u")))))
     :hook (org-timeblock-mode . turn-off-evil-mode))
 #+end_src
 ** Org bullets
@@ -225,13 +225,13 @@
     (org-timeblock)
     (org-agenda nil "t")
     (shrink-window-horizontally 50))
-  (add-hook 'after-init-hook (lambda () (org-agenda-timeblock)))
 #+end_src
 ** Keybind
 #+begin_src emacs-lisp
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "C-g") 'evil-normal-state)
   (global-set-key (kbd "M-!") 'compile)
+  (global-set-key (kbd "C-x C-a") 'org-agenda-timeblock)
 #+end_src
 ** Misc
 #+begin_src emacs-lisp
