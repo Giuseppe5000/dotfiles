@@ -54,7 +54,7 @@
 #+begin_src emacs-lisp
   (use-package evil-mc
     :ensure t
-    :config (global-evil-mc-mode 1))
+    :hook (prog-mode . evil-mc-mode))
   (global-set-key (kbd "C-<") 'evil-mc-make-and-goto-next-match)
   (global-set-key (kbd "C->") 'evil-mc-undo-all-cursors)
 #+end_src
@@ -67,7 +67,7 @@
   (use-package company
     :after eglot
     :ensure t
-    :config (setq company-idle-delay 0)
+    :config (setq company-idle-delay nil) (define-key company-mode-map (kbd "TAB") #'company-complete-common)
     :hook (eglot-managed-mode . company-mode))
 #+end_src
 ** Mu4e
@@ -259,6 +259,7 @@
   (global-set-key (kbd "C-g") 'evil-normal-state)
   (global-set-key (kbd "M-!") 'compile)
   (global-set-key (kbd "C-x C-a") 'org-agenda-timeblock)
+  (global-set-key (kbd "C-x C-<return>") 'term-split)
 #+end_src
 ** Misc
 #+begin_src emacs-lisp
