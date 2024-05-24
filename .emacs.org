@@ -18,7 +18,9 @@
     :ensure t
     :init (setq evil-want-keybinding nil) (setq evil-want-C-u-scroll t)
     :config (evil-set-undo-system 'undo-redo) (evil-mode 1))
-
+#+end_src
+*** Evil collection
+#+begin_src emacs-lisp
   (use-package evil-collection
     :after evil
     :ensure t
@@ -27,6 +29,14 @@
     (evil-collection-define-key 'normal 'dired-mode-map
       "h" 'dired-up-directory
       "l" 'dired-find-file))
+#+end_src
+*** Evil multiple cursors
+#+begin_src emacs-lisp
+  (use-package evil-mc
+    :ensure t
+    :hook (prog-mode . evil-mc-mode))
+  (global-set-key (kbd "C-<") 'evil-mc-make-and-goto-next-match)
+  (global-set-key (kbd "C->") 'evil-mc-undo-all-cursors)
 #+end_src
 ** IDO vertical
 #+begin_src emacs-lisp
@@ -49,14 +59,6 @@
     :init (setq yas-snippet-dirs '("~/.dotfiles/emacs-snippets"))
     :config (yas-reload-all)
     :hook (prog-mode . yas-minor-mode) (org-mode . yas-minor-mode) (latex-mode . yas-minor-mode))
-#+end_src
-** Multiple cursors
-#+begin_src emacs-lisp
-  (use-package evil-mc
-    :ensure t
-    :hook (prog-mode . evil-mc-mode))
-  (global-set-key (kbd "C-<") 'evil-mc-make-and-goto-next-match)
-  (global-set-key (kbd "C->") 'evil-mc-undo-all-cursors)
 #+end_src
 ** LSP
 #+begin_src emacs-lisp
@@ -241,11 +243,11 @@
 #+end_src
 ** Custom functions
 #+begin_src emacs-lisp
-  (defun term-split ()
+  (defun eshell-split ()
     (interactive)
     (split-window-vertically)
     (other-window 1)
-    (term "/usr/bin/bash"))
+    (eshell 'N))
 
   (defun org-agenda-timeblock ()
     (interactive)
@@ -259,7 +261,7 @@
   (global-set-key (kbd "C-g") 'evil-normal-state)
   (global-set-key (kbd "M-!") 'compile)
   (global-set-key (kbd "C-x C-a") 'org-agenda-timeblock)
-  (global-set-key (kbd "C-x C-<return>") 'term-split)
+  (global-set-key (kbd "C-x C-<return>") 'eshell-split)
 #+end_src
 ** Misc
 #+begin_src emacs-lisp
