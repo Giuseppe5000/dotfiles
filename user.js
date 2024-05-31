@@ -53,3 +53,4 @@ user_pref("signon.generation.enabled", false);
 user_pref("signon.management.page.breach-alerts.enabled", false);
 user_pref("signon.rememberSignons", false);
 user_pref("toolkit.telemetry.pioneer-new-studies-available", true);
+user_pref("browser.newtabpage.activity-stream.showSearch", true);

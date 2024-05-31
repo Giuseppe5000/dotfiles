@@ -3,7 +3,7 @@
 cd "$(dirname "$0")" || exit
 
 # Install all packets
-su -c "apt update && apt -y install $(sed -e '/^\s*#.*$/d' -e '/^\s*$/d' aptpkg.txt)" || exit
+su -c "apt update && apt -y install $(sed '/^[[:blank:]]*#/d;s/#.*//' aptpkg.txt |tr '\n' ' ')" || exit
 
 cd ..
 
