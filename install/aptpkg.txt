@@ -99,7 +99,7 @@ i3status
 i3-wm
 picom
 rofi
-unclutter
+unclutter-xfixes
 xautolock
 xclip
 xinit

@@ -57,7 +57,7 @@ set $mouse_id $(xinput|grep 'USB OPTICAL MOUSE'|grep -Eo '[0-9]{1,2}'|head -1)
 exec_always --no-startup-id "xinput --set-prop $mouse_id 'libinput Accel Speed' -1"
 
 # Hide the mouse after some time
-exec --no-startup-id unclutter
+exec --no-startup-id unclutter-xfixes
 
 # Borders
 default_border pixel
