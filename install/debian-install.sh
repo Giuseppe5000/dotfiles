@@ -1,9 +1,10 @@
 #!/bin/sh
+set -e
 
-cd "$(dirname "$0")" || exit
+cd "$(dirname "$0")"
 
 # Install all packets
-su -c "apt update && apt -y install $(sed '/^[[:blank:]]*#/d;s/#.*//' aptpkg.txt |tr '\n' ' ')" || exit
+su -c "apt update && apt -y install $(sed '/^[[:blank:]]*#/d;s/#.*//' aptpkg.txt |tr '\n' ' ')"
 
 cd ..
 
@@ -57,7 +58,7 @@ wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip -O "$HO
 chmod +x "$HOME"/.local/bin/greenclip
 
 # Cliphist (sway)
-wget https://github.com/sentriz/cliphist/releases/download/v0.1.2/v0.1.2-linux-amd64 -O "$HOME"/.local/bin/cliphist
+wget https://github.com/sentriz/cliphist/releases/download/v0.5.0/v0.5.0-linux-amd64 -O "$HOME"/.local/bin/cliphist
 chmod +x "$HOME"/.local/bin/cliphist
 
 # Powerlevel10k

@@ -6,6 +6,7 @@ btop
 chromium
 clangd
 cups
+emacs
 eog
 ffmpegthumbnailer
 file-roller
@@ -53,7 +54,6 @@ systemd-zram-generator
 telegram-desktop
 texlive-latex-extra
 tor
-torbrowser-launcher
 v4l2loopback-dkms
 vim
 wget
@@ -81,8 +81,6 @@ brightnessctl
 ethtool
 fprintd
 imagemagick
-intel-microcode
-iw
 libpam-fprintd
 smartmontools
 tlp
@@ -90,7 +88,6 @@ tlp-rdw
 
 # i3
 dunst
-emacs
 feh
 flameshot
 gromit-mpx
