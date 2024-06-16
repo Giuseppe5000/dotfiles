@@ -263,6 +263,13 @@
   (global-set-key (kbd "C-x C-a") 'org-agenda-timeblock)
   (global-set-key (kbd "C-x C-<return>") 'eshell-split)
 #+end_src
+** TTY
+#+begin_src emacs-lisp
+  (unless (display-graphic-p)
+    (load-theme 'tsdh-dark t)
+    (unless (string-match-p "N/A" (battery))
+      (display-battery-mode)))
+#+end_src
 ** Misc
 #+begin_src emacs-lisp
   (setenv "PATH" (concat (getenv "PATH") ":~/.cargo/bin"))
