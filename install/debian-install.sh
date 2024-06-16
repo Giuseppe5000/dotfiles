@@ -30,9 +30,6 @@ ln -s "$PWD"/.vimrc "$HOME"/.vimrc
 mkdir -p "$HOME"/.gnupg
 ln -s "$PWD"/.gnupg/gpg-agent.conf "$HOME"/.gnupg/gpg-agent.conf
 
-# NetworkManager MAC randomization conf
-# su -c 'mv etc/NetworkManager/conf.d/wifi_rand_mac.conf /etc/NetworkManager/conf.d/'
-
 # Cursor
 mv .icons "$HOME"
 
@@ -54,11 +51,13 @@ ln -s "$PWD"/user.js "$HOME"/.mozilla/firefox/"$PROFILE_PATH"/user.js
 
 # Greenclip (i3)
 mkdir -p "$HOME"/.local/bin
-wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip -O "$HOME"/.local/bin/greenclip
+greenclip_url="$(curl -s https://api.github.com/repos/erebe/greenclip/releases/latest | grep browser_download_url | cut -d '"' -f 4 | head -n 1)"
+wget "$greenclip_url" -O "$HOME"/.local/bin/greenclip
 chmod +x "$HOME"/.local/bin/greenclip
 
 # Cliphist (sway)
-wget https://github.com/sentriz/cliphist/releases/download/v0.5.0/v0.5.0-linux-amd64 -O "$HOME"/.local/bin/cliphist
+cliphist_url="$(curl -s https://api.github.com/repos/sentriz/cliphist/releases/latest | grep browser_download_url | grep amd64 | cut -d '"' -f 4)"
+wget "$cliphist_url" -O "$HOME"/.local/bin/cliphist
 chmod +x "$HOME"/.local/bin/cliphist
 
 # Powerlevel10k
@@ -66,8 +65,9 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME"/.powerl
 
 # Nerd Fonts
 mkdir -p "$HOME"/.local/share/fonts
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/IosevkaTerm.tar.xz
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/DejaVuSansMono.tar.xz
+nerdfonts_url="$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep browser_download_url)"
+wget "$(echo "$nerdfonts_url" | grep IosevkaTerm.tar.xz | cut -d '"' -f 4)"
+wget "$(echo "$nerdfonts_url" | grep DejaVuSansMono.tar.xz | cut -d '"' -f 4)"
 tar xvf IosevkaTerm.tar.xz -C "$HOME"/.local/share/fonts
 tar xvf DejaVuSansMono.tar.xz -C "$HOME"/.local/share/fonts
 rm IosevkaTerm.tar.xz DejaVuSansMono.tar.xz
