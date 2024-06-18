@@ -59,12 +59,6 @@ aug netrw_mapping
     au filetype netrw call NetrwMapping()
 aug END
 
-" No arrows
-nm <Up> <Nop>
-nm <Down> <Nop>
-nm <Left> <Nop>
-nm <Right> <Nop>
-
 " Theme
 set background=dark
 set termguicolors

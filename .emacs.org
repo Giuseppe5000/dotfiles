@@ -30,14 +30,6 @@
       "h" 'dired-up-directory
       "l" 'dired-find-file))
 #+end_src
-*** Evil multiple cursors
-#+begin_src emacs-lisp
-  (use-package evil-mc
-    :ensure t
-    :hook (prog-mode . evil-mc-mode))
-  (global-set-key (kbd "C-<") 'evil-mc-make-and-goto-next-match)
-  (global-set-key (kbd "C->") 'evil-mc-undo-all-cursors)
-#+end_src
 ** IDO vertical
 #+begin_src emacs-lisp
   (use-package ido-vertical-mode
@@ -267,6 +259,7 @@
 #+begin_src emacs-lisp
   (unless (display-graphic-p)
     (load-theme 'tsdh-dark t)
+    (global-set-key (kbd "C-x RET") 'eshell-split)
     (unless (string-match-p "N/A" (battery))
       (display-battery-mode)))
 #+end_src
