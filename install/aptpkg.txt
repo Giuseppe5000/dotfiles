@@ -33,7 +33,6 @@ mpv
 mu4e
 nemo
 network-manager
-nm-tray
 obs-studio
 offlineimap
 papirus-icon-theme
