@@ -107,13 +107,13 @@ xss-lock
 dunst
 flameshot
 grim
+i3status
 rofi
 slurp
 sway
 swaybg
 swayidle
 swaylock
-waybar
 wl-clipboard
 xdg-desktop-portal
 xdg-desktop-portal-wlr
