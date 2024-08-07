@@ -275,4 +275,5 @@
   (setq lpr-command "gtklp")
   (setq vc-follow-symlinks t)
   (setq use-dialog-box nil)
+  (setq shell-command-switch "-ic")
 #+end_src
