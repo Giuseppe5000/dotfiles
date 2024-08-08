@@ -47,6 +47,7 @@ python3
 python3-pip
 qbittorrent
 rclone
+ripgrep
 simple-scan
 syncthing
 systemd-zram-generator
