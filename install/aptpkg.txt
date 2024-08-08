@@ -1,5 +1,4 @@
 adwaita-qt
-alacritty
 baobab
 blueman
 btop
@@ -65,6 +64,7 @@ zsh
 zsh-autosuggestions
 
 # Workstation
+alacritty
 broadcom-sta-common
 broadcom-sta-dkms
 dnsmasq
@@ -79,6 +79,7 @@ virt-manager
 # Laptop
 brightnessctl
 ethtool
+foot
 fprintd
 imagemagick
 libpam-fprintd
