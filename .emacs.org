@@ -275,8 +275,4 @@
   (setq lpr-command "gtklp")
   (setq vc-follow-symlinks t)
   (setq use-dialog-box nil)
-  (defadvice compile (around use-bashrc activate)
-    "Load .bashrc in any calls to bash (e.g. so we can use aliases)"
-    (let ((shell-command-switch "-ic"))
-      ad-do-it))
 #+end_src
