@@ -81,18 +81,3 @@ set statusline+=%#White#
 set statusline+=\ \ (\%l,\%c)
 set statusline+=\ \ %p%%\ 
 set laststatus=2
-
-" GPG encrypted files
-aug encrypted
-    au!
-    au BufReadPre,FileReadPre *.gpg set viminfo=
-    au BufReadPre,FileReadPre *.gpg set noswapfile
-    au BufReadPre,FileReadPre *.gpg set bin
-    au BufReadPre,FileReadPre *.gpg let ch_save = &ch|set ch=2
-    au BufReadPost,FileReadPost *.gpg '[,']!gpg --decrypt 2> /dev/null
-    au BufReadPost,FileReadPost *.gpg set nobin
-    au BufReadPost,FileReadPost *.gpg let &ch = ch_save|unlet ch_save
-    au BufReadPost,FileReadPost *.gpg execute ":doautocmd BufReadPost " . expand("%:r")
-    au BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2>/dev/null
-    au BufWritePost,FileWritePost *.gpg u
-aug END

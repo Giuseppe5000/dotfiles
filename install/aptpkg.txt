@@ -1,9 +1,7 @@
 adwaita-qt
 baobab
 blueman
-btop
 chromium
-clangd
 cups
 emacs
 eog
@@ -22,6 +20,7 @@ gnome-calculator
 gnome-disk-utility
 gnome-themes-extra
 gstreamer1.0-libav
+htop
 iptables
 keepassxc
 libreoffice
