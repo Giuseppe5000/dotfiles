@@ -111,13 +111,6 @@
   ;; don't save messages to Sent Messages, Gmail/IMAP takes care of this
   (setq mu4e-sent-messages-behavior 'delete)
 #+end_src
-** Org bullets
-#+begin_src emacs-lisp
-  (use-package org-bullets
-    :ensure t
-    :config (setq org-bullets-bullet-list '("✜" "●" "◉" "○"))
-    :hook (org-mode . org-bullets-mode))
-#+end_src
 ** Theme
 #+begin_src emacs-lisp
   (use-package gruber-darker-theme
@@ -151,19 +144,6 @@
                                (800 1000 1200 1400 1600 1800 2000)
                                " --- " ""))
   (setq org-agenda-current-time-string "← NOW")
-  (setq org-agenda-exporter-settings
-        '((ps-left-header (list 'org-agenda-write-buffer-name))
-          (ps-right-header
-           (list "/pagenumberstring load"
-                 (lambda () (format-time-string "%d/%m/%Y"))))
-          (ps-print-color-p t)
-          (ps-default-bg t)
-          (ps-font-size '(12 . 11))
-          (ps-left-margin 0)
-          (ps-right-margin 0)
-          (ps-bottom-margin 0)
-          (ps-top-margin 0)
-          (ps-print-header nil)))
 #+end_src
 *** Org appearance
 #+begin_src emacs-lisp
@@ -222,15 +202,6 @@
   (column-number-mode 1)
   (size-indication-mode 1)
 #+end_src
-** Backup files
-#+begin_src emacs-lisp
-  (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
-        backup-by-copying      t  ; Don't de-link hard links
-        version-control        t  ; Use version numbers on backups
-        delete-old-versions    t  ; Automatically delete excess backups:
-        kept-new-versions      20 ; how many of the newest versions to keep
-        kept-old-versions      5) ; and how many of the old
-#+end_src
 ** Custom functions
 #+begin_src emacs-lisp
   (defun eshell-split ()
@@ -257,14 +228,12 @@
 #+end_src
 ** Misc
 #+begin_src emacs-lisp
-  (setenv "PATH" (concat (getenv "PATH") ":~/.cargo/bin"))
-  (setq exec-path (append exec-path '("~/.cargo/bin")))
   (setq auto-save-default nil)
   (setq use-short-answers 1)
   (setq doc-view-continuous t)
   (setq compile-command "")
   (setq calendar-week-start-day 1)
-  (setq lpr-command "gtklp")
   (setq vc-follow-symlinks t)
   (setq use-dialog-box nil)
+  (setq make-backup-files nil)
 #+end_src
