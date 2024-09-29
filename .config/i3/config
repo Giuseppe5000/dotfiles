@@ -2,7 +2,7 @@
 
 # Variables
 set $mod Mod4
-set $background ~/Immagini/Wallpapers/background.jpg
+set $background ~/Pictures/Wallpapers/background.jpg
 set $term alacritty
 set $i3lockwall i3lock-fancy
 #set $i3lockwall i3lock --blur 5 --clock --indicator --ring-color 808080 --line-color 000000 --inside-color 00000088 --separator-color 00000000 --time-color ffffffff --date-color ffffffff
@@ -229,6 +229,9 @@ bindsym $mod+n exec --no-startup-id nemo
 
 # Clipboard menu
 bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
+
+# Boomer
+bindsym $mod+z exec --no-startup-id boomer
 
 # Gaps
 gaps inner 5px

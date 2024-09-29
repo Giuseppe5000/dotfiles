@@ -34,7 +34,7 @@ ln -s "$PWD"/.gnupg/gpg-agent.conf "$HOME"/.gnupg/gpg-agent.conf
 mv .icons "$HOME"
 
 # Create user dirs
-xdg-user-dirs-update
+LC_ALL=C.UTF-8 xdg-user-dirs-update --force
 
 # Wallpapers
 mv Wallpapers "$HOME"/Pictures
@@ -74,7 +74,7 @@ rm IosevkaTerm.tar.xz DejaVuSansMono.tar.xz
 fc-cache -f
 
 # Enable some services
-su -c 'systemctl enable NetworkManager && systemctl enable firewalld && cp /usr/share/doc/offlineimap3/examples/systemd/offlineimap.service /etc/systemd/user/'
+su -c 'systemctl enable NetworkManager && systemctl enable firewalld && systemctl disable bluetooth && systemctl disable cups && systemctl disable tor && cp /usr/share/doc/offlineimap3/examples/systemd/offlineimap.service /etc/systemd/user/'
 systemctl --user daemon-reload
 systemctl --user enable syncthing
 systemctl --user enable offlineimap

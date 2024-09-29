@@ -94,7 +94,7 @@
 
   (setq
    user-mail-address (with-temp-buffer
-                       (insert-file-contents "~/Documenti/.emacs/email.txt")
+                       (insert-file-contents "~/Documents/.emacs/email.txt")
                        (replace-regexp-in-string "\n$" "" (buffer-string)))
    user-full-name  "Giuseppe Tutino")
 
@@ -135,7 +135,7 @@
 ** Org mode
 #+begin_src emacs-lisp
   (setq org-preview-latex-image-directory "~/.emacs.d/latexpreview/")
-  (setq org-directory "~/Documenti/Org")
+  (setq org-directory "~/Documents/Org")
   (setq org-startup-folded t)
   (setq org-hide-emphasis-markers t)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
@@ -144,7 +144,7 @@
 #+end_src
 *** Agenda
 #+begin_src emacs-lisp
-  (setq org-agenda-files (list "~/Documenti/Org/Uni.org" "~/Documenti/Org/Todo.org"))
+  (setq org-agenda-files (list "~/Documents/Org/Uni.org" "~/Documents/Org/Todo.org"))
   (setq org-agenda-start-on-weekday nil)
   (setq org-agenda-start-day "+0d")
   (setq org-agenda-time-grid '((daily today require-timed remove-match)
@@ -198,7 +198,7 @@
 ** Newsticker
 #+begin_src emacs-lisp
   (setq newsticker-url-list-defaults nil)
-  (load "~/Documenti/.emacs/newsticker.el")
+  (load "~/Documents/.emacs/newsticker.el")
 #+end_src
 ** Dired
 #+begin_src emacs-lisp
