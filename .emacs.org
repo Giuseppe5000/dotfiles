@@ -8,14 +8,14 @@
   (require 'package)
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
   (package-initialize)
-  (setq package-native-compile t)
-  (setq native-comp-async-report-warnings-errors nil)
+  (setq package-native-compile t
+        native-comp-async-report-warnings-errors nil)
 #+end_src
 ** Evil
 #+begin_src emacs-lisp
   (use-package evil
     :ensure t
-    :init (setq evil-want-keybinding nil) (setq evil-want-C-u-scroll t)
+    :init (setq evil-want-keybinding nil evil-want-C-u-scroll t)
     :config (evil-set-undo-system 'undo-redo) (evil-mode 1))
 #+end_src
 *** Evil collection
@@ -28,6 +28,13 @@
     (evil-collection-define-key 'normal 'dired-mode-map
       "h" 'dired-up-directory
       "l" 'dired-find-file))
+#+end_src
+*** Evil multiple cursors
+#+begin_src emacs-lisp
+  (use-package evil-mc
+    :ensure t)
+  (global-set-key (kbd "C-<") 'evil-mc-make-and-goto-next-match)
+  (global-set-key (kbd "C->") 'evil-mc-undo-all-cursors)
 #+end_src
 ** IDO vertical
 #+begin_src emacs-lisp
@@ -53,10 +60,6 @@
 #+end_src
 ** LSP
 #+begin_src emacs-lisp
-  (use-package eglot
-    :ensure t
-    :defer t)
-
   (use-package company
     :after eglot
     :ensure t
@@ -127,23 +130,23 @@
 #+end_src
 ** Org mode
 #+begin_src emacs-lisp
-  (setq org-preview-latex-image-directory "~/.emacs.d/latexpreview/")
-  (setq org-directory "~/Documents/Org")
-  (setq org-startup-folded t)
-  (setq org-hide-emphasis-markers t)
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
-  (setq org-html-validation-link nil)
+  (setq org-preview-latex-image-directory "~/.emacs.d/latexpreview/"
+        org-directory "~/Documents/Org"
+        org-startup-folded t
+        org-hide-emphasis-markers t
+        org-format-latex-options (plist-put org-format-latex-options :scale 1.5)
+        org-html-validation-link nil)
   (add-hook 'org-mode-hook #'org-indent-mode)
 #+end_src
 *** Agenda
 #+begin_src emacs-lisp
-  (setq org-agenda-files (list "~/Documents/Org/Uni.org" "~/Documents/Org/Todo.org"))
-  (setq org-agenda-start-on-weekday nil)
-  (setq org-agenda-start-day "+0d")
-  (setq org-agenda-time-grid '((daily today require-timed remove-match)
+  (setq org-agenda-files (list "~/Documents/Org/Uni.org" "~/Documents/Org/Todo.org")
+        org-agenda-start-on-weekday nil
+        org-agenda-start-day "+0d"
+        org-agenda-current-time-string "← NOW"
+        org-agenda-time-grid '((daily today require-timed remove-match)
                                (800 1000 1200 1400 1600 1800 2000)
                                " --- " ""))
-  (setq org-agenda-current-time-string "← NOW")
 #+end_src
 *** Org appearance
 #+begin_src emacs-lisp
@@ -172,8 +175,8 @@
 #+begin_src emacs-lisp
   (require 'org-crypt)
   (org-crypt-use-before-save-magic)
-  (setq org-tags-exclude-from-inheritance (quote ("crypt")))
-  (setq org-crypt-key nil)
+  (setq org-tags-exclude-from-inheritance (quote ("crypt"))
+        org-crypt-key nil)
 #+end_src
 ** Newsticker
 #+begin_src emacs-lisp
@@ -182,22 +185,23 @@
 #+end_src
 ** Dired
 #+begin_src emacs-lisp
-  (setq dired-listing-switches "-lhAX --group-directories-first")
+  (setq dired-listing-switches "-lhAX --group-directories-first"
+        dired-dwim-target t)
   (add-hook 'dired-mode-hook #'auto-revert-mode)
 #+end_src
 ** Performance
 #+begin_src emacs-lisp
-  (setq gc-cons-threshold most-positive-fixnum)
-  (setq gc-cons-threshold (* 100 1024 1024))
+  (setq gc-cons-threshold most-positive-fixnum
+        gc-cons-threshold (* 100 1024 1024))
 #+end_src
 ** Style
 #+begin_src emacs-lisp
   (set-frame-parameter nil 'alpha-background 99)
   (set-frame-font "IosevkaTerm NFM 12" nil t)
   (setq-default indent-tabs-mode nil)
-  (setq c-basic-offset 4)
-  (setq whitespace-style '(face tabs spaces trailing space-before-tab space-after-tab space-mark tab-mark))
-  (setq display-line-numbers-type 'relative)
+  (setq c-basic-offset 4
+        whitespace-style '(face tabs spaces trailing space-before-tab space-after-tab space-mark tab-mark)
+        display-line-numbers-type 'relative)
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   (column-number-mode 1)
   (size-indication-mode 1)
@@ -228,12 +232,12 @@
 #+end_src
 ** Misc
 #+begin_src emacs-lisp
-  (setq auto-save-default nil)
-  (setq use-short-answers 1)
-  (setq doc-view-continuous t)
-  (setq compile-command "")
-  (setq calendar-week-start-day 1)
-  (setq vc-follow-symlinks t)
-  (setq use-dialog-box nil)
-  (setq make-backup-files nil)
+  (setq auto-save-default nil
+        use-short-answers 1
+        doc-view-continuous t
+        compile-command ""
+        calendar-week-start-day 1
+        vc-follow-symlinks t
+        use-dialog-box nil
+        make-backup-files nil)
 #+end_src
