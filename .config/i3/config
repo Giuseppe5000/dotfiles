@@ -13,7 +13,7 @@ exec_always --no-startup-id feh --bg-scale --randomize $background
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $i3lockwall
-exec --no-startup-id xset dpms 0 0 300
+exec_always --no-startup-id xset dpms 0 0 300
 
 # Auto suspend
 # exec --no-startup-id xautolock -time 30 -locker "systemctl suspend"
@@ -247,7 +247,7 @@ for_window [class="gnome-calculator"] floating enable
 for_window [class=.*] border pixel
 
 # Apps workspace
-assign [class="^Firefox-esr$"] $ws2
+assign [class="^firefox-esr$"] $ws2
 assign [class="^Chromium$"] $ws3
 assign [class="^mpv$"] $ws4
 

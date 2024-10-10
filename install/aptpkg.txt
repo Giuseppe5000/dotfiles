@@ -15,13 +15,11 @@ fonts-dejavu
 fonts-font-awesome
 fonts-noto-color-emoji
 fonts-powerline
-gimp
 git
 gnome-calculator
 gnome-disk-utility
 gnome-themes-extra
 gstreamer1.0-libav
-htop
 iptables
 keepassxc
 libreoffice
@@ -32,7 +30,6 @@ mpv
 mu4e
 nemo
 network-manager
-obs-studio
 offlineimap
 papirus-icon-theme
 pavucontrol
@@ -42,18 +39,13 @@ pipewire-audio
 pipewire-jack
 pipewire-pulse
 printer-driver-brlaser
-python3
-python3-pip
 qbittorrent
 rclone
-ripgrep
 simple-scan
 syncthing
-systemd-zram-generator
 telegram-desktop
 texlive-latex-extra
 tor
-v4l2loopback-dkms
 vim
 wget
 wireless-tools
@@ -73,7 +65,9 @@ intel-microcode
 nvidia-driver
 nvidia-driver-libs
 nvidia-settings
+obs-studio
 qemu-kvm
+v4l2loopback-dkms
 virt-manager
 
 # Laptop
