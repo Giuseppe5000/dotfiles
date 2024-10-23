@@ -63,8 +63,11 @@
   (use-package company
     :after eglot
     :ensure t
-    :config (setq company-idle-delay nil) (define-key company-mode-map (kbd "TAB") #'company-complete-common)
     :hook (eglot-managed-mode . company-mode))
+
+  (use-package eglot
+    :defer t
+    :config (add-to-list 'eglot-server-programs '((simpc-mode) "clangd")))
 #+end_src
 ** Mu4e
 #+begin_src emacs-lisp
@@ -131,7 +134,7 @@
 ** Org mode
 #+begin_src emacs-lisp
   (setq org-preview-latex-image-directory "~/.emacs.d/latexpreview/"
-        org-directory "~/Documents/Org"
+        org-directory "~/Documents/org"
         org-startup-folded t
         org-hide-emphasis-markers t
         org-format-latex-options (plist-put org-format-latex-options :scale 1.5)
@@ -140,7 +143,7 @@
 #+end_src
 *** Agenda
 #+begin_src emacs-lisp
-  (setq org-agenda-files (list "~/Documents/Org/Uni.org" "~/Documents/Org/Todo.org")
+  (setq org-agenda-files (list "~/Documents/org/todo.org")
         org-agenda-start-on-weekday nil
         org-agenda-start-day "+0d"
         org-agenda-current-time-string "← NOW"
@@ -240,4 +243,5 @@
         vc-follow-symlinks t
         use-dialog-box nil
         make-backup-files nil)
+  (setq sgml-quick-keys 'close)
 #+end_src
