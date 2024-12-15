@@ -44,11 +44,6 @@ ln -s "$PWD"/.zshenv "$HOME"/.zshenv
 ln -s "$PWD"/.zshrc "$HOME"/.zshrc
 ln -s "$PWD"/.p10k.zsh "$HOME"/.p10k.zsh
 
-# Firefox user.js
-timeout 10s firefox --headless # Gen profile folder
-PROFILE_PATH=$(grep '^Path=.*default-esr$' "$HOME"/.mozilla/firefox/profiles.ini | cut -c 6-)
-ln -s "$PWD"/user.js "$HOME"/.mozilla/firefox/"$PROFILE_PATH"/user.js
-
 # Greenclip (i3)
 mkdir -p "$HOME"/.local/bin
 greenclip_url="$(curl -s https://api.github.com/repos/erebe/greenclip/releases/latest | grep browser_download_url | cut -d '"' -f 4 | head -n 1)"

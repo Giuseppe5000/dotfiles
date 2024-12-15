@@ -206,6 +206,7 @@
         whitespace-style '(face tabs spaces trailing space-before-tab space-after-tab space-mark tab-mark)
         display-line-numbers-type 'relative)
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+  (add-hook 'dired-mode-hook #'display-line-numbers-mode)
   (column-number-mode 1)
   (size-indication-mode 1)
 #+end_src
@@ -243,5 +244,6 @@
         vc-follow-symlinks t
         use-dialog-box nil
         make-backup-files nil)
-  (setq sgml-quick-keys 'close)
+  (load-file "~/Documents/.emacs/simpc-mode.el")
+  (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
 #+end_src
