@@ -36,9 +36,6 @@ mv .icons "$HOME"
 # Create user dirs
 LC_ALL=C.UTF-8 xdg-user-dirs-update --force
 
-# Wallpapers
-mv Wallpapers "$HOME"/Pictures
-
 # ZSH
 ln -s "$PWD"/.zshenv "$HOME"/.zshenv
 ln -s "$PWD"/.zshrc "$HOME"/.zshrc
