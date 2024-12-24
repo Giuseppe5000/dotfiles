@@ -68,6 +68,22 @@
   (use-package eglot
     :defer t
     :config (add-to-list 'eglot-server-programs '((simpc-mode) "clangd")))
+
+  (defun setup-tide-mode ()
+    (interactive)
+    (tide-setup)
+    (flycheck-mode +1)
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (eldoc-mode +1)
+    (tide-hl-identifier-mode +1))
+  (add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+  (require 'web-mode)
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (when (string-equal "tsx" (file-name-extension buffer-file-name))
+                (setup-tide-mode))))
 #+end_src
 ** Mu4e
 #+begin_src emacs-lisp
@@ -134,7 +150,7 @@
 ** Org mode
 #+begin_src emacs-lisp
   (setq org-preview-latex-image-directory "~/.emacs.d/latexpreview/"
-        org-directory "~/Documents/org"
+        org-directory "~/Documents/various/org"
         org-startup-folded t
         org-hide-emphasis-markers t
         org-format-latex-options (plist-put org-format-latex-options :scale 1.5)
@@ -143,7 +159,7 @@
 #+end_src
 *** Agenda
 #+begin_src emacs-lisp
-  (setq org-agenda-files (list "~/Documents/org/todo.org")
+  (setq org-agenda-files (list "~/Documents/todo.org")
         org-agenda-start-on-weekday nil
         org-agenda-start-day "+0d"
         org-agenda-current-time-string "← NOW"
