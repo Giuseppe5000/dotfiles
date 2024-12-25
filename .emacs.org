@@ -68,7 +68,9 @@
   (use-package eglot
     :defer t
     :config (add-to-list 'eglot-server-programs '((simpc-mode) "clangd")))
-
+#+end_src
+** Typescript
+#+begin_src emacs-lisp
   (defun setup-tide-mode ()
     (interactive)
     (tide-setup)
@@ -84,54 +86,6 @@
             (lambda ()
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
                 (setup-tide-mode))))
-#+end_src
-** Mu4e
-#+begin_src emacs-lisp
-  (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa/mu4e-1.8.14")
-  (require 'mu4e)
-
-  (setq mail-user-agent 'mu4e-user-agent)
-  (setq mu4e-drafts-folder "/GmailAccount/[Gmail].Bozze")
-  (setq mu4e-sent-folder   "/GmailAccount/[Gmail].Posta inviata")
-  (setq mu4e-trash-folder  "/GmailAccount/[Gmail].Cestino")
-  (setq mu4e-refile-folder  "/GmailAccount/[Gmail].Tutti i messaggi")
-
-  ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-  (setq mu4e-sent-messages-behavior 'delete)
-
-  (setq mu4e-maildir-shortcuts
-        '( (:maildir "/GmailAccount/INBOX"                    :key ?i)
-           (:maildir "/GmailAccount/[Gmail].Posta inviata"    :key ?s)
-           (:maildir "/GmailAccount/[Gmail].Cestino"          :key ?t)
-           (:maildir "/GmailAccount/[Gmail].Tutti i messaggi" :key ?a)))
-
-  ;; allow for updating mail using 'U' in the main view:
-  (setq mu4e-get-mail-command "offlineimap")
-
-  ;; don't keep message buffers around
-  (setq message-kill-buffer-on-exit t)
-
-  ;; don't ask to quit
-  (setq mu4e-confirm-quit nil)
-
-  (setq
-   user-mail-address (with-temp-buffer
-                       (insert-file-contents "~/Documents/.emacs/email.txt")
-                       (replace-regexp-in-string "\n$" "" (buffer-string)))
-   user-full-name  "Giuseppe Tutino")
-
-  (require 'smtpmail)
-  (setq message-send-mail-function 'smtpmail-send-it
-        starttls-use-gnutls t
-        smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-        smtpmail-auth-credentials
-        '(("smtp.gmail.com" 587 user-mail-address nil))
-        smtpmail-default-smtp-server "smtp.gmail.com"
-        smtpmail-smtp-server "smtp.gmail.com"
-        smtpmail-smtp-service 587)
-
-  ;; don't save messages to Sent Messages, Gmail/IMAP takes care of this
-  (setq mu4e-sent-messages-behavior 'delete)
 #+end_src
 ** Theme
 #+begin_src emacs-lisp
@@ -153,7 +107,6 @@
         org-directory "~/Documents/various/org"
         org-startup-folded t
         org-hide-emphasis-markers t
-        org-format-latex-options (plist-put org-format-latex-options :scale 1.5)
         org-html-validation-link nil)
   (add-hook 'org-mode-hook #'org-indent-mode)
 #+end_src
@@ -196,11 +149,6 @@
   (org-crypt-use-before-save-magic)
   (setq org-tags-exclude-from-inheritance (quote ("crypt"))
         org-crypt-key nil)
-#+end_src
-** Newsticker
-#+begin_src emacs-lisp
-  (setq newsticker-url-list-defaults nil)
-  (load "~/Documents/.emacs/newsticker.el")
 #+end_src
 ** Dired
 #+begin_src emacs-lisp
