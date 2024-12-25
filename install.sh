@@ -1,28 +1,38 @@
 #!/bin/sh
-set -e
+set -xe
 
 cd "$(dirname "$0")"
 
-# XDG configs
+# Install some useful packages
+useful_packages="cups firefox-esr firewall-config firewalld flameshot git gromit-mpx \
+keepassxc rclone rofi syncthing telegram-desktop vim xournalpp zsh zsh-autosuggestions"
+su -c "apt update && apt -y install $useful_packages"
+
+# Symlink XDG configs
 for dir in .config/*
 do
     if [ -d "$dir" ] ; then
-        mkdir -p "$HOME"/"$dir"
+        mkdir -p ~/"$dir"
         for conf in "$dir"/*
         do
-            ln -s "$PWD"/"$conf" "$HOME"/"$conf"
+            # If symlink doesn't exist then create
+            (ls ~/"$conf") || ln -s "$PWD"/"$conf" ~/"$conf"
         done
     fi
 done
 
 # Emacs config
-ln -s "$PWD"/.emacs.org "$HOME"/.emacs.org
+(ls ~/.emacs.org) || ln -s "$PWD"/.emacs.org ~/.emacs.org
 
 # Vim config
-ln -s "$PWD"/.vimrc "$HOME"/.vimrc
+(ls ~/.vimrc) || ln -s "$PWD"/.vimrc ~/.vimrc
 
 # ZSH
-ln -s "$PWD"/.zshenv "$HOME"/.zshenv
-ln -s "$PWD"/.zshrc "$HOME"/.zshrc
-ln -s "$PWD"/.p10k.zsh "$HOME"/.p10k.zsh
-chsh -s /usr/bin/zsh
+(ls ~/.zshenv)   || ln -s "$PWD"/.zshenv ~/.zshenv
+(ls ~/.zshrc)    || ln -s "$PWD"/.zshrc ~/.zshrc
+(ls ~/.p10k.zsh) || ln -s "$PWD"/.p10k.zsh ~/.p10k.zsh
+
+if [ "$SHELL" != "/usr/bin/zsh" ]
+then
+    chsh -s /usr/bin/zsh
+fi
