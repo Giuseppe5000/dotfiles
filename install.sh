@@ -21,10 +21,6 @@ ln -s "$PWD"/.emacs.org "$HOME"/.emacs.org
 # Vim config
 ln -s "$PWD"/.vimrc "$HOME"/.vimrc
 
-# GnuPG
-mkdir -p "$HOME"/.gnupg
-ln -s "$PWD"/.gnupg/gpg-agent.conf "$HOME"/.gnupg/gpg-agent.conf
-
 # ZSH
 ln -s "$PWD"/.zshenv "$HOME"/.zshenv
 ln -s "$PWD"/.zshrc "$HOME"/.zshrc
