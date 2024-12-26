@@ -1,11 +1,9 @@
 #!/bin/sh
 set -xe
-
 cd "$(dirname "$0")"
-
 # Install some useful packages
-useful_packages="cups firefox-esr firewall-config firewalld flameshot git gromit-mpx \
-keepassxc rclone rofi syncthing telegram-desktop vim xournalpp zsh zsh-autosuggestions"
+useful_packages="cups curl firefox-esr firewall-config firewalld flameshot git gromit-mpx \
+keepassxc rclone rofi syncthing telegram-desktop vim wget xournalpp zsh zsh-autosuggestions"
 su -c "apt update && apt -y install $useful_packages"
 
 # Symlink XDG configs
@@ -28,9 +26,10 @@ done
 (ls ~/.vimrc) || ln -s "$PWD"/.vimrc ~/.vimrc
 
 # ZSH
-(ls ~/.zshenv)   || ln -s "$PWD"/.zshenv ~/.zshenv
-(ls ~/.zshrc)    || ln -s "$PWD"/.zshrc ~/.zshrc
-(ls ~/.p10k.zsh) || ln -s "$PWD"/.p10k.zsh ~/.p10k.zsh
+(ls ~/.zshenv)        || ln -s "$PWD"/.zshenv ~/.zshenv
+(ls ~/.zshrc)         || ln -s "$PWD"/.zshrc ~/.zshrc
+(ls ~/.p10k.zsh)      || ln -s "$PWD"/.p10k.zsh ~/.p10k.zsh
+(ls ~/.powerlevel10k) || git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
 
 if [ "$SHELL" != "/usr/bin/zsh" ]
 then
