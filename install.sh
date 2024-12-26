@@ -36,3 +36,14 @@ if [ "$SHELL" != "/usr/bin/zsh" ]
 then
     chsh -s /usr/bin/zsh
 fi
+
+# Install fonts
+if [ ! -e ~/.local/share/fonts/IosevkaTermNerdFont-Regular.ttf ]
+then
+    mkdir -p ~/.local/share/fonts
+    nerdfonts_url="$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep browser_download_url)"
+    wget "$(echo "$nerdfonts_url" | grep IosevkaTerm.tar.xz | cut -d '"' -f 4)"
+    tar xvf IosevkaTerm.tar.xz -C ~/.local/share/fonts
+    rm IosevkaTerm.tar.xz
+    fc-cache -f
+fi
