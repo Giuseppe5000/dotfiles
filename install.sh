@@ -1,6 +1,7 @@
 #!/bin/sh
 set -xe
 cd "$(dirname "$0")"
+
 # Install some useful packages
 useful_packages="cups curl firefox-esr firewall-config firewalld flameshot git gromit-mpx \
 keepassxc rclone rofi syncthing telegram-desktop vim wget xournalpp zsh zsh-autosuggestions"
@@ -46,3 +47,8 @@ then
     rm IosevkaTerm.tar.xz
     fc-cache -f
 fi
+
+# Enable some services
+su -c "systemctl enable firewalld --now && systemctl disable cups --now"
+systemctl --user daemon-reload
+systemctl --user enable syncthing --now
