@@ -1,4 +1,4 @@
-#+TITLE: Emacs Configuration
+#+TITLE:Emacs Configuration
 #+AUTHOR: Giuseppe
 #+PROPERTY: header-args :tangle ~/.emacs
 
@@ -50,6 +50,17 @@
     :ensure t
     :defer t)
 #+end_src
+** Vterm
+#+begin_src emacs-lisp
+  ;; Requirements:
+  ;; emacs module support (module-file-suffix != nil)
+  ;; lmake >= 3.11
+  ;; libtool-bin
+  ;; OPTIONAL: libvterm >= 0.2
+  (use-package vterm
+    :ensure t
+    :config (setq vterm-kill-buffer-on-exit t))
+#+end_src
 ** Yasnippet
 #+begin_src emacs-lisp
   (use-package yasnippet
@@ -71,21 +82,23 @@
 #+end_src
 ** Typescript
 #+begin_src emacs-lisp
+  (setq indent-line-function 'insert-tab)
   (defun setup-tide-mode ()
     (interactive)
     (tide-setup)
     (flycheck-mode +1)
     (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (setq tide-format-options '(:indentSize 2 :tabSize 2))
     (eldoc-mode +1)
     (tide-hl-identifier-mode +1))
   (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
-  (require 'web-mode)
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-  (add-hook 'web-mode-hook
-            (lambda ()
-              (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                (setup-tide-mode))))
+  (use-package web-mode
+    :config (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+    :hook (web-mode . (lambda ()
+                        (when (string-equal "tsx" (file-name-extension buffer-file-name))
+                          (setup-tide-mode)))))
+  (setq-default typescript-indent-level 2)
 #+end_src
 ** Theme
 #+begin_src emacs-lisp
@@ -169,6 +182,7 @@
   (setq c-basic-offset 4
         whitespace-style '(face tabs spaces trailing space-before-tab space-after-tab space-mark tab-mark)
         display-line-numbers-type 'relative)
+  ;; (setq indent-line-function 'insert-tab)
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   (add-hook 'dired-mode-hook #'display-line-numbers-mode)
   (column-number-mode 1)
@@ -176,11 +190,11 @@
 #+end_src
 ** Custom functions
 #+begin_src emacs-lisp
-  (defun eshell-split ()
+  (defun vterm-split ()
     (interactive)
     (split-window-vertically)
     (other-window 1)
-    (eshell 'N))
+    (vterm 'N))
 #+end_src
 ** Keybind
 #+begin_src emacs-lisp
@@ -188,13 +202,13 @@
   (global-set-key (kbd "C-g") 'evil-normal-state)
   (global-set-key (kbd "M-!") 'compile)
   (global-set-key (kbd "C-x C-a") 'org-agenda-list)
-  (global-set-key (kbd "C-x C-<return>") 'eshell-split)
+  (global-set-key (kbd "C-x C-<return>") 'vterm-split)
 #+end_src
 ** TTY
 #+begin_src emacs-lisp
   (unless (display-graphic-p)
     (load-theme 'tsdh-dark t)
-    (global-set-key (kbd "C-x RET") 'eshell-split)
+    (global-set-key (kbd "C-x RET") 'vterm-split)
     (unless (string-match-p "N/A" (battery))
       (display-battery-mode)))
 #+end_src
