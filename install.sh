@@ -4,7 +4,7 @@ cd "$(dirname "$0")"
 
 # Install some useful packages
 useful_packages="cups curl firefox-esr firewall-config firewalld flameshot git gromit-mpx \
-keepassxc rclone rofi syncthing telegram-desktop vim wget xournalpp zsh zsh-autosuggestions"
+keepassxc rclone rofi syncthing telegram-desktop thunderbird vim wget xournalpp zsh zsh-autosuggestions"
 su -c "apt update && apt -y install $useful_packages"
 
 # Symlink XDG configs
