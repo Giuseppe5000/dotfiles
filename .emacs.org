@@ -197,9 +197,11 @@
 #+end_src
 ** Custom functions
 #+begin_src emacs-lisp
-  (defun vterm-split ()
+  (defun vterm-split (verticalSplit)
     (interactive)
-    (split-window-vertically)
+    (if verticalSplit
+      (split-window-vertically)
+        (split-window-horizontally))
     (other-window 1)
     (vterm 'N))
 #+end_src
@@ -209,13 +211,15 @@
   (global-set-key (kbd "C-g") 'evil-normal-state)
   (global-set-key (kbd "M-!") 'compile)
   (global-set-key (kbd "C-x C-a") 'org-agenda-list)
-  (global-set-key (kbd "C-x C-<return>") 'vterm-split)
+  (global-set-key (kbd "C-x C-<return> v") (lambda () (interactive) (vterm-split nil)))
+  (global-set-key (kbd "C-x C-<return> s") (lambda () (interactive) (vterm-split t)))
 #+end_src
 ** TTY
 #+begin_src emacs-lisp
   (unless (display-graphic-p)
     (load-theme 'tsdh-dark t)
-    (global-set-key (kbd "C-x RET") 'vterm-split)
+    (global-set-key (kbd "C-x RET v") (lambda () (interactive) (vterm-split nil)))
+    (global-set-key (kbd "C-x RET s") (lambda () (interactive) (vterm-split t)))
     (unless (string-match-p "N/A" (battery))
       (display-battery-mode)))
 #+end_src
