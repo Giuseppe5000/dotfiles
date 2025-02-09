@@ -54,10 +54,11 @@
 #+begin_src emacs-lisp
   ;; Requirements:
   ;; emacs module support (module-file-suffix != nil)
-  ;; lmake >= 3.11
+  ;; cmake >= 3.11
   ;; libtool-bin
   ;; OPTIONAL: libvterm >= 0.2
   (use-package vterm
+    :defer t
     :ensure t
     :config (setq vterm-kill-buffer-on-exit t)
     (add-hook 'vterm-exit-functions
@@ -89,7 +90,6 @@
 #+end_src
 ** Typescript
 #+begin_src emacs-lisp
-  (setq indent-line-function 'insert-tab)
   (defun setup-tide-mode ()
     (interactive)
     (tide-setup)
@@ -106,6 +106,7 @@
                         (when (string-equal "tsx" (file-name-extension buffer-file-name))
                           (setup-tide-mode)))))
   (setq-default typescript-indent-level 2)
+  ;;  (setq indent-line-function 'insert-tab)
 #+end_src
 ** Theme
 #+begin_src emacs-lisp
@@ -165,10 +166,10 @@
 #+end_src
 *** Org crypt
 #+begin_src emacs-lisp
-  (require 'org-crypt)
-  (org-crypt-use-before-save-magic)
-  (setq org-tags-exclude-from-inheritance (quote ("crypt"))
-        org-crypt-key nil)
+  ;;(require 'org-crypt)
+  ;;(org-crypt-use-before-save-magic)
+  ;;(setq org-tags-exclude-from-inheritance (quote ("crypt"))
+  ;;      org-crypt-key nil)
 #+end_src
 ** Dired
 #+begin_src emacs-lisp
@@ -178,8 +179,8 @@
 #+end_src
 ** Performance
 #+begin_src emacs-lisp
-  (setq gc-cons-threshold most-positive-fixnum
-        gc-cons-threshold (* 100 1024 1024))
+  ;;(setq gc-cons-threshold most-positive-fixnum
+  ;;      gc-cons-threshold (* 100 1024 1024))
 #+end_src
 ** Style
 #+begin_src emacs-lisp
@@ -189,7 +190,7 @@
   (setq c-basic-offset 4
         whitespace-style '(face tabs spaces trailing space-before-tab space-after-tab space-mark tab-mark)
         display-line-numbers-type 'relative)
-  ;; (setq indent-line-function 'insert-tab)
+  (setq indent-line-function 'insert-tab)
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   (add-hook 'dired-mode-hook #'display-line-numbers-mode)
   (column-number-mode 1)
@@ -200,8 +201,8 @@
   (defun vterm-split (verticalSplit)
     (interactive)
     (if verticalSplit
-      (split-window-vertically)
-        (split-window-horizontally))
+        (split-window-vertically)
+      (split-window-horizontally))
     (other-window 1)
     (vterm 'N))
 #+end_src
