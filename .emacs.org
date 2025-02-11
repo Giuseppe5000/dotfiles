@@ -130,19 +130,7 @@
         org-hide-emphasis-markers t
         org-html-validation-link nil)
   (add-hook 'org-mode-hook #'org-indent-mode)
-#+end_src
-*** Agenda
-#+begin_src emacs-lisp
-  (setq org-agenda-files (list "~/Documents/todo.org")
-        org-agenda-start-on-weekday nil
-        org-agenda-start-day "+0d"
-        org-agenda-current-time-string "← NOW"
-        org-agenda-time-grid '((daily today require-timed remove-match)
-                               (800 1000 1200 1400 1600 1800 2000)
-                               " --- " ""))
-#+end_src
-*** Org appearance
-#+begin_src emacs-lisp
+
   (custom-set-faces
    '(org-document-title ((t (:foreground "pale turquoise" :bold t :height 1.5))))
    '(org-document-info ((t (:foreground "pale turquoise" :height 1.3))))
@@ -152,39 +140,14 @@
    '(org-done ((t (:foreground "PaleGreen" :height 0.9))))
    )
 #+end_src
-*** Org Agenda evil-mode
-#+begin_src emacs-lisp
-  (add-hook 'org-agenda-mode-hook
-            (lambda ()
-              (local-set-key "k" 'org-agenda-previous-line)
-              (local-set-key "j" 'org-agenda-next-line)
-              (local-set-key "p" 'org-agenda-capture)
-              (local-set-key "n" 'org-agenda-goto-date)
-              (local-set-key (kbd "C-w C-w") 'evil-window-next)
-              (local-set-key (kbd "C-w o") 'delete-other-windows)
-              ))
-#+end_src
-*** Org crypt
-#+begin_src emacs-lisp
-  ;;(require 'org-crypt)
-  ;;(org-crypt-use-before-save-magic)
-  ;;(setq org-tags-exclude-from-inheritance (quote ("crypt"))
-  ;;      org-crypt-key nil)
-#+end_src
 ** Dired
 #+begin_src emacs-lisp
   (setq dired-listing-switches "-lhAX --group-directories-first"
         dired-dwim-target t)
   (add-hook 'dired-mode-hook #'auto-revert-mode)
 #+end_src
-** Performance
-#+begin_src emacs-lisp
-  ;;(setq gc-cons-threshold most-positive-fixnum
-  ;;      gc-cons-threshold (* 100 1024 1024))
-#+end_src
 ** Style
 #+begin_src emacs-lisp
-  (set-frame-parameter nil 'alpha-background 99)
   (set-frame-font "IosevkaTerm NFM 12" nil t)
   (setq-default indent-tabs-mode nil)
   (setq c-basic-offset 4
@@ -211,7 +174,6 @@
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "C-g") 'evil-normal-state)
   (global-set-key (kbd "M-!") 'compile)
-  (global-set-key (kbd "C-x C-a") 'org-agenda-list)
   (global-set-key (kbd "C-x C-<return> v") (lambda () (interactive) (vterm-split nil)))
   (global-set-key (kbd "C-x C-<return> s") (lambda () (interactive) (vterm-split t)))
 #+end_src
