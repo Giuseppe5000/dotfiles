@@ -63,7 +63,6 @@ aug END
 set background=dark
 set termguicolors
 colorscheme habamax
-hi Normal guibg=NONE ctermbg=NONE
 hi MatchParen cterm=NONE ctermbg=green ctermfg=blue
 
 " Status line
