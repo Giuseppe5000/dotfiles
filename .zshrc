@@ -1,6 +1,7 @@
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias vi='vim'
+alias vi='vim --clean -c "source ~/.vimrc"'
+alias vim='vim --clean -c "source ~/.vimrc"'
 
 autoload -Uz compinit
 compinit

@@ -24,8 +24,10 @@ set complete=.,w,b,t
 " Mappings
 imap <C-c> <Esc>
 nnoremap <C-t> :Lex<cr>
+nnoremap <C-x><C-f> :e<Space>
 nnoremap <C-x><C-s> :w<CR>
 nnoremap <C-x>b :b<Space>
+nnoremap <C-x>k :bd<CR>
 nnoremap <C-x><C-b> :buffers<CR>
 nnoremap <C-x><C-l> :below terminal<CR>
 nnoremap <C-x>g :!git<Space>
