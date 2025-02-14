@@ -22,8 +22,14 @@ set history=200
 set complete=.,w,b,t
 
 " Mappings
-nn <C-t> :Lex<cr>
-im <C-c> <Esc>
+imap <C-c> <Esc>
+nnoremap <C-t> :Lex<cr>
+nnoremap <C-x><C-s> :w<CR>
+nnoremap <C-x>b :b<Space>
+nnoremap <C-x><C-b> :buffers<CR>
+nnoremap <C-x><C-l> :below terminal<CR>
+nnoremap <C-x>g :!git<Space>
+tnoremap <Esc> <C-\><C-n>
 
 " Search
 set incsearch
