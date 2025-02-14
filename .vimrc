@@ -65,18 +65,20 @@ set termguicolors
 colorscheme habamax
 hi MatchParen cterm=NONE ctermbg=green ctermfg=blue
 
-" Status line
-hi White ctermbg=239 ctermfg=white
-hi Green ctermbg=239 ctermfg=green
+" Status line (feat. antirez)
+hi User1 ctermfg=green ctermbg=black
+hi User2 ctermfg=yellow ctermbg=black
+hi User3 ctermfg=red ctermbg=black
+hi User4 ctermfg=blue ctermbg=black
+hi User5 ctermfg=white ctermbg=black
 
 set statusline=
-set statusline+=%#White#
-set statusline+=\ %<%F
-set statusline+=%#Green#
-set statusline+=\ %y
-set statusline+=\ %m
-set statusline+=%=
-set statusline+=%#White#
-set statusline+=\ \ (\%l,\%c)
-set statusline+=\ \ %p%%\ 
+set statusline +=%1*\ %n\ %*
+set statusline +=%5*%{&ff}%*
+set statusline +=%3*%y%*
+set statusline +=%4*\ %<%F%*
+set statusline +=%2*%m%*
+set statusline +=%4*%=(\%l,\%c)
+set statusline +=%1*%5l%*
+set statusline +=%2*/%L\ %*
 set laststatus=2
