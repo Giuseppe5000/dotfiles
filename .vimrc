@@ -24,15 +24,29 @@ set autochdir
 
 " Mappings
 imap <C-c> <Esc>
+cnoremap <C-g> <C-c>
 nnoremap <C-t> :Lex<cr>
 nnoremap <C-x><C-f> :e<Space>
 nnoremap <C-x><C-s> :w<CR>
 nnoremap <C-x>b :b<Space>
-nnoremap <C-x>k :bd<CR>
+nnoremap <C-x>k :bd<Space>
 nnoremap <C-x><C-b> :buffers<CR>
 nnoremap <C-x><C-l> :below terminal<CR>
-nnoremap <C-x>g :!git<Space>
 tnoremap <Esc> <C-\><C-n>
+
+" Git mappings (feat. Magit)
+nnoremap <C-x>gs :!git status<CR>
+nnoremap <C-x>ga :!git add<Space>
+nnoremap <C-x>gcc :!git commit -m "
+nnoremap <C-x>gp :!git push<Space>
+nnoremap <C-x>gf :!git pull<CR>
+nnoremap <C-x>gd :!git diff<CR>
+nnoremap <C-x>gbb :!git checkout<Space>
+nnoremap <C-x>gbc :!git checkout -b<Space>
+nnoremap <C-x>gm :!git merge<Space>
+nnoremap <C-x>gr :!git rebase<Space>
+nnoremap <C-x>gz :!git stash<Space>
+nnoremap <C-x>gll :!git log<CR>
 
 " Search
 set incsearch
