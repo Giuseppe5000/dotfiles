@@ -20,6 +20,7 @@ set list
 set lcs=space:·
 set history=200
 set complete=.,w,b,t
+set autochdir
 
 " Mappings
 imap <C-c> <Esc>
