@@ -34,22 +34,25 @@ nnoremap <C-x><C-s> :w<CR>
 nnoremap <C-x>b :b!<Space>
 nnoremap <C-x>k :bd<Space>
 nnoremap <C-x><C-b> :buffers<CR>
-nnoremap <C-x><C-l> :below terminal<CR>
+nnoremap <C-x><C-l> :below term<CR>
 tnoremap <Esc> <C-\><C-n>
 exec "map \e! <M-!>"
 nnoremap <M-!> :Compile<CR>
+exec "map \e& <M-&>"
+nnoremap <M-&> :tab term<Space>
 exec "map \ex <M-x>"
 nnoremap <M-x> :
 
 " Git mappings (feat. Magit)
-nnoremap <C-x>gs :!git status<CR>
-nnoremap <C-x>ga :!git add<Space>
+nnoremap <C-x>gS :tab term git status<CR>
+nnoremap <C-x>gs :!git add<Space>
+nnoremap <C-x>gu :!git restore --staged<Space>
 nnoremap <C-x>gx :!git restore<Space>
 nnoremap <C-x>gcc :!git commit -m "
 nnoremap <C-x>gp :!git push<Space>
 nnoremap <C-x>gf :!git pull<CR>
-nnoremap <C-x>gd :!git diff<CR>
-nnoremap <C-x>gD :!git diff --staged<CR>
+nnoremap <C-x>gd :tab term git diff<CR>
+nnoremap <C-x>gD :tab term git diff --staged<CR>
 nnoremap <C-x>gbb :!git checkout<Space>
 nnoremap <C-x>gbc :!git checkout -b<Space>
 nnoremap <C-x>gm :!git merge<Space>
@@ -90,6 +93,7 @@ function! NetrwMapping()
     nm <buffer> C :!cp <cfile><Space>
     nm <buffer> u mF
     nm <buffer> z mz
+    nm <buffer> . gh
 endfunction
 aug netrw_mapping
     au!
