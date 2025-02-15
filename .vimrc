@@ -22,6 +22,7 @@ set history=200
 set complete=.,w,b,t
 set autochdir
 set backspace=indent,eol,start
+set iskeyword-=_
 set ttimeoutlen=0
 
 " Mappings
@@ -35,14 +36,20 @@ nnoremap <C-x>k :bd<Space>
 nnoremap <C-x><C-b> :buffers<CR>
 nnoremap <C-x><C-l> :below terminal<CR>
 tnoremap <Esc> <C-\><C-n>
+exec "map \e! <M-!>"
+nnoremap <M-!> :Compile<CR>
+exec "map \ex <M-x>"
+nnoremap <M-x> :
 
 " Git mappings (feat. Magit)
 nnoremap <C-x>gs :!git status<CR>
 nnoremap <C-x>ga :!git add<Space>
+nnoremap <C-x>gx :!git restore<Space>
 nnoremap <C-x>gcc :!git commit -m "
 nnoremap <C-x>gp :!git push<Space>
 nnoremap <C-x>gf :!git pull<CR>
 nnoremap <C-x>gd :!git diff<CR>
+nnoremap <C-x>gD :!git diff --staged<CR>
 nnoremap <C-x>gbb :!git checkout<Space>
 nnoremap <C-x>gbc :!git checkout -b<Space>
 nnoremap <C-x>gm :!git merge<Space>
@@ -73,12 +80,17 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_liststyle = 3
 let g:netrw_winsize = 12
 let g:netrw_banner = 0
+let g:netrw_keepdir = 0
 
-fu! NetrwMapping()
+function! NetrwMapping()
     nm <buffer> h -
-    nm <buffer> l <CR>
-    nm <buffer> C gn
-endf
+    nm <buffer> l gn
+    nm <buffer> <Tab> <CR>
+    nm <buffer> + d
+    nm <buffer> C :!cp <cfile><Space>
+    nm <buffer> u mF
+    nm <buffer> z mz
+endfunction
 aug netrw_mapping
     au!
     au filetype netrw call NetrwMapping()
