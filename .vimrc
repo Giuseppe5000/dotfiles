@@ -21,6 +21,8 @@ set lcs=space:·
 set history=200
 set complete=.,w,b,t
 set autochdir
+set backspace=indent,eol,start
+set ttimeoutlen=0
 
 " Mappings
 imap <C-c> <Esc>
@@ -28,7 +30,7 @@ cnoremap <C-g> <C-c>
 nnoremap <C-t> :Lex<cr>
 nnoremap <C-x><C-f> :e<Space>
 nnoremap <C-x><C-s> :w<CR>
-nnoremap <C-x>b :b<Space>
+nnoremap <C-x>b :b!<Space>
 nnoremap <C-x>k :bd<Space>
 nnoremap <C-x><C-b> :buffers<CR>
 nnoremap <C-x><C-l> :below terminal<CR>
@@ -81,6 +83,14 @@ aug netrw_mapping
     au!
     au filetype netrw call NetrwMapping()
 aug END
+
+" Compilation mode like Emacs
+command! Compile call SetMakePrgAndExec()
+function! SetMakePrgAndExec()
+    let l:make_command = input('Enter makeprg: ')
+    execute 'setlocal makeprg=' . l:make_command
+    make
+endfunction
 
 " Theme
 set background=dark
