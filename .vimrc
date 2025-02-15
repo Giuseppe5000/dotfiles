@@ -44,7 +44,7 @@ exec "map \ex <M-x>"
 nnoremap <M-x> :
 
 " Git mappings (feat. Magit)
-nnoremap <C-x>gS :tab term git status<CR>
+nnoremap <C-x>gS :tab term git status -v --show-stash<CR>
 nnoremap <C-x>gs :!git add<Space>
 nnoremap <C-x>gu :!git restore --staged<Space>
 nnoremap <C-x>gx :!git restore<Space>
@@ -52,7 +52,6 @@ nnoremap <C-x>gcc :!git commit -m "
 nnoremap <C-x>gp :!git push<Space>
 nnoremap <C-x>gf :!git pull<CR>
 nnoremap <C-x>gd :tab term git diff<CR>
-nnoremap <C-x>gD :tab term git diff --staged<CR>
 nnoremap <C-x>gbb :!git checkout<Space>
 nnoremap <C-x>gbc :!git checkout -b<Space>
 nnoremap <C-x>gm :!git merge<Space>
@@ -87,8 +86,8 @@ let g:netrw_keepdir = 0
 
 function! NetrwMapping()
     nm <buffer> h -
-    nm <buffer> l gn
-    nm <buffer> <Tab> <CR>
+    nm <buffer> l <CR>
+    nm <buffer> <Tab> gn
     nm <buffer> + d
     nm <buffer> C :!cp <cfile><Space>
     nm <buffer> u mF
@@ -103,10 +102,13 @@ aug END
 " Compilation mode like Emacs
 command! Compile call SetMakePrgAndExec()
 function! SetMakePrgAndExec()
-    let l:make_command = input('Enter makeprg: ')
-    execute 'setlocal makeprg=' . l:make_command
+    let l:compile_command = input('Compile command: ')
+    execute 'setlocal makeprg=' . l:compile_command
     make
 endfunction
+
+" Term
+autocmd TerminalOpen * setlocal nolist
 
 " Theme
 set background=dark
