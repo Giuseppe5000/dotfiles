@@ -25,6 +25,24 @@ set backspace=indent,eol,start
 set iskeyword-=_
 set ttimeoutlen=0
 
+" Search
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+" Indent
+set autoindent
+set smartindent
+set expandtab
+set smarttab
+set shiftwidth=4
+set tabstop=4
+
+" Folding
+set foldmethod=indent
+set nofoldenable
+
 " Mappings
 let mapleader = "\<C-x>"
 imap <C-c> <Esc>
@@ -46,7 +64,7 @@ nnoremap <M-&> :tab term<Space>
 nnoremap <M-x> :
 
 " Git mappings (feat. Magit)
-nnoremap <leader>g<Space> :tab term git status -v --show-stash<CR>
+nnoremap <leader>g<Space> :call UpdateGitStatus()<CR>
 nnoremap <leader>gs :!git add<Space>
 nnoremap <leader>gu :!git restore --staged<Space>
 nnoremap <leader>gx :!git restore<Space>
@@ -62,53 +80,16 @@ nnoremap <leader>gr :!git rebase<Space>
 nnoremap <leader>gz :!git stash<Space>
 nnoremap <leader>gll :!git log<CR>
 
-" Search
-set incsearch
-set hlsearch
-set ignorecase
-set smartcase
-
-" Indent
-set autoindent
-set smartindent
-set expandtab
-set smarttab
-set shiftwidth=4
-set tabstop=4
-
-" Folding
-set foldmethod=indent
-set nofoldenable
-
 " Explorer
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_liststyle = 3
 let g:netrw_winsize = 12
 let g:netrw_banner = 0
 let g:netrw_keepdir = 0
-
-function! NetrwMapping()
-    nm <buffer> h -
-    nm <buffer> l <CR>
-    nm <buffer> <Tab> gn
-    nm <buffer> + d
-    nm <buffer> C :!cp <cfile><Space>
-    nm <buffer> u mF
-    nm <buffer> z mz
-    nm <buffer> . gh
-endfunction
-aug netrw_mapping
-    au!
-    au filetype netrw call NetrwMapping()
-aug END
+autocmd filetype netrw call NetrwMapping()
 
 " Compilation mode like Emacs
 command! Compile call SetMakePrgAndExec()
-function! SetMakePrgAndExec()
-    let l:compile_command = input('Compile command: ')
-    execute 'setlocal makeprg=' . l:compile_command
-    make
-endfunction
 
 " Term
 autocmd TerminalOpen * setlocal nolist
@@ -136,3 +117,29 @@ set statusline +=%4*%=(\%l,\%c)
 set statusline +=%1*%5l%*
 set statusline +=%2*/%L\ %*
 set laststatus=2
+
+" Custom functions
+function! UpdateGitStatus()
+    let l:buffer_name = expand('%:t')
+    if &buftype == 'terminal' && l:buffer_name == '!git status -v --show-stash'
+        bd!
+    endif
+    tab term git status -v --show-stash
+endfunction
+
+function! NetrwMapping()
+    nm <buffer> h -
+        nm <buffer> l <CR>
+    nm <buffer> <Tab> gn
+    nm <buffer> + d
+    nm <buffer> C :!cp <cfile><Space>
+    nm <buffer> u mF
+    nm <buffer> z mz
+    nm <buffer> . gh
+endfunction
+
+function! SetMakePrgAndExec()
+    let l:compile_command = input('Compile command: ')
+    execute 'setlocal makeprg=' . l:compile_command
+    make
+endfunction
