@@ -65,8 +65,8 @@ nnoremap <M-x> :
 
 " Git mappings (feat. Magit)
 nnoremap <leader>g<Space> :call UpdateGitStatus()<CR>
-nnoremap <leader>gs :!git add<Space>
-nnoremap <leader>gu :!git restore --staged<Space>
+nnoremap <leader>gs :call GitStageFile()<CR>
+nnoremap <leader>gu :call GitUnstageFile()<CR>
 nnoremap <leader>gx :!git restore<Space>
 nnoremap <leader>gcc :!git commit<CR>
 nnoremap <leader>gp :!git push<Space>
@@ -121,15 +121,37 @@ set laststatus=2
 " Custom functions
 function! UpdateGitStatus()
     let l:buffer_name = expand('%:t')
-    if &buftype == 'terminal' && l:buffer_name == '!git status -v --show-stash'
+    if l:buffer_name == '!git status -v --show-stash'
         bd!
     endif
     tab term git status -v --show-stash
 endfunction
 
+function! GitStageFile()
+    let l:buffer_name = expand('%:t')
+    if l:buffer_name == '!git status -v --show-stash'
+        let l:current_line = getline(line('.'))
+        let l:file = trim(split(l:current_line, ":")[1])
+        execute 'silent !git add ' . shellescape(l:file)
+        call UpdateGitStatus()
+        execute 'redraw!'
+    endif
+endfunction
+
+function! GitUnstageFile()
+    let l:buffer_name = expand('%:t')
+    if l:buffer_name == '!git status -v --show-stash'
+        let l:current_line = getline(line('.'))
+        let l:file = trim(split(l:current_line, ":")[1])
+        execute 'silent !git restore --staged ' . shellescape(l:file)
+        call UpdateGitStatus()
+        execute 'redraw!'
+    endif
+endfunction
+
 function! NetrwMapping()
     nm <buffer> h -
-        nm <buffer> l <CR>
+    nm <buffer> l <CR>
     nm <buffer> <Tab> gn
     nm <buffer> + d
     nm <buffer> C :!cp <cfile><Space>
