@@ -26,38 +26,41 @@ set iskeyword-=_
 set ttimeoutlen=0
 
 " Mappings
+let mapleader = "\<C-x>"
 imap <C-c> <Esc>
 cnoremap <C-g> <C-c>
+nnoremap <leader><leader> :qa<CR>
 nnoremap <C-t> :Lex<cr>
-nnoremap <C-x><C-f> :e<Space>
-nnoremap <C-x><C-s> :w<CR>
-nnoremap <C-x>b :b!<Space>
-nnoremap <C-x>k :bd<Space>
-nnoremap <C-x><C-b> :buffers<CR>
-nnoremap <C-x><C-l> :below term<CR>
+nnoremap <leader><C-f> :e *
+nnoremap <leader><C-s> :w<CR>
+nnoremap <leader>b :b!<Space>
+nnoremap <leader>k :bd<Space>
+nnoremap <leader><C-b> :buffers<CR>
+nnoremap <leader><C-l> :below term<CR>
 tnoremap <Esc> <C-\><C-n>
 exec "map \e! <M-!>"
-nnoremap <M-!> :Compile<CR>
 exec "map \e& <M-&>"
-nnoremap <M-&> :tab term<Space>
 exec "map \ex <M-x>"
+nnoremap <M-!> :Compile<CR>
+nnoremap <M-&> :tab term<Space>
 nnoremap <M-x> :
 
 " Git mappings (feat. Magit)
-nnoremap <C-x>gS :tab term git status -v --show-stash<CR>
-nnoremap <C-x>gs :!git add<Space>
-nnoremap <C-x>gu :!git restore --staged<Space>
-nnoremap <C-x>gx :!git restore<Space>
-nnoremap <C-x>gcc :!git commit -m "
-nnoremap <C-x>gp :!git push<Space>
-nnoremap <C-x>gf :!git pull<CR>
-nnoremap <C-x>gd :tab term git diff<CR>
-nnoremap <C-x>gbb :!git checkout<Space>
-nnoremap <C-x>gbc :!git checkout -b<Space>
-nnoremap <C-x>gm :!git merge<Space>
-nnoremap <C-x>gr :!git rebase<Space>
-nnoremap <C-x>gz :!git stash<Space>
-nnoremap <C-x>gll :!git log<CR>
+nnoremap <leader>g<Space> :tab term git status -v --show-stash<CR>
+nnoremap <leader>gs :!git add<Space>
+nnoremap <leader>gu :!git restore --staged<Space>
+nnoremap <leader>gx :!git restore<Space>
+nnoremap <leader>gcc :!git commit<CR>
+nnoremap <leader>gp :!git push<Space>
+nnoremap <leader>gF :!git pull<CR>
+nnoremap <leader>gfa :!git fetch --all<CR>
+nnoremap <leader>gd :tab term git diff<CR>
+nnoremap <leader>gbb :!git checkout<Space>
+nnoremap <leader>gbc :!git checkout -b<Space>
+nnoremap <leader>gm :!git merge<Space>
+nnoremap <leader>gr :!git rebase<Space>
+nnoremap <leader>gz :!git stash<Space>
+nnoremap <leader>gll :!git log<CR>
 
 " Search
 set incsearch

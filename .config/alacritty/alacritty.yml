@@ -38,10 +38,15 @@ font:
     family: IosevkaTerm NFM
     style: Bold Italic
 
-  size: 11
+  size: 12
 
 window:
   opacity: 0.98
 
 mouse:
-    hide_when_typing: true
+  hide_when_typing: true
+
+cursor:
+  style:
+    blinking: Always
+    blink_interval: 100
