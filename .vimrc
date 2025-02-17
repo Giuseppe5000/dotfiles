@@ -139,6 +139,8 @@ function! GitStatus()
         bd!
     endif
     rightb vert term git status -v --show-stash
+    sleep 50ms
+    goto 1
 endfunction
 
 function! GitFileOp(gitCommand)
