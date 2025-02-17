@@ -81,6 +81,7 @@ function! GitTermMapping()
     nn <buffer> r :call GitInputOp("!git rebase", "Rebase: ")<CR>
     nn <buffer> z :!git stash<Space>
     nn <buffer> ll :!git log<CR>
+    nn <buffer> q :bd<CR>
 endfunction
 
 " Netrw mappings
@@ -137,39 +138,30 @@ function! GitStatus()
     if l:buffer_name =~ '^!git status -v --show-stash'
         bd!
     endif
-    tab term git status -v --show-stash
+    rightb vert term git status -v --show-stash
 endfunction
 
 function! GitFileOp(gitCommand)
-    let l:buffer_name = expand('%:t')
-    if l:buffer_name =~ '^!git status -v --show-stash'
-        let l:current_line = getline(line('.'))
-        let l:file = trim(split(l:current_line, ":")[1])
-        if a:gitCommand == 'silent !git restore' && confirm("Delete " . shellescape(l:file) . " changes?", "&No\n&Yes") == 1
-            return
-        endif
-        execute a:gitCommand . ' ' . shellescape(l:file)
-        call GitStatus()
-        execute 'redraw!'
+    let l:current_line = getline(line('.'))
+    let l:file = trim(split(l:current_line, ":")[1])
+    if a:gitCommand == 'silent !git restore' && confirm("Delete " . shellescape(l:file) . " changes?", "&No\n&Yes") == 1
+        return
     endif
+    execute a:gitCommand . ' ' . shellescape(l:file)
+    call GitStatus()
+    execute 'redraw!'
 endfunction
 
 function! GitInputOp(gitCommand, gitCommandArg)
-    let l:buffer_name = expand('%:t')
-    if l:buffer_name =~ '^!git status -v --show-stash'
-        execute a:gitCommand . ' ' . input(a:gitCommandArg)
-        call GitStatus()
-        execute 'redraw!'
-    endif
+    execute a:gitCommand . ' ' . input(a:gitCommandArg)
+    call GitStatus()
+    execute 'redraw!'
 endfunction
 
 function! GitOp(gitCommand)
-    let l:buffer_name = expand('%:t')
-    if l:buffer_name =~ '^!git status -v --show-stash'
-        execute a:gitCommand
-        call GitStatus()
-        execute 'redraw!'
-    endif
+    execute a:gitCommand
+    call GitStatus()
+    execute 'redraw!'
 endfunction
 
 function! SetMakePrgAndExec()
