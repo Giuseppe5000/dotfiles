@@ -64,29 +64,42 @@ nnoremap <M-&> :tab term<Space>
 nnoremap <M-x> :
 
 " Git mappings (feat. Magit)
-nnoremap <leader>g<Space> :call GitStatus()<CR>
-nnoremap <leader>gs :call GitFileOp("silent !git add")<CR>
-nnoremap <leader>gu :call GitFileOp("silent !git restore --staged")<CR>
-nnoremap <leader>gx :call GitFileOp("silent !git restore")<CR>
-nnoremap <leader>gcc :call GitOp("!git commit")<CR>
-nnoremap <leader>gp :!git push<Space>
-nnoremap <leader>gF :call GitOp("!git pull")<CR>
-nnoremap <leader>gfa :call GitOp("!git fetch --all")<CR>
-nnoremap <leader>gd :tab term git diff<CR>
-nnoremap <leader>gbb :!git checkout<Space>
-nnoremap <leader>gbc :!git checkout -b<Space>
-nnoremap <leader>gm :!git merge<Space>
-nnoremap <leader>gr :!git rebase<Space>
-nnoremap <leader>gz :!git stash<Space>
-nnoremap <leader>gll :!git log<CR>
+nnoremap <leader>g :call GitStatus()<CR>
+autocmd TerminalOpen * if expand('%:t') =~ '^!git status -v --show-stash' | call GitTermMapping()
+function! GitTermMapping()
+    nn <buffer> s :call GitFileOp("silent !git add")<CR>
+    nn <buffer> u :call GitFileOp("silent !git restore --staged")<CR>
+    nn <buffer> x :call GitFileOp("silent !git restore")<CR>
+    nn <buffer> cc :call GitOp("!git commit")<CR>
+    nn <buffer> p :call GitInputOp("!git push", "Push to: ")<CR>
+    nn <buffer> F :call GitOp("!git pull")<CR>
+    nn <buffer> fa :call GitOp("!git fetch --all")<CR>
+    nn <buffer> d :tab term git diff<CR>
+    nn <buffer> bb :call GitInputOp("silent !git checkout", "Checkout: ")<CR>
+    nn <buffer> bc :call GitInputOp("silent !git checkout -b", "Name for new branch: ")<CR>
+    nn <buffer> m :call GitInputOp("!git merge", "Merge: ")<CR>
+    nn <buffer> r :call GitInputOp("!git rebase", "Rebase: ")<CR>
+    nn <buffer> z :!git stash<Space>
+    nn <buffer> ll :!git log<CR>
+endfunction
 
-" Explorer
+" Netrw mappings
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_liststyle = 3
 let g:netrw_winsize = 12
 let g:netrw_banner = 0
 let g:netrw_keepdir = 0
 autocmd filetype netrw call NetrwMapping()
+function! NetrwMapping()
+    nm <buffer> h -
+    nm <buffer> l <CR>
+    nm <buffer> <Tab> gn
+    nm <buffer> + d
+    nm <buffer> C :!cp <cfile><Space>
+    nm <buffer> u mF
+    nm <buffer> z mz
+    nm <buffer> . gh
+endfunction
 
 " Compilation mode like Emacs
 command! Compile call SetMakePrgAndExec()
@@ -121,7 +134,7 @@ set laststatus=2
 " Custom functions
 function! GitStatus()
     let l:buffer_name = expand('%:t')
-    if l:buffer_name == '!git status -v --show-stash'
+    if l:buffer_name =~ '^!git status -v --show-stash'
         bd!
     endif
     tab term git status -v --show-stash
@@ -129,7 +142,7 @@ endfunction
 
 function! GitFileOp(gitCommand)
     let l:buffer_name = expand('%:t')
-    if l:buffer_name == '!git status -v --show-stash'
+    if l:buffer_name =~ '^!git status -v --show-stash'
         let l:current_line = getline(line('.'))
         let l:file = trim(split(l:current_line, ":")[1])
         if a:gitCommand == 'silent !git restore' && confirm("Delete " . shellescape(l:file) . " changes?", "&No\n&Yes") == 1
@@ -141,24 +154,22 @@ function! GitFileOp(gitCommand)
     endif
 endfunction
 
-function! GitOp(gitCommand)
+function! GitInputOp(gitCommand, gitCommandArg)
     let l:buffer_name = expand('%:t')
-    if l:buffer_name == '!git status -v --show-stash'
-        execute a:gitCommand
+    if l:buffer_name =~ '^!git status -v --show-stash'
+        execute a:gitCommand . ' ' . input(a:gitCommandArg)
         call GitStatus()
         execute 'redraw!'
     endif
 endfunction
 
-function! NetrwMapping()
-    nm <buffer> h -
-    nm <buffer> l <CR>
-    nm <buffer> <Tab> gn
-    nm <buffer> + d
-    nm <buffer> C :!cp <cfile><Space>
-    nm <buffer> u mF
-    nm <buffer> z mz
-    nm <buffer> . gh
+function! GitOp(gitCommand)
+    let l:buffer_name = expand('%:t')
+    if l:buffer_name =~ '^!git status -v --show-stash'
+        execute a:gitCommand
+        call GitStatus()
+        execute 'redraw!'
+    endif
 endfunction
 
 function! SetMakePrgAndExec()
