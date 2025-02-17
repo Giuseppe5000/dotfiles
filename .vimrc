@@ -64,14 +64,14 @@ nnoremap <M-&> :tab term<Space>
 nnoremap <M-x> :
 
 " Git mappings (feat. Magit)
-nnoremap <leader>g<Space> :call UpdateGitStatus()<CR>
-nnoremap <leader>gs :call GitStageFile()<CR>
-nnoremap <leader>gu :call GitUnstageFile()<CR>
-nnoremap <leader>gx :!git restore<Space>
-nnoremap <leader>gcc :!git commit<CR>
+nnoremap <leader>g<Space> :call GitStatus()<CR>
+nnoremap <leader>gs :call GitFileOp("silent !git add")<CR>
+nnoremap <leader>gu :call GitFileOp("silent !git restore --staged")<CR>
+nnoremap <leader>gx :call GitFileOp("silent !git restore")<CR>
+nnoremap <leader>gcc :call GitOp("!git commit")<CR>
 nnoremap <leader>gp :!git push<Space>
-nnoremap <leader>gF :!git pull<CR>
-nnoremap <leader>gfa :!git fetch --all<CR>
+nnoremap <leader>gF :call GitOp("!git pull")<CR>
+nnoremap <leader>gfa :call GitOp("!git fetch --all")<CR>
 nnoremap <leader>gd :tab term git diff<CR>
 nnoremap <leader>gbb :!git checkout<Space>
 nnoremap <leader>gbc :!git checkout -b<Space>
@@ -119,7 +119,7 @@ set statusline +=%2*/%L\ %*
 set laststatus=2
 
 " Custom functions
-function! UpdateGitStatus()
+function! GitStatus()
     let l:buffer_name = expand('%:t')
     if l:buffer_name == '!git status -v --show-stash'
         bd!
@@ -127,24 +127,25 @@ function! UpdateGitStatus()
     tab term git status -v --show-stash
 endfunction
 
-function! GitStageFile()
+function! GitFileOp(gitCommand)
     let l:buffer_name = expand('%:t')
     if l:buffer_name == '!git status -v --show-stash'
         let l:current_line = getline(line('.'))
         let l:file = trim(split(l:current_line, ":")[1])
-        execute 'silent !git add ' . shellescape(l:file)
-        call UpdateGitStatus()
+        if a:gitCommand == 'silent !git restore' && confirm("Delete " . shellescape(l:file) . " changes?", "&No\n&Yes") == 1
+            return
+        endif
+        execute a:gitCommand . ' ' . shellescape(l:file)
+        call GitStatus()
         execute 'redraw!'
     endif
 endfunction
 
-function! GitUnstageFile()
+function! GitOp(gitCommand)
     let l:buffer_name = expand('%:t')
     if l:buffer_name == '!git status -v --show-stash'
-        let l:current_line = getline(line('.'))
-        let l:file = trim(split(l:current_line, ":")[1])
-        execute 'silent !git restore --staged ' . shellescape(l:file)
-        call UpdateGitStatus()
+        execute a:gitCommand
+        call GitStatus()
         execute 'redraw!'
     endif
 endfunction
