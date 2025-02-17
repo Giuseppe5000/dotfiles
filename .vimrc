@@ -67,18 +67,18 @@ nnoremap <M-x> :
 nnoremap <leader>g :call GitStatus()<CR>
 autocmd TerminalOpen * if expand('%:t') =~ '^!git status -v --show-stash' | call GitTermMapping()
 function! GitTermMapping()
-    nn <buffer> s :call GitFileOp("silent !git add")<CR>
-    nn <buffer> u :call GitFileOp("silent !git restore --staged")<CR>
-    nn <buffer> x :call GitFileOp("silent !git restore")<CR>
+    nn <buffer> s :call GitFileOp("git add")<CR>
+    nn <buffer> u :call GitFileOp("git restore --staged")<CR>
+    nn <buffer> x :call GitFileOp("git restore")<CR>
     nn <buffer> cc :call GitOp("!git commit")<CR>
-    nn <buffer> p :call GitInputOp("!git push", "Push to: ")<CR>
+    nn <buffer> p :call GitInputOp("git push", "Push to: ")<CR>
     nn <buffer> F :call GitOp("!git pull")<CR>
     nn <buffer> fa :call GitOp("!git fetch --all")<CR>
     nn <buffer> d :tab term git diff<CR>
-    nn <buffer> bb :call GitInputOp("silent !git checkout", "Checkout: ")<CR>
-    nn <buffer> bc :call GitInputOp("silent !git checkout -b", "Name for new branch: ")<CR>
-    nn <buffer> m :call GitInputOp("!git merge", "Merge: ")<CR>
-    nn <buffer> r :call GitInputOp("!git rebase", "Rebase: ")<CR>
+    nn <buffer> bb :call GitInputOp("git checkout", "Checkout: ")<CR>
+    nn <buffer> bc :call GitInputOp("git checkout -b", "Name for new branch: ")<CR>
+    nn <buffer> m :call GitInputOp("git merge", "Merge: ")<CR>
+    nn <buffer> r :call GitInputOp("git rebase", "Rebase: ")<CR>
     nn <buffer> z :!git stash<Space>
     nn <buffer> ll :!git log<CR>
     nn <buffer> q :bd<CR>
@@ -147,15 +147,13 @@ function! GitFileOp(gitCommand)
     if a:gitCommand == 'silent !git restore' && confirm("Delete " . shellescape(l:file) . " changes?", "&No\n&Yes") == 1
         return
     endif
-    execute a:gitCommand . ' ' . shellescape(l:file)
+    call system(a:gitCommand . ' ' . shellescape(l:file))
     call GitStatus()
-    execute 'redraw!'
 endfunction
 
 function! GitInputOp(gitCommand, gitCommandArg)
-    execute a:gitCommand . ' ' . input(a:gitCommandArg)
+    call system(a:gitCommand . ' ' . input(a:gitCommandArg))
     call GitStatus()
-    execute 'redraw!'
 endfunction
 
 function! GitOp(gitCommand)
