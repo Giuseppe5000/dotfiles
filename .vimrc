@@ -135,10 +135,10 @@ set laststatus=2
 " Custom functions
 function! GitStatus()
     let l:buffer_name = expand('%:t')
-    if l:buffer_name =~ '^!git status -v --show-stash'
-        bd!
-    endif
     rightb vert term git status -v --show-stash
+    if l:buffer_name =~ '^!git status -v --show-stash'
+        bd #
+    endif
     sleep 50ms
     goto 1
 endfunction
@@ -146,7 +146,7 @@ endfunction
 function! GitFileOp(gitCommand)
     let l:current_line = getline(line('.'))
     let l:file = trim(split(l:current_line, ":")[1])
-    if a:gitCommand == 'silent !git restore' && confirm("Delete " . shellescape(l:file) . " changes?", "&No\n&Yes") == 1
+    if a:gitCommand == 'git restore' && confirm("Delete " . shellescape(l:file) . " changes?", "&No\n&Yes") == 1
         return
     endif
     call system(a:gitCommand . ' ' . shellescape(l:file))
