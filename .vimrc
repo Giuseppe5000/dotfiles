@@ -48,8 +48,7 @@ let mapleader = "\<C-x>"
 imap <C-c> <Esc>
 cnoremap <C-g> <C-c>
 nnoremap <leader><leader> :qa<CR>
-nnoremap <C-t> :Lex<cr>
-nnoremap <leader><C-f> :e *
+nnoremap <leader><C-f> :Hex<CR>
 nnoremap <leader><C-s> :w<CR>
 nnoremap <leader>b :b!<Space>
 nnoremap <leader>k :bd<Space>
@@ -87,23 +86,23 @@ endfunction
 " Netrw mappings
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_liststyle = 3
-let g:netrw_winsize = 12
 let g:netrw_banner = 0
 let g:netrw_keepdir = 0
 autocmd filetype netrw call NetrwMapping()
 function! NetrwMapping()
-    nm <buffer> h -
-    nm <buffer> l <CR>
-    nm <buffer> <Tab> gn
+    nm <buffer> h -:call NetrwCollapse()<CR>
+    nm <buffer> l <CR>gn
     nm <buffer> + d
     nm <buffer> C :!cp <cfile><Space>
     nm <buffer> u mF
     nm <buffer> z mz
     nm <buffer> . gh
+    nm <buffer> q :bd!<CR>
 endfunction
 
 " Compilation mode like Emacs
 command! Compile call SetMakePrgAndExec()
+autocmd filetype qf nm <buffer> q :bd!<CR>
 
 " Term
 autocmd TerminalOpen * setlocal nolist
@@ -161,11 +160,22 @@ endfunction
 function! GitOp(gitCommand)
     execute a:gitCommand
     call GitStatus()
-    execute 'redraw!'
+    redraw!
 endfunction
 
 function! SetMakePrgAndExec()
-    let l:compile_command = input('Compile command: ')
+    let l:compile_command = escape(input('Compile command: '), ' ')
     execute 'setlocal makeprg=' . l:compile_command
-    make
+    silent make
+    rightb vert copen 100
+    redraw!
+endfunction
+
+function! NetrwCollapse()
+    redir => cnt
+        silent .s/|//gn
+    redir END
+    let lvl = substitute(cnt, '\n', '', '')[0:0] - 1
+    exec '?^\(| \)\{' . lvl . '\}\w'
+    exec "normal \<CR>"
 endfunction
