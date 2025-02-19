@@ -164,8 +164,8 @@ function! GitOp(gitCommand)
 endfunction
 
 function! SetMakePrgAndExec()
-    let l:compile_command = escape(input('Compile command: '), ' ')
-    execute 'setlocal makeprg=' . l:compile_command
+    let l:compile_command = input('Compile command: ')
+    let &makeprg = l:compile_command
     silent make
     rightb vert copen 100
     redraw!
