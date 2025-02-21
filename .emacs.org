@@ -41,22 +41,24 @@
   (use-package ido-vertical-mode
     :ensure t
     :defer t
-    :hook (ido-setup . (lambda () (define-key ido-completion-map (kbd "C-j") 'ido-next-match) (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)))
+    :hook (ido-setup . (lambda ()
+                         (define-key ido-completion-map (kbd "C-j") 'ido-next-match)
+                         (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)))
     :init (ido-mode 1) (ido-vertical-mode 1))
 #+end_src
 ** Magit
 #+begin_src emacs-lisp
   (use-package magit
-    :ensure t
-    :defer t)
+    :defer t
+    :ensure t)
 #+end_src
 ** Vterm
+*Requirements:*
+- emacs module support (module-file-suffix != nil)
+- cmake >= 3.11
+- libtool-bin
+- OPTIONAL: libvterm >= 0.2
 #+begin_src emacs-lisp
-  ;; Requirements:
-  ;; emacs module support (module-file-suffix != nil)
-  ;; cmake >= 3.11
-  ;; libtool-bin
-  ;; OPTIONAL: libvterm >= 0.2
   (use-package vterm
     :defer t
     :ensure t
@@ -71,26 +73,53 @@
 #+end_src
 ** Yasnippet
 #+begin_src emacs-lisp
-  (use-package yasnippet
-    :ensure t
-    :init (setq yas-snippet-dirs '("~/.dotfiles/emacs-snippets"))
-    :config (yas-reload-all)
-    :hook (prog-mode . yas-minor-mode) (org-mode . yas-minor-mode) (latex-mode . yas-minor-mode))
+  ;;(use-package yasnippet
+  ;;  :ensure t
+  ;;  :init (setq yas-snippet-dirs '("~/.dotfiles/emacs-snippets"))
+  ;;  :config (yas-reload-all)
+  ;;  :hook (prog-mode . yas-minor-mode) (org-mode . yas-minor-mode) (latex-mode . yas-minor-mode))
 #+end_src
 ** LSP
 #+begin_src emacs-lisp
   (use-package company
-    :after eglot
-    :ensure t
-    :hook (eglot-managed-mode . company-mode))
+    :defer t
+    :ensure t)
 
   (use-package eglot
     :defer t
+    :hook (java-mode . eglot-ensure)
     :config (add-to-list 'eglot-server-programs '((simpc-mode) "clangd")))
 #+end_src
-** Typescript
+** Theme
 #+begin_src emacs-lisp
-  ;;  (setq indent-line-function 'insert-tab)
+  (use-package gruber-darker-theme
+    :ensure t
+    :config (load-theme 'gruber-darker t))
+#+end_src
+* General
+** Style
+#+begin_src emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (setq inhibit-startup-screen t)
+  (set-frame-font "IosevkaTerm NFM 12" nil t)
+  (setq-default indent-tabs-mode nil)
+  (setq whitespace-style '(face tabs spaces trailing space-before-tab space-after-tab space-mark tab-mark)
+        display-line-numbers-type 'relative
+        indent-line-function 'insert-tab)
+  (column-number-mode 1)
+  (size-indication-mode 1)
+#+end_src
+** Languages
+*** C
+#+begin_src emacs-lisp
+  (load-file "~/Documents/.emacs/simpc-mode.el")
+  (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
+  (setq c-basic-offset 4)
+#+end_src
+*** Typescript
+#+begin_src emacs-lisp
   ;;  (defun setup-tide-mode ()
   ;;    (interactive)
   ;;    (tide-setup)
@@ -108,20 +137,6 @@
   ;;                          (setup-tide-mode)))))
   ;;  (setq-default typescript-indent-level 2)
 #+end_src
-** Theme
-#+begin_src emacs-lisp
-  (use-package gruber-darker-theme
-    :ensure t
-    :config (load-theme 'gruber-darker t))
-#+end_src
-* General
-** Remove menus
-#+begin_src emacs-lisp
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-  (setq inhibit-startup-screen t)
-#+end_src
 ** Org mode
 #+begin_src emacs-lisp
   (setq org-preview-latex-image-directory "~/.emacs.d/latexpreview/"
@@ -129,7 +144,6 @@
         org-startup-folded t
         org-hide-emphasis-markers t
         org-html-validation-link nil)
-  (add-hook 'org-mode-hook #'org-indent-mode)
 
   (custom-set-faces
    '(org-document-title ((t (:foreground "pale turquoise" :bold t :height 1.5))))
@@ -144,20 +158,6 @@
 #+begin_src emacs-lisp
   (setq dired-listing-switches "-lhAX --group-directories-first"
         dired-dwim-target t)
-  (add-hook 'dired-mode-hook #'auto-revert-mode)
-#+end_src
-** Style
-#+begin_src emacs-lisp
-  (set-frame-font "IosevkaTerm NFM 12" nil t)
-  (setq-default indent-tabs-mode nil)
-  (setq c-basic-offset 4
-        whitespace-style '(face tabs spaces trailing space-before-tab space-after-tab space-mark tab-mark)
-        display-line-numbers-type 'relative)
-  (setq indent-line-function 'insert-tab)
-  (add-hook 'prog-mode-hook #'display-line-numbers-mode)
-  (add-hook 'dired-mode-hook #'display-line-numbers-mode)
-  (column-number-mode 1)
-  (size-indication-mode 1)
 #+end_src
 ** Custom functions
 #+begin_src emacs-lisp
@@ -169,13 +169,20 @@
     (other-window 1)
     (vterm 'N))
 #+end_src
-** Keybind
+** Custom Keybinds
 #+begin_src emacs-lisp
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "C-g") 'evil-normal-state)
   (global-set-key (kbd "M-!") 'compile)
   (global-set-key (kbd "C-x C-<return> v") (lambda () (interactive) (vterm-split nil)))
   (global-set-key (kbd "C-x C-<return> s") (lambda () (interactive) (vterm-split t)))
+#+end_src
+** Hooks
+#+begin_src emacs-lisp
+  (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+  (add-hook 'dired-mode-hook #'display-line-numbers-mode)
+  (add-hook 'dired-mode-hook #'auto-revert-mode)
+  (add-hook 'org-mode-hook #'org-indent-mode)
 #+end_src
 ** TTY
 #+begin_src emacs-lisp
@@ -196,6 +203,4 @@
         vc-follow-symlinks t
         use-dialog-box nil
         make-backup-files nil)
-  (load-file "~/Documents/.emacs/simpc-mode.el")
-  (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
 #+end_src
