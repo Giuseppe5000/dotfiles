@@ -114,9 +114,13 @@
 ** Languages
 *** C
 #+begin_src emacs-lisp
-  (load-file "~/Documents/.emacs/simpc-mode.el")
-  (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
   (setq c-basic-offset 4)
+  (let ((file-path "~/Documents/.emacs/simpc-mode.el"))
+    (if (file-exists-p  file-path)
+        (progn
+          (load-file file-path)
+          (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode)))
+      (message "File does not exist: %s" file-path)))
 #+end_src
 *** Typescript
 #+begin_src emacs-lisp
