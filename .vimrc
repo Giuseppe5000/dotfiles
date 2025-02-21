@@ -71,7 +71,7 @@ function! GitTermMapping()
     nn <buffer> x :call GitFileOp("git restore")<CR>
     nn <buffer> cc :call GitOp("!git commit")<CR>
     nn <buffer> p :call GitInputOp("git push", "Push to: ")<CR>
-    nn <buffer> F :call GitOp("!git pull")<CR>
+    nn <buffer> Fu :call GitOp("!git pull")<CR>
     nn <buffer> fa :call GitOp("!git fetch --all")<CR>
     nn <buffer> d :tab term git diff<CR>
     nn <buffer> bb :call GitInputOp("git checkout", "Checkout: ")<CR>
@@ -107,11 +107,13 @@ autocmd filetype qf nm <buffer> q :bd!<CR>
 " Term
 autocmd TerminalOpen * setlocal nolist
 
-" Theme
+" Style
 set background=dark
 set termguicolors
 colorscheme habamax
 hi MatchParen cterm=NONE ctermbg=green ctermfg=blue
+hi TrailingWhitespace ctermbg=red guibg=red
+match TrailingWhitespace /\s\+$/
 
 " Status line (feat. antirez)
 hi User1 ctermfg=green ctermbg=black
@@ -165,10 +167,12 @@ endfunction
 
 function! SetMakePrgAndExec()
     let l:compile_command = input('Compile command: ')
-    let &makeprg = l:compile_command
-    silent make
-    rightb vert copen 100
-    redraw!
+    if len(l:compile_command) > 0
+        let &makeprg = l:compile_command
+        silent make
+        rightb vert copen 100
+        redraw!
+    endif
 endfunction
 
 function! NetrwCollapse()
