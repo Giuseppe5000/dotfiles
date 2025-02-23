@@ -33,8 +33,6 @@
 #+begin_src emacs-lisp
   (use-package evil-mc
     :ensure t)
-  (global-set-key (kbd "C-<") 'evil-mc-make-and-goto-next-match)
-  (global-set-key (kbd "C->") 'evil-mc-undo-all-cursors)
 #+end_src
 ** IDO vertical
 #+begin_src emacs-lisp
@@ -155,8 +153,7 @@
    '(org-level-1 ((t (:inherit outline-1 :height 1.2))))
    '(org-level-2 ((t (:inherit outline-2 :height 1.1))))
    '(org-todo ((t (:foreground "red"  :bold t :height 0.9))))
-   '(org-done ((t (:foreground "PaleGreen" :height 0.9))))
-   )
+   '(org-done ((t (:foreground "PaleGreen" :height 0.9)))))
 #+end_src
 ** Dired
 #+begin_src emacs-lisp
@@ -166,16 +163,23 @@
 ** Custom functions
 #+begin_src emacs-lisp
   (defun custom/vterm-split-vertical ()
-      (interactive)
+    (interactive)
     (split-window-vertically)
     (other-window 1)
     (vterm 'N))
 
   (defun custom/vterm-split-horizontal ()
-      (interactive)
+    (interactive)
     (split-window-horizontally)
     (other-window 1)
     (vterm 'N))
+
+  (defun custom/ensure-evil-mc ()
+    (interactive)
+    (when (fboundp 'evil-mc-mode)
+      (evil-mc-mode 1)
+      (local-set-key (kbd "C-<") 'evil-mc-make-and-goto-next-match)
+      (local-set-key (kbd "C->") 'evil-mc-undo-all-cursors)))
 #+end_src
 ** Custom Keybinds
 #+begin_src emacs-lisp
@@ -184,6 +188,8 @@
   (global-set-key (kbd "M-!") 'compile)
   (global-set-key (kbd "C-x C-<return> v") 'custom/vterm-split-horizontal)
   (global-set-key (kbd "C-x C-<return> s") 'custom/vterm-split-vertical)
+  (global-set-key (kbd "C-x C-<return> s") 'custom/vterm-split-vertical)
+  (global-set-key (kbd "C-<") 'custom/ensure-evil-mc)
 #+end_src
 ** Hooks
 #+begin_src emacs-lisp
