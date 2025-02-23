@@ -6,15 +6,23 @@
 ** Repos
 #+begin_src emacs-lisp
   (require 'package)
+  (setq package-enable-at-startup nil)
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-  (package-initialize)
+  (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
   (setq package-native-compile t
         native-comp-async-report-warnings-errors nil)
+  (package-initialize)
+
+  (eval-and-compile
+    (require 'use-package-ensure)
+    (setq use-package-always-defer t
+          use-package-always-ensure t
+          use-package-always-pin "melpa-stable"))
 #+end_src
 ** Evil
 #+begin_src emacs-lisp
   (use-package evil
-    :ensure t
+    :demand t
     :init (setq evil-want-keybinding nil evil-want-C-u-scroll t)
     :config (evil-set-undo-system 'undo-redo) (evil-mode 1))
 #+end_src
@@ -22,7 +30,7 @@
 #+begin_src emacs-lisp
   (use-package evil-collection
     :after evil
-    :ensure t
+    :demand t
     :init (setq evil-collection-want-unimpaired-p nil)
     :config (evil-collection-init)
     (evil-collection-define-key 'normal 'dired-mode-map
@@ -31,14 +39,11 @@
 #+end_src
 *** Evil multiple cursors
 #+begin_src emacs-lisp
-  (use-package evil-mc
-    :ensure t)
+  (use-package evil-mc)
 #+end_src
 ** IDO vertical
 #+begin_src emacs-lisp
   (use-package ido-vertical-mode
-    :ensure t
-    :defer t
     :hook (ido-setup . (lambda ()
                          (define-key ido-completion-map (kbd "C-j") 'ido-next-match)
                          (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)))
@@ -46,20 +51,17 @@
 #+end_src
 ** Magit
 #+begin_src emacs-lisp
-  (use-package magit
-    :defer t
-    :ensure t)
+  (use-package magit)
 #+end_src
 ** Vterm
 *Requirements:*
 - emacs module support (module-file-suffix != nil)
-- cmake >= 3.11
-- libtool-bin
-- OPTIONAL: libvterm >= 0.2
+  - cmake >= 3.11
+  - libtool-bin
+  - OPTIONAL: libvterm >= 0.2
 #+begin_src emacs-lisp
   (use-package vterm
-    :defer t
-    :ensure t
+    :pin "melpa"
     :config (setq vterm-kill-buffer-on-exit t)
     (add-hook 'vterm-exit-functions
               (lambda (_ _)
@@ -72,26 +74,23 @@
 ** Yasnippet
 #+begin_src emacs-lisp
   ;;(use-package yasnippet
-  ;;  :ensure t
   ;;  :init (setq yas-snippet-dirs '("~/.dotfiles/emacs-snippets"))
   ;;  :config (yas-reload-all)
   ;;  :hook (prog-mode . yas-minor-mode) (org-mode . yas-minor-mode) (latex-mode . yas-minor-mode))
 #+end_src
 ** LSP
 #+begin_src emacs-lisp
-  (use-package company
-    :defer t
-    :ensure t)
+  (use-package company)
 
   (use-package eglot
-    :defer t
     :hook (java-mode . eglot-ensure)
     :config (add-to-list 'eglot-server-programs '((simpc-mode) "clangd")))
 #+end_src
 ** Theme
 #+begin_src emacs-lisp
   (use-package gruber-darker-theme
-    :ensure t
+    :pin "melpa"
+    :demand t
     :config (load-theme 'gruber-darker t))
 #+end_src
 * General
