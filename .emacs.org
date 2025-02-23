@@ -165,11 +165,15 @@
 #+end_src
 ** Custom functions
 #+begin_src emacs-lisp
-  (defun vterm-split (verticalSplit)
-    (interactive)
-    (if verticalSplit
-        (split-window-vertically)
-      (split-window-horizontally))
+  (defun custom/vterm-split-vertical ()
+      (interactive)
+    (split-window-vertically)
+    (other-window 1)
+    (vterm 'N))
+
+  (defun custom/vterm-split-horizontal ()
+      (interactive)
+    (split-window-horizontally)
     (other-window 1)
     (vterm 'N))
 #+end_src
@@ -178,8 +182,8 @@
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "C-g") 'evil-normal-state)
   (global-set-key (kbd "M-!") 'compile)
-  (global-set-key (kbd "C-x C-<return> v") (lambda () (interactive) (vterm-split nil)))
-  (global-set-key (kbd "C-x C-<return> s") (lambda () (interactive) (vterm-split t)))
+  (global-set-key (kbd "C-x C-<return> v") 'custom/vterm-split-horizontal)
+  (global-set-key (kbd "C-x C-<return> s") 'custom/vterm-split-vertical)
 #+end_src
 ** Hooks
 #+begin_src emacs-lisp
@@ -192,8 +196,8 @@
 #+begin_src emacs-lisp
   (unless (display-graphic-p)
     (load-theme 'tsdh-dark t)
-    (global-set-key (kbd "C-x RET v") (lambda () (interactive) (vterm-split nil)))
-    (global-set-key (kbd "C-x RET s") (lambda () (interactive) (vterm-split t)))
+    (global-set-key (kbd "C-x RET v") 'custom/vterm-split-horizontal)
+    (global-set-key (kbd "C-x RET s") 'custom/vterm-split-vertical)
     (unless (string-match-p "N/A" (battery))
       (display-battery-mode)))
 #+end_src
