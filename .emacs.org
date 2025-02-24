@@ -19,36 +19,20 @@
           use-package-always-ensure t
           use-package-always-pin "melpa-stable"))
 #+end_src
-** Evil
-#+begin_src emacs-lisp
-  (use-package evil
-    :demand t
-    :init (setq evil-want-keybinding nil evil-want-C-u-scroll t)
-    :config (evil-set-undo-system 'undo-redo) (evil-mode 1))
-#+end_src
-*** Evil collection
-#+begin_src emacs-lisp
-  (use-package evil-collection
-    :after evil
-    :demand t
-    :init (setq evil-collection-want-unimpaired-p nil)
-    :config (evil-collection-init)
-    (evil-collection-define-key 'normal 'dired-mode-map
-      "h" 'dired-up-directory
-      "l" 'dired-find-file))
-#+end_src
-*** Evil multiple cursors
-#+begin_src emacs-lisp
-  (use-package evil-mc
-    :pin "melpa")
-#+end_src
 ** IDO vertical
 #+begin_src emacs-lisp
   (use-package ido-vertical-mode
-    :hook (ido-setup . (lambda ()
-                         (define-key ido-completion-map (kbd "C-j") 'ido-next-match)
-                         (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)))
-    :init (ido-mode 1) (ido-vertical-mode 1))
+    :init
+    (ido-mode 1)
+    (ido-vertical-mode 1)
+    (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
+#+end_src
+** Multiple cursors
+#+begin_src emacs-lisp
+  (use-package multiple-cursors)
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-beginnings-of-lines)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this-word)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this-word)
 #+end_src
 ** Magit
 #+begin_src emacs-lisp
@@ -184,11 +168,9 @@
 ** Custom Keybinds
 #+begin_src emacs-lisp
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-  (global-set-key (kbd "C-g") 'evil-normal-state)
   (global-set-key (kbd "M-!") 'compile)
   (global-set-key (kbd "C-x C-<return> v") 'custom/vterm-split-horizontal)
   (global-set-key (kbd "C-x C-<return> s") 'custom/vterm-split-vertical)
-  (global-set-key (kbd "C-<") 'custom/ensure-evil-mc)
 #+end_src
 ** Hooks
 #+begin_src emacs-lisp
