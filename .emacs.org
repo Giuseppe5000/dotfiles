@@ -39,7 +39,8 @@
 #+end_src
 *** Evil multiple cursors
 #+begin_src emacs-lisp
-  (use-package evil-mc)
+  (use-package evil-mc
+    :pin "melpa")
 #+end_src
 ** IDO vertical
 #+begin_src emacs-lisp
