@@ -57,9 +57,9 @@
 ** Vterm
 *Requirements:*
 - emacs module support (module-file-suffix != nil)
-  - cmake >= 3.11
-  - libtool-bin
-  - OPTIONAL: libvterm >= 0.2
+- cmake >= 3.11
+- libtool-bin
+- OPTIONAL: libvterm >= 0.2
 #+begin_src emacs-lisp
   (use-package vterm
     :pin "melpa"
