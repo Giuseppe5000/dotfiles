@@ -188,7 +188,6 @@
   (global-set-key (kbd "M-!") 'compile)
   (global-set-key (kbd "C-x C-<return> v") 'custom/vterm-split-horizontal)
   (global-set-key (kbd "C-x C-<return> s") 'custom/vterm-split-vertical)
-  (global-set-key (kbd "C-x C-<return> s") 'custom/vterm-split-vertical)
   (global-set-key (kbd "C-<") 'custom/ensure-evil-mc)
 #+end_src
 ** Hooks
