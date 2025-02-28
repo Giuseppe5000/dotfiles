@@ -171,6 +171,8 @@
   (global-set-key (kbd "M-!") 'compile)
   (global-set-key (kbd "C-x C-<return> v") 'custom/vterm-split-horizontal)
   (global-set-key (kbd "C-x C-<return> s") 'custom/vterm-split-vertical)
+  (global-set-key (kbd "C-v") (lambda () (interactive) (scroll-up (/ (window-body-height) 2))))
+  (global-set-key (kbd "M-v") (lambda () (interactive) (scroll-down (/ (window-body-height) 2))))
 #+end_src
 ** Hooks
 #+begin_src emacs-lisp
