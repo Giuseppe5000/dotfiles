@@ -157,13 +157,6 @@
     (split-window-horizontally)
     (other-window 1)
     (vterm 'N))
-
-  (defun custom/ensure-evil-mc ()
-    (interactive)
-    (when (fboundp 'evil-mc-mode)
-      (evil-mc-mode 1)
-      (local-set-key (kbd "C-<") 'evil-mc-make-and-goto-next-match)
-      (local-set-key (kbd "C->") 'evil-mc-undo-all-cursors)))
 #+end_src
 ** Custom Keybinds
 #+begin_src emacs-lisp
