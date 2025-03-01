@@ -162,8 +162,8 @@
 #+begin_src emacs-lisp
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "M-!") 'compile)
-  (global-set-key (kbd "C-x C-<return> v") 'custom/vterm-split-horizontal)
-  (global-set-key (kbd "C-x C-<return> s") 'custom/vterm-split-vertical)
+  (global-set-key (kbd "C-x C-<return> 3") 'custom/vterm-split-horizontal)
+  (global-set-key (kbd "C-x C-<return> 2") 'custom/vterm-split-vertical)
   (global-set-key (kbd "C-v") (lambda () (interactive) (scroll-up (/ (window-body-height) 2))))
   (global-set-key (kbd "M-v") (lambda () (interactive) (scroll-down (/ (window-body-height) 2))))
 #+end_src
@@ -178,8 +178,8 @@
 #+begin_src emacs-lisp
   (unless (display-graphic-p)
     (load-theme 'tsdh-dark t)
-    (global-set-key (kbd "C-x RET v") 'custom/vterm-split-horizontal)
-    (global-set-key (kbd "C-x RET s") 'custom/vterm-split-vertical)
+    (global-set-key (kbd "C-x RET 3") 'custom/vterm-split-horizontal)
+    (global-set-key (kbd "C-x RET 2") 'custom/vterm-split-vertical)
     (unless (string-match-p "N/A" (battery))
       (display-battery-mode)))
 #+end_src
