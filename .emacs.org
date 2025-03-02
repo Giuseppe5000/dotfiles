@@ -58,10 +58,10 @@
 #+end_src
 ** Yasnippet
 #+begin_src emacs-lisp
-  ;;(use-package yasnippet
-  ;;  :init (setq yas-snippet-dirs '("~/.dotfiles/emacs-snippets"))
-  ;;  :config (yas-reload-all)
-  ;;  :hook (prog-mode . yas-minor-mode) (org-mode . yas-minor-mode) (latex-mode . yas-minor-mode))
+  (use-package yasnippet
+    :init (setq yas-snippet-dirs '("~/.dotfiles/emacs-snippets"))
+    :config (yas-reload-all)
+    :hook (org-mode . yas-minor-mode))
 #+end_src
 ** LSP
 #+begin_src emacs-lisp
