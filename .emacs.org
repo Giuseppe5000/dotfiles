@@ -139,6 +139,14 @@
    '(org-todo ((t (:foreground "red"  :bold t :height 0.9))))
    '(org-done ((t (:foreground "PaleGreen" :height 0.9)))))
 #+end_src
+*** Auto html export
+Export some specific org files to html when closing.
+#+begin_src emacs-lisp
+  (defun custom/org-mode-export-hook ()
+    (when (string-prefix-p "/home/giuseppe/Documents/uni" (buffer-file-name))
+      (add-hook 'kill-buffer-hook 'org-html-export-to-html t t)))
+  (add-hook 'org-mode-hook #'custom/org-mode-export-hook)
+#+end_src
 ** Dired
 #+begin_src emacs-lisp
   (setq dired-listing-switches "-lhAX --group-directories-first"
