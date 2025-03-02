@@ -27,16 +27,17 @@
     (ido-vertical-mode 1)
     (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
 #+end_src
-** Multiple cursors
-#+begin_src emacs-lisp
-  (use-package multiple-cursors)
-  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-beginnings-of-lines)
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this-word)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this-word)
-#+end_src
 ** Magit
 #+begin_src emacs-lisp
   (use-package magit)
+#+end_src
+** LSP
+#+begin_src emacs-lisp
+  (use-package company)
+
+  (use-package eglot
+    :hook (java-mode . eglot-ensure)
+    :config (add-to-list 'eglot-server-programs '((simpc-mode) "clangd")))
 #+end_src
 ** Vterm
 *Requirements:*
@@ -63,13 +64,18 @@
     :config (yas-reload-all)
     :hook (org-mode . yas-minor-mode))
 #+end_src
-** LSP
+** Multiple cursors
 #+begin_src emacs-lisp
-  (use-package company)
-
-  (use-package eglot
-    :hook (java-mode . eglot-ensure)
-    :config (add-to-list 'eglot-server-programs '((simpc-mode) "clangd")))
+  (use-package multiple-cursors)
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-beginnings-of-lines)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this-word)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this-word)
+#+end_src
+** Expand region
+#+begin_src emacs-lisp
+  (use-package expand-region
+    :bind ("C-@" . er/expand-region))
+#+end_src
 #+end_src
 ** Theme
 #+begin_src emacs-lisp
