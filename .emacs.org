@@ -17,11 +17,12 @@
     (require 'use-package-ensure)
     (setq use-package-always-defer t
           use-package-always-ensure t
-          use-package-always-pin "melpa-stable"))
+          use-package-always-pin "nongnu"))
 #+end_src
 ** IDO vertical
 #+begin_src emacs-lisp
   (use-package ido-vertical-mode
+    :pin "melpa-stable"
     :init
     (ido-mode 1)
     (ido-vertical-mode 1)
@@ -33,7 +34,8 @@
 #+end_src
 ** LSP
 #+begin_src emacs-lisp
-  (use-package company)
+  (use-package company
+    :pin "melpa-stable")
 
   (use-package eglot
     :hook (java-mode . eglot-ensure)
@@ -60,6 +62,7 @@
 ** Yasnippet
 #+begin_src emacs-lisp
   (use-package yasnippet
+    :pin "melpa-stable"
     :init (setq yas-snippet-dirs '("~/.dotfiles/emacs-snippets"))
     :config (yas-reload-all)
     :hook (org-mode . yas-minor-mode))
@@ -74,6 +77,7 @@
 ** Expand region
 #+begin_src emacs-lisp
   (use-package expand-region
+    :pin "melpa-stable"
     :bind ("C-@" . er/expand-region))
 #+end_src
 #+end_src
