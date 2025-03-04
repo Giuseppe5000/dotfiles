@@ -175,6 +175,19 @@ Export some specific org files to html when closing.
     (split-window-horizontally)
     (other-window 1)
     (vterm 'N))
+
+  (defun custom/fix-accent ()
+    (interactive)
+    (beginning-of-buffer)
+    (query-replace "a'" "à")
+    (beginning-of-buffer)
+    (query-replace "e'" "è")
+    (beginning-of-buffer)
+    (query-replace "i'" "ì")
+    (beginning-of-buffer)
+    (query-replace "o'" "ò")
+    (beginning-of-buffer)
+    (query-replace "u'" "ù"))
 #+end_src
 ** Custom Keybinds
 #+begin_src emacs-lisp
