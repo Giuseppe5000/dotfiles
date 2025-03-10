@@ -99,7 +99,8 @@
   (setq-default indent-tabs-mode nil)
   (setq whitespace-style '(face tabs spaces trailing space-before-tab space-after-tab space-mark tab-mark)
         display-line-numbers-type 'relative
-        indent-line-function 'insert-tab)
+        indent-line-function 'insert-tab
+        display-line-numbers-type 'visual)
   (column-number-mode 1)
   (size-indication-mode 1)
 #+end_src
@@ -198,6 +199,7 @@ Export some specific org files to html when closing.
   (global-set-key (kbd "C-x C-<return> 2") 'custom/vterm-split-vertical)
   (global-set-key (kbd "C-v") (lambda () (interactive) (scroll-up (/ (window-body-height) 2))))
   (global-set-key (kbd "M-v") (lambda () (interactive) (scroll-down (/ (window-body-height) 2))))
+  (global-set-key (kbd "M-n") 'dabbrev-expand)
 #+end_src
 ** Hooks
 #+begin_src emacs-lisp
