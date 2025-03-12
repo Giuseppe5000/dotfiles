@@ -108,7 +108,7 @@
 *** C
 #+begin_src emacs-lisp
   (setq c-basic-offset 4)
-  (let ((file-path "~/Documents/.emacs/simpc-mode.el"))
+  (let ((file-path "~/.dotfiles/emacs-modes/simpc-mode.el"))
     (if (file-exists-p  file-path)
         (progn
           (load-file file-path)
