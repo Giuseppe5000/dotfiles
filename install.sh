@@ -3,8 +3,8 @@ set -xe
 cd "$(dirname "$0")"
 
 # Install some useful packages
-useful_packages="cups curl firefox-esr firewall-config firewalld flameshot git gromit-mpx \
-keepassxc rclone rofi syncthing telegram-desktop thunderbird vim wget xournalpp zsh zsh-autosuggestions"
+useful_packages="cups curl firefox-esr firewall-config firewalld flameshot gromit-mpx \
+keepassxc rclone syncthing telegram-desktop thunderbird wget xournalpp zsh zsh-autosuggestions"
 su -c "apt update && apt -y install $useful_packages"
 
 # Symlink XDG configs
@@ -21,7 +21,7 @@ do
 done
 
 # Emacs config
-(ls ~/.emacs.org) || ln -s "$PWD"/.emacs.org ~/.emacs.org
+(ls ~/.emacs.org) || ln -s "$PWD"/emacs.org ~/.emacs.org
 
 # Vim config
 (ls ~/.vimrc) || ln -s "$PWD"/.vimrc ~/.vimrc
