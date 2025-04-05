@@ -35,7 +35,9 @@
 ** LSP
 #+begin_src emacs-lisp
   (use-package company
-    :pin "melpa-stable")
+    :pin "melpa-stable"
+    :after eglot
+    :hook (eglot-managed-mode . company-mode))
 
   (use-package eglot
     :hook (java-mode . eglot-ensure)
@@ -80,6 +82,13 @@
     :pin "melpa-stable"
     :bind ("C-@" . er/expand-region))
 #+end_src
+** EMMS
+#+begin_src emacs-lisp
+  (defun emms-start ()
+    (interactive)
+    (require 'emms-setup)
+    (emms-all)
+    (setq emms-player-list '(emms-player-mpv)))
 #+end_src
 ** Theme
 #+begin_src emacs-lisp
