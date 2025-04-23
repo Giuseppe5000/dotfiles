@@ -88,7 +88,9 @@
     (interactive)
     (require 'emms-setup)
     (emms-all)
-    (setq emms-player-list '(emms-player-mpv)))
+    (setq emms-source-file-default-directory "~/Documents/music")
+    (setq emms-player-list '(emms-player-mpv))
+    (setq emms-player-mpv-environment (list (concat "MPV_HOME=" (expand-file-name "~") "/.config/emms-mpv/"))))
 #+end_src
 ** Theme
 #+begin_src emacs-lisp
