@@ -114,6 +114,7 @@
         display-line-numbers-type 'visual)
   (column-number-mode 1)
   (size-indication-mode 1)
+  (setq default-frame-alist '((width . 95) (height . 32)))
 #+end_src
 ** Languages
 *** C
@@ -128,22 +129,27 @@
 #+end_src
 *** Typescript
 #+begin_src emacs-lisp
-  ;;  (defun setup-tide-mode ()
-  ;;    (interactive)
-  ;;    (tide-setup)
-  ;;    (flycheck-mode +1)
-  ;;    (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  ;;    (setq tide-format-options '(:indentSize 2 :tabSize 2))
-  ;;    (eldoc-mode +1)
-  ;;    (tide-hl-identifier-mode +1))
-  ;;  (add-hook 'typescript-mode-hook #'setup-tide-mode)
-  ;;
-  ;;  (use-package web-mode
-  ;;    :config (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-  ;;    :hook (web-mode . (lambda ()
-  ;;                        (when (string-equal "tsx" (file-name-extension buffer-file-name))
-  ;;                          (setup-tide-mode)))))
-  ;;  (setq-default typescript-indent-level 2)
+  (use-package typescript-mode)
+
+  (use-package tide
+    :pin "melpa-stable"
+    :hook (typescript-mode . setup-tide-mode))
+
+  (defun setup-tide-mode ()
+    (interactive)
+    (tide-setup)
+    (flycheck-mode +1)
+    (company-mode +1)
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (setq tide-format-options '(:indentSize 2 :tabSize 2))
+    (eldoc-mode +1)
+    (tide-hl-identifier-mode +1))
+
+  (use-package web-mode
+    :config (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+    :hook (web-mode . (lambda ()
+                        (when (string-equal "tsx" (file-name-extension buffer-file-name))
+                          (setup-tide-mode)))))
 #+end_src
 ** Org mode
 #+begin_src emacs-lisp
@@ -238,5 +244,7 @@ Export some specific org files to html when closing.
         calendar-week-start-day 1
         vc-follow-symlinks t
         use-dialog-box nil
-        make-backup-files nil)
+        make-backup-files nil
+        redisplay-dont-pause t
+        gc-cons-threshold (* 100 1024 1024))
 #+end_src
