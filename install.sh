@@ -3,22 +3,9 @@ set -xe
 cd "$(dirname "$0")"
 
 # Install some useful packages
-useful_packages="cups curl firefox-esr firewall-config firewalld flameshot gromit-mpx \
+useful_packages="cups curl firefox firewall-config firewalld flameshot gromit-mpx \
 keepassxc mpv rclone syncthing telegram-desktop thunderbird wget xournalpp zsh zsh-autosuggestions"
 su -c "apt update && apt -y install $useful_packages"
-
-# Symlink XDG configs
-for dir in .config/*
-do
-    if [ -d "$dir" ] ; then
-        mkdir -p ~/"$dir"
-        for conf in "$dir"/*
-        do
-            # If symlink doesn't exist then create
-            (ls ~/"$conf") || ln -s "$PWD"/"$conf" ~/"$conf"
-        done
-    fi
-done
 
 # Emacs config
 (ls ~/.emacs.org) || ln -s "$PWD"/emacs.org ~/.emacs.org
