@@ -214,6 +214,7 @@ Export some specific org files to html when closing.
   (global-set-key (kbd "M-!") 'compile)
   (global-set-key (kbd "C-x C-<return> 3") 'custom/vterm-split-horizontal)
   (global-set-key (kbd "C-x C-<return> 2") 'custom/vterm-split-vertical)
+  (global-set-key (kbd "C-x C-<return> C-<return>") (lambda () (interactive) (vterm 'N)))
   (global-set-key (kbd "C-v") (lambda () (interactive) (scroll-up (/ (window-body-height) 2))))
   (global-set-key (kbd "M-v") (lambda () (interactive) (scroll-down (/ (window-body-height) 2))))
   (global-set-key (kbd "M-n") 'dabbrev-expand)
@@ -228,9 +229,10 @@ Export some specific org files to html when closing.
 ** TTY
 #+begin_src emacs-lisp
   (unless (display-graphic-p)
-    (load-theme 'tsdh-dark t)
+    (disable-theme 'gruber-darker)
     (global-set-key (kbd "C-x RET 3") 'custom/vterm-split-horizontal)
     (global-set-key (kbd "C-x RET 2") 'custom/vterm-split-vertical)
+    (global-set-key (kbd "C-x RET RET") (lambda () (interactive) (vterm 'N)))
     (global-set-key (kbd "C-@") 'set-mark-command)
     (unless (string-match-p "N/A" (battery))
       (display-battery-mode)))
