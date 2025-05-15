@@ -242,6 +242,23 @@ Export some specific org files to html when closing.
     (unless (string-match-p "N/A" (battery))
       (display-battery-mode)))
 #+end_src
+** Garbage collector
+#+begin_src emacs-lisp
+  (defun my-minibuffer-setup-hook ()
+    (setq gc-cons-threshold most-positive-fixnum))
+
+  (defun my-minibuffer-exit-hook ()
+    (setq gc-cons-threshold 800000000))
+
+  (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+  (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+
+  (defun gc-idle-timer ()
+    "Trigger garbage collection when Emacs is idle for 0.5 seconds."
+    (run-with-idle-timer 1.2 t 'garbage-collect))
+
+  (gc-idle-timer)
+#+end_src
 ** Misc
 #+begin_src emacs-lisp
   (setq auto-save-default nil
@@ -252,6 +269,5 @@ Export some specific org files to html when closing.
         vc-follow-symlinks t
         use-dialog-box nil
         make-backup-files nil
-        redisplay-dont-pause t
-        gc-cons-threshold (* 100 1024 1024))
+        redisplay-dont-pause t)
 #+end_src
