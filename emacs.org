@@ -226,6 +226,7 @@ Export some specific org files to html when closing.
 ** Hooks
 #+begin_src emacs-lisp
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+  (add-hook 'prog-mode-hook #'electric-pair-mode)
   (add-hook 'dired-mode-hook #'display-line-numbers-mode)
   (add-hook 'dired-mode-hook #'auto-revert-mode)
   (add-hook 'org-mode-hook #'org-indent-mode)
