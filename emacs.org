@@ -1,4 +1,4 @@
-#+TITLE:Emacs Configuration
+#+TITLE: Emacs Configuration
 #+AUTHOR: Giuseppe
 #+PROPERTY: header-args :tangle ~/.emacs
 
@@ -121,7 +121,7 @@
 #+begin_src emacs-lisp
   (setq c-basic-offset 4)
   (let ((file-path "~/.dotfiles/emacs-modes/simpc-mode.el"))
-    (if (file-exists-p  file-path)
+    (if (file-exists-p file-path)
         (progn
           (load-file file-path)
           (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode)))
@@ -141,7 +141,7 @@
     (flycheck-mode +1)
     (company-mode +1)
     (setq flycheck-check-syntax-automatically '(save mode-enabled))
-    (setq tide-format-options '(:indentSize 2 :tabSize 2))
+    (setq tide-format-options '(:indentSize 4 :tabSize 4))
     (eldoc-mode +1)
     (tide-hl-identifier-mode +1))
 
