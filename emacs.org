@@ -48,7 +48,7 @@
 - emacs module support (module-file-suffix != nil)
 - cmake >= 3.11
 - libtool-bin
-- OPTIONAL: libvterm >= 0.2
+- libvterm >= 0.2 (optional)
 #+begin_src emacs-lisp
   (use-package vterm
     :pin "melpa"
@@ -184,6 +184,24 @@ Export some specific org files to html when closing.
   (setq dired-listing-switches "-lhAX --group-directories-first"
         dired-dwim-target t)
 #+end_src
+** Garbage collector
+References: https://jackjamison.xyz/blog/emacs-garbage-collection/
+#+begin_src emacs-lisp
+  (defun my-minibuffer-setup-hook ()
+    (setq gc-cons-threshold most-positive-fixnum))
+
+  (defun my-minibuffer-exit-hook ()
+    (setq gc-cons-threshold 800000000))
+
+  (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+  (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+
+  (defun gc-idle-timer ()
+    "Trigger garbage collection when Emacs is idle for 0.5 seconds."
+    (run-with-idle-timer 1.2 t 'garbage-collect))
+
+  (gc-idle-timer)
+#+end_src
 ** Custom functions
 #+begin_src emacs-lisp
   (defun custom/vterm-split-vertical ()
@@ -243,23 +261,6 @@ Export some specific org files to html when closing.
     (unless (string-match-p "N/A" (battery))
       (display-battery-mode)))
 #+end_src
-** Garbage collector
-#+begin_src emacs-lisp
-  (defun my-minibuffer-setup-hook ()
-    (setq gc-cons-threshold most-positive-fixnum))
-
-  (defun my-minibuffer-exit-hook ()
-    (setq gc-cons-threshold 800000000))
-
-  (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
-  (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
-
-  (defun gc-idle-timer ()
-    "Trigger garbage collection when Emacs is idle for 0.5 seconds."
-    (run-with-idle-timer 1.2 t 'garbage-collect))
-
-  (gc-idle-timer)
-#+end_src
 ** Misc
 #+begin_src emacs-lisp
   (setq auto-save-default nil
@@ -271,4 +272,5 @@ Export some specific org files to html when closing.
         use-dialog-box nil
         make-backup-files nil
         redisplay-dont-pause t)
+  (setq gamegrid-glyph-height-mm 10.0) ;; Tetris size fix
 #+end_src
