@@ -228,6 +228,22 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
     (query-replace "o'" "ò")
     (beginning-of-buffer)
     (query-replace "u'" "ù"))
+
+  (defun custom/keyboard-escape-quit ()
+    (interactive)
+    (cond ((eq last-command 'mode-exited) nil)
+  	((region-active-p)
+  	 (deactivate-mark))
+  	((> (minibuffer-depth) 0)
+  	 (abort-recursive-edit))
+  	(current-prefix-arg
+  	 nil)
+  	((> (recursion-depth) 0)
+  	 (exit-recursive-edit))
+  	(buffer-quit-function
+  	 (funcall buffer-quit-function))
+  	((string-match "^ \\*" (buffer-name (current-buffer)))
+  	 (bury-buffer))))
 #+end_src
 ** Custom Keybinds
 #+begin_src emacs-lisp
@@ -240,6 +256,8 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
   (global-set-key (kbd "M-v") (lambda () (interactive) (scroll-down (/ (window-body-height) 2))))
   (global-set-key (kbd "M-n") 'dabbrev-expand)
   (global-set-key (kbd "C-x C-o") 'other-window)
+  (global-set-key (kbd "<escape>") 'custom/keyboard-escape-quit)
+  (global-set-key (kbd "M-ESC ESC") 'custom/keyboard-escape-quit)
 #+end_src
 ** Hooks
 #+begin_src emacs-lisp
