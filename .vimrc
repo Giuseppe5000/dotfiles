@@ -42,16 +42,15 @@ set tabstop=4
 " Folding
 set foldmethod=indent
 set nofoldenable
+let g:markdown_folding = 1
 
 " Mappings
 imap <C-c> <Esc>
 tnoremap <Esc> <C-\><C-n>
-nnoremap <C-x><C-f> :e<space>
 nnoremap <C-x>b :b<space>
 nnoremap <C-x>k :bd<space>
-
-" Term
-autocmd TerminalOpen * setlocal nolist
+nnoremap <C-x><C-f> :Hex<CR>
+nnoremap <TAB> za
 
 " Style
 set background=dark
