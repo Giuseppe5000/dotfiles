@@ -44,9 +44,10 @@ set foldmethod=indent
 set nofoldenable
 
 " Mappings
-imap <C-g> <Esc>
+imap <C-c> <Esc>
 tnoremap <Esc> <C-\><C-n>
 nnoremap <C-x><C-f> :e<space>
+nnoremap <C-x>b :b<space>
 nnoremap <C-x>k :bd<space>
 
 " Term
@@ -77,3 +78,12 @@ set statusline +=%4*%=(\%l,\%c)
 set statusline +=%1*%5l%*
 set statusline +=%2*/%L\ %*
 set laststatus=2
+
+" ALE
+" Installation:
+" mkdir -p ~/.vim/pack/git-plugins/start
+" git clone --depth 1 https://github.com/dense-analysis/ale.git ~/.vim/pack/git-plugins/start/ale
+
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
+nnoremap <C-]> :ALEGoToDefinition<CR>
