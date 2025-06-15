@@ -16,7 +16,7 @@ set mouse=a
 set sj=-50
 set updatetime=1000
 set belloff=all
-set list
+set nolist
 set lcs=space:·
 set history=200
 set complete=.,w,b,t
