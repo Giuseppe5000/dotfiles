@@ -19,11 +19,38 @@
           use-package-always-ensure t
           use-package-always-pin "nongnu"))
 #+end_src
+** Evil
+#+begin_src emacs-lisp
+  (use-package evil
+    :demand t
+    :init (setq evil-want-keybinding nil evil-want-C-u-scroll t)
+    :config
+    (evil-set-undo-system 'undo-redo)
+    (define-key evil-normal-state-map (kbd "C-g") 'evil-normal-state)
+    (define-key evil-visual-state-map (kbd "C-g") 'evil-normal-state)
+    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+    (evil-mode 1))
+#+end_src
+*** Evil collection
+#+begin_src emacs-lisp
+  (use-package evil-collection
+    :after evil
+    :pin melpa
+    :demand t
+    :init (setq evil-collection-want-unimpaired-p nil)
+    :config (evil-collection-init)
+    (evil-collection-define-key 'normal 'dired-mode-map
+      "h" 'dired-up-directory
+      "l" 'dired-find-file))
+#+end_src
 ** IDO vertical
 #+begin_src emacs-lisp
   (use-package ido-vertical-mode
     :pin "melpa-stable"
-    :init
+    :hook (ido-setup . (lambda ()
+                         (define-key ido-completion-map (kbd "C-j") 'ido-next-match)
+                         (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)))
+    :init (ido-mode 1) (ido-vertical-mode 1)
     (ido-mode 1)
     (ido-vertical-mode 1)
     (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
@@ -68,19 +95,6 @@
     :init (setq yas-snippet-dirs '("~/.dotfiles/emacs-snippets"))
     :config (yas-reload-all)
     :hook (org-mode . yas-minor-mode))
-#+end_src
-** Multiple cursors
-#+begin_src emacs-lisp
-  (use-package multiple-cursors)
-  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-beginnings-of-lines)
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this-word)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this-word)
-#+end_src
-** Expand region
-#+begin_src emacs-lisp
-  (use-package expand-region
-    :pin "melpa-stable"
-    :bind ("C-@" . er/expand-region))
 #+end_src
 ** EMMS
 #+begin_src emacs-lisp
@@ -141,7 +155,7 @@
     (flycheck-mode +1)
     (company-mode +1)
     (setq flycheck-check-syntax-automatically '(save mode-enabled))
-    (setq tide-format-options '(:indentSize 4 :tabSize 4))
+    (setq tide-format-options '(:indentSize 2 :tabSize 2))
     (eldoc-mode +1)
     (tide-hl-identifier-mode +1))
 
@@ -232,30 +246,25 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
   (defun custom/keyboard-escape-quit ()
     (interactive)
     (cond ((eq last-command 'mode-exited) nil)
-  	((region-active-p)
-  	 (deactivate-mark))
-  	((> (minibuffer-depth) 0)
-  	 (abort-recursive-edit))
-  	(current-prefix-arg
-  	 nil)
-  	((> (recursion-depth) 0)
-  	 (exit-recursive-edit))
-  	(buffer-quit-function
-  	 (funcall buffer-quit-function))
-  	((string-match "^ \\*" (buffer-name (current-buffer)))
-  	 (bury-buffer))))
+          ((region-active-p)
+           (deactivate-mark))
+          ((> (minibuffer-depth) 0)
+           (abort-recursive-edit))
+          (current-prefix-arg
+           nil)
+          ((> (recursion-depth) 0)
+           (exit-recursive-edit))
+          (buffer-quit-function
+           (funcall buffer-quit-function))
+          ((string-match "^ \\*" (buffer-name (current-buffer)))
+           (bury-buffer))))
 #+end_src
 ** Custom Keybinds
 #+begin_src emacs-lisp
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "M-!") 'compile)
   (global-set-key (kbd "C-x C-<return> 3") 'custom/vterm-split-horizontal)
   (global-set-key (kbd "C-x C-<return> 2") 'custom/vterm-split-vertical)
   (global-set-key (kbd "C-x C-<return> C-<return>") (lambda () (interactive) (vterm 'N)))
-  (global-set-key (kbd "C-v") (lambda () (interactive) (scroll-up (/ (window-body-height) 2))))
-  (global-set-key (kbd "M-v") (lambda () (interactive) (scroll-down (/ (window-body-height) 2))))
-  (global-set-key (kbd "M-n") 'dabbrev-expand)
-  (global-set-key (kbd "C-x C-o") 'other-window)
   (global-set-key (kbd "<escape>") 'custom/keyboard-escape-quit)
   (global-set-key (kbd "M-ESC ESC") 'custom/keyboard-escape-quit)
 #+end_src
@@ -274,7 +283,6 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
     (global-set-key (kbd "C-x RET 3") 'custom/vterm-split-horizontal)
     (global-set-key (kbd "C-x RET 2") 'custom/vterm-split-vertical)
     (global-set-key (kbd "C-x RET RET") (lambda () (interactive) (vterm 'N)))
-    (global-set-key (kbd "C-@") 'set-mark-command)
     (remove-hook 'org-mode-hook #'org-indent-mode)
     (unless (string-match-p "N/A" (battery))
       (display-battery-mode)))
