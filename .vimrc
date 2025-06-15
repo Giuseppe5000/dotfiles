@@ -44,8 +44,10 @@ set foldmethod=indent
 set nofoldenable
 
 " Mappings
-imap <C-c> <Esc>
+imap <C-g> <Esc>
 tnoremap <Esc> <C-\><C-n>
+nnoremap <C-x><C-f> :e<space>
+nnoremap <C-x>k :bd<space>
 
 " Term
 autocmd TerminalOpen * setlocal nolist
