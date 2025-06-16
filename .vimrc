@@ -49,8 +49,7 @@ imap <C-c> <Esc>
 tnoremap <Esc> <C-\><C-n>
 nnoremap <C-x>b :b<space>
 nnoremap <C-x>k :bd<space>
-nnoremap <C-x><C-f> :Hex<CR>
-nnoremap <TAB> za
+nnoremap <C-x><C-f> :Ex<CR>
 
 " Style
 set background=dark
@@ -86,3 +85,6 @@ set laststatus=2
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 nnoremap <C-]> :ALEGoToDefinition<CR>
+
+" If using Wayland install:
+" https://github.com/jasonccox/vim-wayland-clipboard.git
