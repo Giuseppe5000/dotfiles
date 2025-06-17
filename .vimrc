@@ -48,8 +48,21 @@ let g:markdown_folding = 1
 imap <C-c> <Esc>
 tnoremap <Esc> <C-\><C-n>
 nnoremap <C-x>b :b<space>
-nnoremap <C-x>k :bd<space>
-nnoremap <C-x><C-f> :Ex<CR>
+nnoremap <C-x>k :bd
+nnoremap <C-x><C-f> :Files<CR>
+nnoremap <C-x><C-d> :Ex<CR>
+
+" Netrw
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_banner = 0
+let g:netrw_keepdir = 0
+autocmd filetype netrw call NetrwMapping()
+function! NetrwMapping()
+    nm <buffer> h -
+    nm <buffer> l <CR>
+    nm <buffer> + d
+    nm <buffer> . gh
+endfunction
 
 " Style
 set background=dark
