@@ -47,10 +47,12 @@ let g:markdown_folding = 1
 " Mappings
 imap <C-c> <Esc>
 tnoremap <Esc> <C-\><C-n>
-nnoremap <C-x>b :b<space>
-nnoremap <C-x>k :bd
+" Kills a buffer without closing the window
+nnoremap <C-x>k :bp<bar>sp<bar>bn<bar>bd
+nnoremap <C-x>b :Buffers<CR>
 nnoremap <C-x><C-f> :Files<CR>
 nnoremap <C-x><C-d> :Ex<CR>
+nnoremap <C-]> :ALEGoToDefinition<CR>
 
 " Netrw
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
@@ -58,8 +60,8 @@ let g:netrw_banner = 0
 let g:netrw_keepdir = 0
 autocmd filetype netrw call NetrwMapping()
 function! NetrwMapping()
-    nm <buffer> h -
-    nm <buffer> l <CR>
+    nm <buffer> q -
+    nm <buffer> e <CR>
     nm <buffer> + d
     nm <buffer> . gh
 endfunction
@@ -90,14 +92,17 @@ set statusline +=%1*%5l%*
 set statusline +=%2*/%L\ %*
 set laststatus=2
 
-" ALE
-" Installation:
-" mkdir -p ~/.vim/pack/git-plugins/start
-" git clone --depth 1 https://github.com/dense-analysis/ale.git ~/.vim/pack/git-plugins/start/ale
+" Plugins
+" how to install a plugin:
+" Make the plugin dir with: 'mkdir -p ~/.vim/pack/git-plugins/start'
+" Clone the plugin code with: 'git clone --depth 1 <plugin-repo> ~/.vim/pack/git-plugins/start/<plugin-name>'
 
+" Plugin list:
+" https://github.com/dense-analysis/ale.git
+" https://github.com/junegunn/fzf.vim.git
+" https://github.com/junegunn/fzf.git
+" https://github.com/jasonccox/vim-wayland-clipboard.git
+
+" ALE
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
-nnoremap <C-]> :ALEGoToDefinition<CR>
-
-" If using Wayland install:
-" https://github.com/jasonccox/vim-wayland-clipboard.git
