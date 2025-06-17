@@ -60,8 +60,8 @@ let g:netrw_banner = 0
 let g:netrw_keepdir = 0
 autocmd filetype netrw call NetrwMapping()
 function! NetrwMapping()
-    nm <buffer> q -
-    nm <buffer> e <CR>
+    nm <buffer> h -
+    nm <buffer> l <CR>
     nm <buffer> + d
     nm <buffer> . gh
 endfunction
@@ -93,15 +93,12 @@ set statusline +=%2*/%L\ %*
 set laststatus=2
 
 " Plugins
-" how to install a plugin:
 " Make the plugin dir with: 'mkdir -p ~/.vim/pack/git-plugins/start'
-" Clone the plugin code with: 'git clone --depth 1 <plugin-repo> ~/.vim/pack/git-plugins/start/<plugin-name>'
-
-" Plugin list:
-" https://github.com/dense-analysis/ale.git
-" https://github.com/junegunn/fzf.vim.git
-" https://github.com/junegunn/fzf.git
-" https://github.com/jasonccox/vim-wayland-clipboard.git
+"
+" ALE: 'git clone --depth 1 https://github.com/dense-analysis/ale.git ~/.vim/pack/git-plugins/start/ale'
+" FZF: 'git clone --depth 1 https://github.com/junegunn/fzf.git ~/.vim/pack/git-plugins/start/fzf'
+" FZFvim: 'git clone --depth 1 https://github.com/junegunn/fzf.vim.git ~/.vim/pack/git-plugins/start/fzf.vim'
+" WaylandClipboad: 'git clone --depth 1 https://github.com/jasonccox/vim-wayland-clipboard.git " ~/.vim/pack/git-plugins/start/wayland-clipboard'
 
 " ALE
 let g:ale_completion_enabled = 1
