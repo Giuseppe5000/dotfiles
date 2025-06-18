@@ -4,7 +4,6 @@ filetype plugin indent on
 syntax on
 set autoread
 set number relativenumber
-set cursorline
 set noswapfile
 set wildmenu
 set wildmode=full
@@ -12,7 +11,6 @@ set wildoptions=pum
 set wildignore=*/node_modules/**
 set clipboard=unnamedplus
 set encoding=utf-8
-set mouse=a
 set sj=-50
 set belloff=all
 set lcs=space:·
@@ -96,7 +94,7 @@ set laststatus=2
 " ALE: 'git clone --depth 1 https://github.com/dense-analysis/ale.git ~/.vim/pack/git-plugins/start/ale'
 " FZF: 'git clone --depth 1 https://github.com/junegunn/fzf.git ~/.vim/pack/git-plugins/start/fzf'
 " FZFvim: 'git clone --depth 1 https://github.com/junegunn/fzf.vim.git ~/.vim/pack/git-plugins/start/fzf.vim'
-" WaylandClipboad: 'git clone --depth 1 https://github.com/jasonccox/vim-wayland-clipboard.git " ~/.vim/pack/git-plugins/start/wayland-clipboard'
+" WaylandClipboad: 'git clone --depth 1 https://github.com/jasonccox/vim-wayland-clipboard.git ~/.vim/pack/git-plugins/start/wayland-clipboard'
 
 " ALE
 let g:ale_enabled = 1
