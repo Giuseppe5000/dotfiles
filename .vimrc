@@ -9,21 +9,19 @@ set noswapfile
 set wildmenu
 set wildmode=full
 set wildoptions=pum
-set path+=**
 set clipboard=unnamedplus
 set encoding=utf-8
 set mouse=a
 set sj=-50
-set updatetime=1000
 set belloff=all
-set nolist
 set lcs=space:·
 set history=200
 set complete=.,w,b,t
-set autochdir
 set backspace=indent,eol,start
 set iskeyword-=_
-set ttimeoutlen=0
+"set path+=**
+"set updatetime=1000
+"set ttimeoutlen=0
 
 " Search
 set incsearch
@@ -49,10 +47,7 @@ imap <C-c> <Esc>
 tnoremap <Esc> <C-\><C-n>
 " Kills a buffer without closing the window
 nnoremap <C-x>k :bp<bar>sp<bar>bn<bar>bd
-nnoremap <C-x>b :Buffers<CR>
-nnoremap <C-x><C-f> :Files<CR>
 nnoremap <C-x><C-d> :Ex<CR>
-nnoremap <C-]> :ALEGoToDefinition<CR>
 
 " Netrw
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
@@ -64,6 +59,7 @@ function! NetrwMapping()
     nm <buffer> l <CR>
     nm <buffer> + d
     nm <buffer> . gh
+    nnoremap <C-x><C-f> :lcd %<bar>Files<CR>
 endfunction
 
 " Style
@@ -93,6 +89,7 @@ set statusline +=%2*/%L\ %*
 set laststatus=2
 
 " Plugins
+
 " Make the plugin dir with: 'mkdir -p ~/.vim/pack/git-plugins/start'
 "
 " ALE: 'git clone --depth 1 https://github.com/dense-analysis/ale.git ~/.vim/pack/git-plugins/start/ale'
@@ -101,5 +98,13 @@ set laststatus=2
 " WaylandClipboad: 'git clone --depth 1 https://github.com/jasonccox/vim-wayland-clipboard.git " ~/.vim/pack/git-plugins/start/wayland-clipboard'
 
 " ALE
+let g:ale_enabled = 1
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
+nnoremap <C-]> :ALEGoToDefinition<CR>
+
+" FZF
+nnoremap <C-x>b :Buffers<CR>
+nnoremap <C-x>f :Files<CR>
+" Execute Files in the current buffer dir
+nnoremap <C-x><C-f> :execute 'Files ' . expand('%:p:h')<CR>
