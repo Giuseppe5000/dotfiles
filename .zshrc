@@ -1,8 +1,7 @@
 alias ls='ls --color=auto'
+alias ll='ls -l --color=auto'
 alias grep='grep --color=auto'
 alias vi='vim'
-alias vimf='vim $(fzf)'
-alias magit='~/.local/bin/emacs/build/src/emacs -nw --eval "(progn (require '\''package) (package-initialize) (require '\''magit) (magit-status)(delete-other-windows))"'
 
 autoload -Uz compinit
 compinit

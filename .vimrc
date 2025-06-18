@@ -9,6 +9,7 @@ set noswapfile
 set wildmenu
 set wildmode=full
 set wildoptions=pum
+set wildignore=*/node_modules/**
 set clipboard=unnamedplus
 set encoding=utf-8
 set mouse=a
@@ -45,9 +46,9 @@ let g:markdown_folding = 1
 " Mappings
 imap <C-c> <Esc>
 tnoremap <Esc> <C-\><C-n>
+nnoremap <C-x><C-d> :Ex<CR>
 " Kills a buffer without closing the window
 nnoremap <C-x>k :bp<bar>sp<bar>bn<bar>bd
-nnoremap <C-x><C-d> :Ex<CR>
 
 " Netrw
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
