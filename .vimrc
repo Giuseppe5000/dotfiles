@@ -58,7 +58,6 @@ function! NetrwMapping()
     nm <buffer> l <CR>
     nm <buffer> + d
     nm <buffer> . gh
-    nnoremap <C-x><C-f> :lcd %<bar>Files<CR>
 endfunction
 
 " Style
