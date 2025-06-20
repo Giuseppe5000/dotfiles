@@ -40,21 +40,8 @@ let g:markdown_folding = 1
 " Mappings
 imap <C-c> <Esc>
 tnoremap <Esc> <C-\><C-n>
-nnoremap <C-x><C-d> :Ex<CR>
 " Kills a buffer without closing the window
 nnoremap <C-x>k :bp<bar>sp<bar>bn<bar>bd
-
-" Netrw
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_banner = 0
-let g:netrw_keepdir = 0
-autocmd filetype netrw call NetrwMapping()
-function! NetrwMapping()
-    nm <buffer> h -
-    nm <buffer> l <CR>
-    nm <buffer> + d
-    nm <buffer> . gh
-endfunction
 
 " Style
 set background=dark
