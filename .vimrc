@@ -13,14 +13,10 @@ set clipboard=unnamedplus
 set encoding=utf-8
 set sj=-50
 set belloff=all
-set lcs=space:·
 set history=200
 set complete=.,w,b,t
 set backspace=indent,eol,start
 set iskeyword-=_
-"set path+=**
-"set updatetime=1000
-"set ttimeoutlen=0
 
 " Search
 set incsearch
@@ -96,7 +92,7 @@ set laststatus=2
 " WaylandClipboad: 'git clone --depth 1 https://github.com/jasonccox/vim-wayland-clipboard.git ~/.vim/pack/git-plugins/start/wayland-clipboard'
 
 " ALE
-let g:ale_enabled = 1
+let g:ale_enabled = 0
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 nnoremap <C-]> :ALEGoToDefinition<CR>
