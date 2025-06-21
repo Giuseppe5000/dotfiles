@@ -17,6 +17,7 @@ set history=200
 set complete=.,w,b,t
 set backspace=indent,eol,start
 set iskeyword-=_
+set hidden
 
 " Search
 set incsearch
@@ -40,8 +41,38 @@ let g:markdown_folding = 1
 " Mappings
 imap <C-c> <Esc>
 tnoremap <Esc> <C-\><C-n>
+nnoremap <C-x>b :b<Space>
+nnoremap <C-x>f :call FZF()<CR>
+nnoremap <C-x><C-f> :call FZF(expand('%:p:h'))<CR>
 " Kills a buffer without closing the window
 nnoremap <C-x>k :bp<bar>sp<bar>bn<bar>bd
+
+" Custom functions
+function! FZF(dir = '')
+    let _ = system('which fzf')
+    if v:shell_error != 0
+        echo "Error: fzf is not installed."
+        return
+    end
+
+    " Using temp buffer for reading fzf output
+    " and then jump to" the selected file
+    enew | setlocal buftype=nofile nobuflisted nospell nonu nornu | file fzf_output
+
+    if a:dir == ''
+        silent read !fzf
+    else
+        let l:cmd = printf('find %s -type f 2>/dev/null | fzf', a:dir)
+        silent execute 'read !' . l:cmd
+    end
+
+    let l:file = getline('.')
+    if !empty(l:file)
+        normal gf
+    end
+
+    silent execute 'bwipeout fzf_output'
+endfunction
 
 " Style
 set background=dark
@@ -59,8 +90,7 @@ hi User4 ctermfg=blue ctermbg=black
 hi User5 ctermfg=white ctermbg=black
 
 set statusline=
-set statusline +=%1*\ %n\ %*
-set statusline +=%5*%{&ff}%*
+set statusline +=%5*\ %{&ff}%*
 set statusline +=%3*%y%*
 set statusline +=%4*\ %<%F%*
 set statusline +=%2*%m%*
@@ -72,20 +102,11 @@ set laststatus=2
 " Plugins
 
 " Make the plugin dir with: 'mkdir -p ~/.vim/pack/git-plugins/start'
-"
 " ALE: 'git clone --depth 1 https://github.com/dense-analysis/ale.git ~/.vim/pack/git-plugins/start/ale'
-" FZF: 'git clone --depth 1 https://github.com/junegunn/fzf.git ~/.vim/pack/git-plugins/start/fzf'
-" FZFvim: 'git clone --depth 1 https://github.com/junegunn/fzf.vim.git ~/.vim/pack/git-plugins/start/fzf.vim'
-" WaylandClipboad: 'git clone --depth 1 https://github.com/jasonccox/vim-wayland-clipboard.git ~/.vim/pack/git-plugins/start/wayland-clipboard'
 
 " ALE
 let g:ale_enabled = 0
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 let g:ale_completion_autoimport = 1
+set omnifunc=ale#completion#OmniFunc
 nnoremap <C-]> :ALEGoToDefinition<CR>
-
-" FZF
-nnoremap <C-x>b :Buffers<CR>
-nnoremap <C-x>f :Files<CR>
-" Execute Files in the current buffer dir
-nnoremap <C-x><C-f> :execute 'Files ' . expand('%:p:h')<CR>
