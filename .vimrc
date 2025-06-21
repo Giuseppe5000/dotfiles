@@ -18,6 +18,7 @@ set complete=.,w,b,t
 set backspace=indent,eol,start
 set iskeyword-=_
 set hidden
+set mouse=a
 
 " Search
 set incsearch
@@ -62,7 +63,7 @@ function! FZF(dir = '')
     if a:dir == ''
         silent read !fzf
     else
-        let l:cmd = printf('find %s -type f 2>/dev/null | fzf', a:dir)
+        let l:cmd = printf('find %s -type f 2>/dev/null | grep -vE "(/node_modules/|\.git/)" | fzf', a:dir)
         silent execute 'read !' . l:cmd
     end
 
@@ -105,8 +106,10 @@ set laststatus=2
 " ALE: 'git clone --depth 1 https://github.com/dense-analysis/ale.git ~/.vim/pack/git-plugins/start/ale'
 
 " ALE
-let g:ale_enabled = 0
-let g:ale_completion_enabled = 0
-let g:ale_completion_autoimport = 1
-set omnifunc=ale#completion#OmniFunc
-nnoremap <C-]> :ALEGoToDefinition<CR>
+if isdirectory(expand('~/.vim/pack/git-plugins/start/ale'))
+    let g:ale_enabled = 0
+    let g:ale_completion_enabled = 0
+    let g:ale_completion_autoimport = 1
+    set omnifunc=ale#completion#OmniFunc
+    nnoremap <C-]> :ALEGoToDefinition<CR>
+end
