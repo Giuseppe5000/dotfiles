@@ -20,6 +20,7 @@ set iskeyword-=_
 set hidden
 set mouse=a
 set autochdir
+set tags=tags;
 
 " Search
 set incsearch
