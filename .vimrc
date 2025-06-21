@@ -19,6 +19,7 @@ set backspace=indent,eol,start
 set iskeyword-=_
 set hidden
 set mouse=a
+set autochdir
 
 " Search
 set incsearch
@@ -43,13 +44,13 @@ let g:markdown_folding = 1
 imap <C-c> <Esc>
 tnoremap <Esc> <C-\><C-n>
 nnoremap <C-x>b :b<Space>
-nnoremap <C-x>f :call FZF()<CR>
-nnoremap <C-x><C-f> :call FZF(expand('%:p:h'))<CR>
+nnoremap <C-x>f :call FZF(1)<CR>
+nnoremap <C-x><C-f> :call FZF()<CR>
 " Kills a buffer without closing the window
 nnoremap <C-x>k :bp<bar>sp<bar>bn<bar>bd
 
 " Custom functions
-function! FZF(dir = '')
+function! FZF(root = 0)
     let _ = system('which fzf')
     if v:shell_error != 0
         echo "Error: fzf is not installed."
@@ -60,11 +61,11 @@ function! FZF(dir = '')
     " and then jump to" the selected file
     enew | setlocal buftype=nofile nobuflisted nospell nonu nornu | file fzf_output
 
-    if a:dir == ''
-        silent read !fzf
-    else
-        let l:cmd = printf('find %s -type f 2>/dev/null | grep -vE "(/node_modules/|\.git/)" | fzf', a:dir)
+    if a:root
+        let l:cmd = printf('find %s -type f 2>/dev/null | grep -vE "(/node_modules/|\.git/)" | fzf', g:vim_initial_cwd)
         silent execute 'read !' . l:cmd
+    else
+        silent read !fzf
     end
 
     let l:file = getline('.')
@@ -74,6 +75,9 @@ function! FZF(dir = '')
 
     silent execute 'bwipeout fzf_output'
 endfunction
+
+" Useful constants
+let g:vim_initial_cwd = expand('%:p:h')
 
 " Style
 set background=dark
