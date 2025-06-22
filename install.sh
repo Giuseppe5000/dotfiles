@@ -33,6 +33,6 @@ then
 fi
 
 # Enable some services
-su -c "systemctl enable firewalld --now && systemctl disable cups --now"
+su -c "systemctl enable firewalld --now"
 systemctl --user daemon-reload
 systemctl --user enable syncthing --now
