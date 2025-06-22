@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: dotequal
-# key: =.
-# --
-\; \dot{=} \; $0

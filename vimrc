@@ -59,7 +59,7 @@ function! FZF(root = 0)
     end
 
     " Using temp buffer for reading fzf output
-    " and then jump to" the selected file
+    " and then jump to the selected file
     enew | setlocal buftype=nofile nobuflisted nospell nonu nornu | file fzf_output
 
     if a:root

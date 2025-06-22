@@ -3,20 +3,17 @@ set -xe
 cd "$(dirname "$0")"
 
 # Install some useful packages
-useful_packages="cups curl firefox firewall-config firewalld flameshot gromit-mpx \
-keepassxc mpv rclone syncthing telegram-desktop thunderbird wget xournalpp zsh zsh-autosuggestions"
+useful_packages="curl firefox firewall-config firewalld flameshot gromit-mpx \
+keepassxc mpv rclone syncthing thunderbird vim-gtk3 wget xournalpp zsh zsh-autosuggestions"
 su -c "apt update && apt -y install $useful_packages"
 
-# Emacs config
-(ls ~/.emacs.org) || ln -s "$PWD"/emacs.org ~/.emacs.org
-
 # Vim config
-(ls ~/.vimrc) || ln -s "$PWD"/.vimrc ~/.vimrc
+(ls ~/.vimrc) || ln -s "$PWD"/vimrc ~/.vimrc
 
 # ZSH
-(ls ~/.zshenv)        || ln -s "$PWD"/.zshenv ~/.zshenv
-(ls ~/.zshrc)         || ln -s "$PWD"/.zshrc ~/.zshrc
-(ls ~/.p10k.zsh)      || ln -s "$PWD"/.p10k.zsh ~/.p10k.zsh
+(ls ~/.zshenv)        || ln -s "$PWD"/zshenv ~/.zshenv
+(ls ~/.zshrc)         || ln -s "$PWD"/zshrc ~/.zshrc
+(ls ~/.p10k.zsh)      || ln -s "$PWD"/p10k.zsh ~/.p10k.zsh
 (ls ~/.powerlevel10k) || git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
 
 if [ "$SHELL" != "/usr/bin/zsh" ]
