@@ -72,6 +72,8 @@ function! FZF(root = 0)
     let l:file = getline('.')
     if !empty(l:file)
         normal gf
+    else
+        buffer #
     end
 
     silent execute 'bwipeout fzf_output'
