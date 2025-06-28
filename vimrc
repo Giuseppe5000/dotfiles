@@ -79,6 +79,11 @@ function! FZF(root = 0)
     silent execute 'bwipeout fzf_output'
 endfunction
 
+" When open a new file remember the cursor position of the last editing
+if has("autocmd")
+    autocmd BufReadPost * if line("'\"") | exe "'\"" | endif
+endif
+
 " Useful constants
 let g:vim_initial_cwd = expand('%:p:h')
 
