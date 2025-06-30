@@ -43,7 +43,6 @@ let g:markdown_folding = 1
 
 " Mappings
 imap <C-c> <Esc>
-tnoremap <Esc> <C-\><C-n>
 nnoremap <C-x>b :b<Space>
 nnoremap <C-x>f :call FZF(1)<CR>
 nnoremap <C-x><C-f> :call FZF()<CR>
