@@ -15,8 +15,6 @@ set sj=-50
 set belloff=all
 set history=200
 set complete=.,w,b,t
-set backspace=indent,eol,start
-set iskeyword-=_
 set hidden
 set mouse=a
 set autochdir
