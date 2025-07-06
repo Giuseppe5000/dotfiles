@@ -2,6 +2,7 @@ alias ls='ls --color=auto'
 alias ll='ls -l --color=auto'
 alias grep='grep --color=auto'
 alias vi='vim'
+alias vif='vim $(fzf)'
 
 autoload -Uz compinit
 compinit

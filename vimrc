@@ -41,48 +41,15 @@ let g:markdown_folding = 1
 
 " Mappings
 imap <C-c> <Esc>
+nnoremap <C-x><C-f> :Ex<CR>
 nnoremap <C-x>b :b<Space>
-nnoremap <C-x>f :call FZF(1)<CR>
-nnoremap <C-x><C-f> :call FZF()<CR>
 " Kills a buffer without closing the window
 nnoremap <C-x>k :bp<bar>sp<bar>bn<bar>bd
-
-" Custom functions
-function! FZF(root = 0)
-    let _ = system('which fzf')
-    if v:shell_error != 0
-        echo "Error: fzf is not installed."
-        return
-    end
-
-    " Using temp buffer for reading fzf output
-    " and then jump to the selected file
-    enew | setlocal buftype=nofile nobuflisted nospell nonu nornu | file fzf_output
-
-    if a:root
-        let l:cmd = printf('find %s -type f 2>/dev/null | grep -vE "(/node_modules/|\.git/)" | fzf', g:vim_initial_cwd)
-        silent execute 'read !' . l:cmd
-    else
-        silent read !fzf
-    end
-
-    let l:file = getline('.')
-    if !empty(l:file)
-        normal gf
-    else
-        buffer #
-    end
-
-    silent execute 'bwipeout fzf_output'
-endfunction
 
 " When open a new file remember the cursor position of the last editing
 if has("autocmd")
     autocmd BufReadPost * if line("'\"") | exe "'\"" | endif
 endif
-
-" Useful constants
-let g:vim_initial_cwd = expand('%:p:h')
 
 " Style
 set background=dark
