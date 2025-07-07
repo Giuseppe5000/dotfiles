@@ -16,7 +16,6 @@ set belloff=all
 set history=200
 set complete=.,w,b,t
 set hidden
-set mouse=a
 set autochdir
 set tags=tags;
 
