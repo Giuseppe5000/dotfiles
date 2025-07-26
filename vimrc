@@ -31,7 +31,8 @@ set smartindent
 set expandtab
 set smarttab
 set shiftwidth=4
-set tabstop=4
+set softtabstop=4
+set cindent
 
 " Folding
 set foldmethod=indent
@@ -41,7 +42,7 @@ let g:markdown_folding = 1
 " Mappings
 imap <C-c> <Esc>
 nnoremap <C-x><C-f> :Ex<CR>
-nnoremap <C-x>b :b<Space>
+nnoremap <C-b> :b<Space>
 " Kills a buffer without closing the window
 nnoremap <C-x>k :bp<bar>sp<bar>bn<bar>bd
 
@@ -55,8 +56,10 @@ set background=dark
 set termguicolors
 colorscheme habamax
 hi MatchParen cterm=NONE ctermbg=green ctermfg=blue
-hi TrailingWhitespace ctermbg=red guibg=red
-match TrailingWhitespace /\s\+$/
+
+" Higlight trailing whitespace and tabs
+hi ForbiddenWhitespace ctermbg=red guibg=red
+match ForbiddenWhitespace /\s\+$\|\t/
 
 " Status line (feat. antirez)
 hi User1 ctermfg=green ctermbg=black
