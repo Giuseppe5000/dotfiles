@@ -4,11 +4,14 @@ cd "$(dirname "$0")"
 
 # Install some useful packages
 useful_packages="curl firefox firewall-config firewalld flameshot gromit-mpx \
-keepassxc mpv rclone syncthing thunderbird vim-gtk3 wget xournalpp zsh zsh-autosuggestions"
+keepassxc mpv rclone syncthing thunderbird wget xournalpp zsh zsh-autosuggestions"
 su -c "apt update && apt -y install $useful_packages"
 
 # Vim config
 (ls ~/.vimrc) || ln -s "$PWD"/vimrc ~/.vimrc
+
+# Emacs config
+(ls ~/.emacs.org) || ln -s "$PWD"/emacs.org ~/.emacs.org
 
 # ZSH
 (ls ~/.zshenv)        || ln -s "$PWD"/zshenv ~/.zshenv

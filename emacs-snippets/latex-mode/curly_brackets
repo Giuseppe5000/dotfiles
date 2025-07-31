@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: curly_brackets
+# key: {
+# --
+\\{$0\\}
