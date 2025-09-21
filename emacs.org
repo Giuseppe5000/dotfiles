@@ -135,6 +135,15 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
                         (when (string-equal "tsx" (file-name-extension buffer-file-name))
                           (setup-tide-mode)))))
 #+end_src
+*** Typst
+#+begin_src emacs-lisp
+  (let ((file-path "~/.dotfiles/emacs-modes/typst-mode.el"))
+  (if (file-exists-p file-path)
+      (progn
+        (load-file file-path)
+        (add-to-list 'auto-mode-alist '("\\.typ\\'" . typst-mode)))
+    (message "File does not exist: %s" file-path)))
+#+end_src
 ** Org mode
 #+begin_src emacs-lisp
   (setq org-preview-latex-image-directory "~/.emacs.d/latexpreview/"
