@@ -147,7 +147,6 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
 ** Org mode
 #+begin_src emacs-lisp
   (setq org-preview-latex-image-directory "~/.emacs.d/latexpreview/"
-        org-directory "~/Documents/various/org"
         org-startup-folded t
         org-hide-emphasis-markers t
         org-html-validation-link nil)
