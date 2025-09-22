@@ -236,6 +236,11 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
            (funcall buffer-quit-function))
           ((string-match "^ \\*" (buffer-name (current-buffer)))
            (bury-buffer))))
+
+  (defun custom/expand-region (&optional arg)
+    (interactive "p")
+    (backward-up-list arg (point) (point))
+    (mark-sexp))
 #+end_src
 ** Custom Keybinds
 #+begin_src emacs-lisp
@@ -249,6 +254,7 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
   (global-set-key (kbd "C-x C-o") 'other-window)
   (global-set-key (kbd "<escape>") 'custom/keyboard-escape-quit)
   (global-set-key (kbd "M-ESC ESC") 'custom/keyboard-escape-quit)
+  (global-set-key (kbd "C-@") 'custom/expand-region)
 #+end_src
 ** Hooks
 #+begin_src emacs-lisp
