@@ -39,3 +39,6 @@ fi
 su -c "systemctl enable firewalld --now"
 systemctl --user daemon-reload
 systemctl --user enable syncthing --now
+
+# Git remote conf
+git remote set-url origin git@github.com:Giuseppe5000/dotfiles.git
