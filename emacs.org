@@ -56,7 +56,11 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
   (use-package gruber-darker-theme
     :pin "melpa"
     :demand t
+    :if (package-installed-p 'gruber-darker-theme)
     :config (load-theme 'gruber-darker t))
+
+  (unless (package-installed-p 'gruber-darker-theme)
+    (load-theme 'tango-dark t))
 #+end_src
 * General
 ** Style
