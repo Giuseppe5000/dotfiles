@@ -36,24 +36,6 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
     :hook (java-mode . eglot-ensure)
     :config (add-to-list 'eglot-server-programs '((simpc-mode) "clangd")))
 #+end_src
-** Vterm
-*Requirements:*
-- emacs module support (module-file-suffix != nil)
-- cmake >= 3.11
-- libtool-bin
-- libvterm >= 0.2 (optional)
-#+begin_src emacs-lisp
-  (use-package vterm
-    :pin "melpa"
-    :config (setq vterm-kill-buffer-on-exit t)
-    (add-hook 'vterm-exit-functions
-              (lambda (_ _)
-                (let* ((buffer (current-buffer))
-                       (window (get-buffer-window buffer)))
-                  (when (not (one-window-p))
-                    (delete-window window))
-                  (kill-buffer buffer)))))
-#+end_src
 ** Yasnippet
 #+begin_src emacs-lisp
   ;; (use-package yasnippet
@@ -180,6 +162,28 @@ Export some specific org files to html when closing.
   (setq dired-listing-switches "-lhAX --group-directories-first"
         dired-dwim-target t)
 #+end_src
+** Eshell
+#+begin_src emacs-lisp
+  (defun custom/eshell-split-vertical ()
+    (interactive)
+    (split-window-vertically)
+    (other-window 1)
+    (eshell 'N))
+
+  (defun custom/eshell-split-horizontal ()
+    (interactive)
+    (split-window-horizontally)
+    (other-window 1)
+    (eshell 'N))
+
+  (global-set-key (kbd "C-x C-<return> 3") 'custom/eshell-split-horizontal)
+  (global-set-key (kbd "C-x C-<return> 2") 'custom/eshell-split-vertical)
+  (global-set-key (kbd "C-x C-<return> C-<return>") (lambda () (interactive) (eshell 'N)))
+
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (define-key eshell-mode-map (kbd "C-d") 'kill-buffer-and-window)))
+#+end_src
 ** Garbage collector
 References: https://jackjamison.xyz/blog/emacs-garbage-collection/
 #+begin_src emacs-lisp
@@ -200,18 +204,6 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
 #+end_src
 ** Custom functions
 #+begin_src emacs-lisp
-  (defun custom/vterm-split-vertical ()
-    (interactive)
-    (split-window-vertically)
-    (other-window 1)
-    (vterm 'N))
-
-  (defun custom/vterm-split-horizontal ()
-    (interactive)
-    (split-window-horizontally)
-    (other-window 1)
-    (vterm 'N))
-
   (defun custom/fix-accent ()
     (interactive)
     (beginning-of-buffer)
@@ -249,9 +241,6 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
 ** Custom Keybinds
 #+begin_src emacs-lisp
   (global-set-key (kbd "M-!") 'compile)
-  (global-set-key (kbd "C-x C-<return> 3") 'custom/vterm-split-horizontal)
-  (global-set-key (kbd "C-x C-<return> 2") 'custom/vterm-split-vertical)
-  (global-set-key (kbd "C-x C-<return> C-<return>") (lambda () (interactive) (vterm 'N)))
   (global-set-key (kbd "C-v") (lambda () (interactive) (scroll-up (/ (window-body-height) 2))))
   (global-set-key (kbd "M-v") (lambda () (interactive) (scroll-down (/ (window-body-height) 2))))
   (global-set-key (kbd "M-n") 'dabbrev-expand)
