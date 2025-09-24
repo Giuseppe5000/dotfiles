@@ -63,11 +63,11 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
 #+end_src
 ** Yasnippet
 #+begin_src emacs-lisp
-  (use-package yasnippet
-    :pin "melpa-stable"
-    :init (setq yas-snippet-dirs '("~/.dotfiles/emacs-snippets"))
-    :config (yas-reload-all)
-    :hook (org-mode . yas-minor-mode))
+  ;; (use-package yasnippet
+  ;;   :pin "melpa-stable"
+  ;;   :init (setq yas-snippet-dirs '("~/.dotfiles/emacs-snippets"))
+  ;;   :config (yas-reload-all)
+  ;;   :hook (org-mode . yas-minor-mode))
 #+end_src
 ** Multiple cursors
 #+begin_src emacs-lisp
@@ -113,36 +113,36 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
 #+end_src
 *** Typescript
 #+begin_src emacs-lisp
-  (use-package typescript-mode)
+  ;; (use-package typescript-mode)
 
-  (use-package tide
-    :pin "melpa-stable"
-    :hook (typescript-mode . setup-tide-mode))
+  ;; (use-package tide
+  ;;   :pin "melpa-stable"
+  ;;   :hook (typescript-mode . setup-tide-mode))
 
-  (defun setup-tide-mode ()
-    (interactive)
-    (tide-setup)
-    (flycheck-mode +1)
-    (company-mode +1)
-    (setq flycheck-check-syntax-automatically '(save mode-enabled))
-    (setq tide-format-options '(:indentSize 2 :tabSize 2))
-    (eldoc-mode +1)
-    (tide-hl-identifier-mode +1))
+  ;; (defun setup-tide-mode ()
+  ;;   (interactive)
+  ;;   (tide-setup)
+  ;;   (flycheck-mode +1)
+  ;;   (company-mode +1)
+  ;;   (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  ;;   (setq tide-format-options '(:indentSize 2 :tabSize 2))
+  ;;   (eldoc-mode +1)
+  ;;   (tide-hl-identifier-mode +1))
 
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-  (use-package web-mode
-    :hook (web-mode . (lambda ()
-                        (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                          (setup-tide-mode)))))
+  ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+  ;; (use-package web-mode
+  ;;   :hook (web-mode . (lambda ()
+  ;;                       (when (string-equal "tsx" (file-name-extension buffer-file-name))
+  ;;                         (setup-tide-mode)))))
 #+end_src
 *** Typst
 #+begin_src emacs-lisp
-  (let ((file-path "~/.dotfiles/emacs-modes/typst-mode.el"))
-  (if (file-exists-p file-path)
-      (progn
-        (load-file file-path)
-        (add-to-list 'auto-mode-alist '("\\.typ\\'" . typst-mode)))
-    (message "File does not exist: %s" file-path)))
+  ;; (let ((file-path "~/.dotfiles/emacs-modes/typst-mode.el"))
+  ;; (if (file-exists-p file-path)
+  ;;     (progn
+  ;;       (load-file file-path)
+  ;;       (add-to-list 'auto-mode-alist '("\\.typ\\'" . typst-mode)))
+  ;;   (message "File does not exist: %s" file-path)))
 #+end_src
 ** Org mode
 #+begin_src emacs-lisp
