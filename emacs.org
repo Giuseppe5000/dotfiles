@@ -271,6 +271,7 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
     (global-set-key (kbd "C-x RET 3") 'custom/vterm-split-horizontal)
     (global-set-key (kbd "C-x RET 2") 'custom/vterm-split-vertical)
     (global-set-key (kbd "C-x RET RET") (lambda () (interactive) (vterm 'N)))
+    (global-set-key (kbd "C-@") 'set-mark-command)
     (remove-hook 'org-mode-hook #'org-indent-mode)
     (unless (string-match-p "N/A" (battery))
       (display-battery-mode)))
