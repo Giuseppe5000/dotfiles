@@ -36,14 +36,6 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
     :hook (java-mode . eglot-ensure)
     :config (add-to-list 'eglot-server-programs '((simpc-mode) "clangd")))
 #+end_src
-** Yasnippet
-#+begin_src emacs-lisp
-  ;; (use-package yasnippet
-  ;;   :pin "melpa-stable"
-  ;;   :init (setq yas-snippet-dirs '("~/.dotfiles/emacs-snippets"))
-  ;;   :config (yas-reload-all)
-  ;;   :hook (org-mode . yas-minor-mode))
-#+end_src
 ** Multiple cursors
 #+begin_src emacs-lisp
   (use-package multiple-cursors)
@@ -136,8 +128,7 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
 #+end_src
 ** Org mode
 #+begin_src emacs-lisp
-  (setq org-preview-latex-image-directory "~/.emacs.d/latexpreview/"
-        org-startup-folded t
+  (setq org-startup-folded t
         org-hide-emphasis-markers t
         org-html-validation-link nil)
 
