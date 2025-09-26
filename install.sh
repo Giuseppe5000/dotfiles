@@ -3,8 +3,7 @@ set -xe
 cd "$(dirname "$0")"
 
 # Install some useful packages
-useful_packages="curl firefox firewall-config firewalld flameshot gromit-mpx \
-keepassxc mpv rclone syncthing thunderbird wget xournalpp zsh zsh-autosuggestions"
+useful_packages="curl firewall-config firewalld flameshot keepassxc rclone syncthing thunderbird xournalpp zsh zsh-autosuggestions"
 su -c "apt update && apt -y install $useful_packages"
 
 # Vim config
@@ -29,7 +28,7 @@ if [ ! -e ~/.local/share/fonts/IosevkaTermNerdFont-Regular.ttf ]
 then
     mkdir -p ~/.local/share/fonts
     nerdfonts_url="$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep browser_download_url)"
-    wget "$(echo "$nerdfonts_url" | grep IosevkaTerm.tar.xz | cut -d '"' -f 4)"
+    curl -LO "$(echo "$nerdfonts_url" | grep IosevkaTerm.tar.xz | cut -d '"' -f 4)"
     tar xvf IosevkaTerm.tar.xz -C ~/.local/share/fonts
     rm IosevkaTerm.tar.xz
     fc-cache -f
