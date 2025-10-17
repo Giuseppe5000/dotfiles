@@ -256,9 +256,9 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
 #+begin_src emacs-lisp
   (unless (display-graphic-p)
     (disable-theme 'gruber-darker)
-    (global-set-key (kbd "C-x RET 3") 'custom/vterm-split-horizontal)
-    (global-set-key (kbd "C-x RET 2") 'custom/vterm-split-vertical)
-    (global-set-key (kbd "C-x RET RET") (lambda () (interactive) (vterm 'N)))
+    (global-set-key (kbd "C-x RET 3") 'custom/eshell-split-horizontal)
+    (global-set-key (kbd "C-x RET 2") 'custom/eshell-split-vertical)
+    (global-set-key (kbd "C-x RET RET") (lambda () (interactive) (eshell 'N)))
     (global-set-key (kbd "C-@") 'set-mark-command)
     (remove-hook 'org-mode-hook #'org-indent-mode)
     (unless (string-match-p "N/A" (battery))
