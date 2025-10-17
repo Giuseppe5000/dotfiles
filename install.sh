@@ -3,7 +3,7 @@ set -xe
 cd "$(dirname "$0")"
 
 # Install some useful packages
-useful_packages="curl firewall-config firewalld flameshot keepassxc rclone syncthing thunderbird xournalpp zsh zsh-autosuggestions"
+useful_packages="curl firewall-config firewalld flameshot keepassxc rclone syncthing xournalpp zsh zsh-autosuggestions"
 su -c "apt update && apt -y install $useful_packages"
 
 # Vim config
