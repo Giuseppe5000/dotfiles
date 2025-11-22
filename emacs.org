@@ -296,7 +296,7 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
      ;; Basic Coloring (or Uncategorized)
      `(border ((t ,(list :background gruber-darker-bg-1
                          :foreground gruber-darker-bg+2))))
-     `(cursor ((t (:background ,gruber-darker-yellow))))
+     `(cursor ((t (:background ,"#D1571D"))))
      `(default ((t ,(list :foreground gruber-darker-fg
                           :background gruber-darker-bg))))
      `(fringe ((t ,(list :background nil
@@ -518,7 +518,7 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
      `(company-preview-common ((t (:foreground ,gruber-darker-green :background ,gruber-darker-bg-1))))
      ))
 
-  (load-theme 'gruber-darker t)
+  (enable-theme 'gruber-darker)
 #+end_src
 ** Misc
 #+begin_src emacs-lisp
