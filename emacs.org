@@ -10,16 +10,14 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
   (require 'package)
   (setq package-enable-at-startup nil)
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-  (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
   (setq package-native-compile nil
         native-comp-async-report-warnings-errors nil)
   (package-initialize)
 
-  (eval-and-compile
-    (require 'use-package-ensure)
-    (setq use-package-always-defer t
-          use-package-always-ensure nil
-          use-package-always-pin "nongnu"))
+  (require 'use-package-ensure)
+  (setq use-package-always-defer t
+        use-package-always-ensure nil
+        use-package-always-pin "nongnu")
 #+end_src
 ** Magit
 #+begin_src emacs-lisp
@@ -28,7 +26,7 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
 ** LSP
 #+begin_src emacs-lisp
   (use-package company
-    :pin "melpa-stable"
+    :pin "gnu"
     :after eglot
     :hook (eglot-managed-mode . company-mode))
 
