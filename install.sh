@@ -4,17 +4,17 @@ cd "$(dirname "$0")"
 
 # Install some useful packages
 useful_packages="curl firewall-config firewalld flameshot keepassxc rclone syncthing xournalpp"
-su -c "apt update && apt -y install $useful_packages"
+sudo apt update && sudo apt -y install $useful_packages
 
 # Vim config
-(ls ~/.vimrc) || ln -s "$PWD"/vimrc ~/.vimrc
+ln -sf "$PWD"/vimrc ~/.vimrc
 
 # Emacs config
-(ls ~/.emacs.org) || ln -s "$PWD"/emacs.org ~/.emacs.org
+ln -sf "$PWD"/emacs.org ~/.emacs.org
 
 # Shell
-(ls ~/.profile) || ln -s "$PWD"/profile ~/.profile
-(ls ~/.bashrc)  || ln -s "$PWD"/bashrc ~/.bashrc
+ln -sf "$PWD"/profile ~/.profile
+ln -sf "$PWD"/bashrc ~/.bashrc
 
 # Install fonts
 if [ ! -e ~/.local/share/fonts/IosevkaTermNerdFont-Regular.ttf ]
@@ -28,7 +28,7 @@ then
 fi
 
 # Enable some services
-su -c "systemctl enable firewalld --now"
+sudo systemctl enable firewalld --now
 systemctl --user daemon-reload
 systemctl --user enable syncthing --now
 
