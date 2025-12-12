@@ -3,7 +3,7 @@ set -xe
 cd "$(dirname "$0")"
 
 # Install some useful packages
-useful_packages="curl firewall-config firewalld flameshot keepassxc rclone syncthing xournalpp zsh zsh-autosuggestions"
+useful_packages="curl firewall-config firewalld flameshot keepassxc rclone syncthing xournalpp"
 su -c "apt update && apt -y install $useful_packages"
 
 # Vim config
@@ -12,16 +12,9 @@ su -c "apt update && apt -y install $useful_packages"
 # Emacs config
 (ls ~/.emacs.org) || ln -s "$PWD"/emacs.org ~/.emacs.org
 
-# ZSH
-(ls ~/.zshenv)        || ln -s "$PWD"/zshenv ~/.zshenv
-(ls ~/.zshrc)         || ln -s "$PWD"/zshrc ~/.zshrc
-(ls ~/.p10k.zsh)      || ln -s "$PWD"/p10k.zsh ~/.p10k.zsh
-(ls ~/.powerlevel10k) || git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
-
-if [ "$SHELL" != "/usr/bin/zsh" ]
-then
-    chsh -s /usr/bin/zsh
-fi
+# Shell
+(ls ~/.profile) || ln -s "$PWD"/profile ~/.profile
+(ls ~/.bashrc)  || ln -s "$PWD"/bashrc ~/.bashrc
 
 # Install fonts
 if [ ! -e ~/.local/share/fonts/IosevkaTermNerdFont-Regular.ttf ]
