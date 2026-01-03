@@ -3,11 +3,8 @@ set -xe
 cd "$(dirname "$0")"
 
 # Install some useful packages
-useful_packages="curl firewall-config firewalld flameshot keepassxc rclone syncthing xournalpp"
+useful_packages="curl emacs firewall-config firewalld flameshot keepassxc rclone syncthing xournalpp"
 sudo apt update && sudo apt -y install $useful_packages
-
-# Vim config
-ln -sf "$PWD"/vimrc ~/.vimrc
 
 # Emacs config
 ln -sf "$PWD"/emacs.org ~/.emacs.org
