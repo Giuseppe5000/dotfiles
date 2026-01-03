@@ -51,9 +51,7 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
   (set-frame-font "IosevkaTerm NFM 12" nil t)
   (setq-default indent-tabs-mode nil)
   (setq whitespace-style '(face tabs spaces trailing space-before-tab space-after-tab space-mark tab-mark)
-        display-line-numbers-type 'relative
-        indent-line-function 'insert-tab
-        display-line-numbers-type 'visual)
+        indent-line-function 'insert-tab)
   (column-number-mode 1)
   (size-indication-mode 1)
   (setq default-frame-alist '((width . 95) (height . 32)))
@@ -233,9 +231,7 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
 #+end_src
 ** Hooks
 #+begin_src emacs-lisp
-  (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   (add-hook 'prog-mode-hook #'electric-pair-mode)
-  (add-hook 'dired-mode-hook #'display-line-numbers-mode)
   (add-hook 'dired-mode-hook #'auto-revert-mode)
   (add-hook 'org-mode-hook #'org-indent-mode)
 #+end_src
