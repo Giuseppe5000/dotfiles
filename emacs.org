@@ -159,10 +159,6 @@ Export some specific org files to html when closing.
   (global-set-key (kbd "C-x C-<return> 3") 'custom/eshell-split-horizontal)
   (global-set-key (kbd "C-x C-<return> 2") 'custom/eshell-split-vertical)
   (global-set-key (kbd "C-x C-<return> C-<return>") (lambda () (interactive) (eshell 'N)))
-
-  (add-hook 'eshell-mode-hook
-            (lambda ()
-              (define-key eshell-mode-map (kbd "C-d") 'kill-buffer-and-window)))
 #+end_src
 ** Garbage collector
 References: https://jackjamison.xyz/blog/emacs-garbage-collection/
@@ -218,7 +214,7 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
     (backward-up-list arg (point) (point))
     (mark-sexp))
 #+end_src
-** Custom Keybinds
+** Custom keybinds
 #+begin_src emacs-lisp
   (global-set-key (kbd "M-!") 'compile)
   (global-set-key (kbd "C-v") (lambda () (interactive) (scroll-up (/ (window-body-height) 2))))
@@ -238,7 +234,6 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
 ** TTY
 #+begin_src emacs-lisp
   (unless (display-graphic-p)
-    (disable-theme 'gruber-darker)
     (global-set-key (kbd "C-x RET 3") 'custom/eshell-split-horizontal)
     (global-set-key (kbd "C-x RET 2") 'custom/eshell-split-vertical)
     (global-set-key (kbd "C-x RET RET") (lambda () (interactive) (eshell 'N)))
