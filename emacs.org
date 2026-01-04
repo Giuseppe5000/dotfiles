@@ -47,6 +47,7 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
   (menu-bar-mode -1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
+  (tooltip-mode -1)
   (setq inhibit-startup-screen t)
   (set-frame-font "IosevkaTerm NFM 12" nil t)
   (setq-default indent-tabs-mode nil)
