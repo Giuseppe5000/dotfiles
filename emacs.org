@@ -129,14 +129,6 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
    '(org-meta-line ((t (:foreground "gray" :height 0.9))))
    '(org-block ((t (:background "#181818" :foreground "gray")))))
 #+end_src
-*** Auto html export
-Export some specific org files to html when closing.
-#+begin_src emacs-lisp
-  (defun custom/org-mode-export-hook ()
-    (when (string-prefix-p "/home/giuseppe/Documents/uni" (buffer-file-name))
-      (add-hook 'kill-buffer-hook 'org-html-export-to-html t t)))
-  (add-hook 'org-mode-hook #'custom/org-mode-export-hook)
-#+end_src
 ** Dired
 #+begin_src emacs-lisp
   (setq dired-listing-switches "-lhAX --group-directories-first"
