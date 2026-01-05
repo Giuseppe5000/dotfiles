@@ -8,7 +8,6 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
 ** Repos
 #+begin_src emacs-lisp
   ;; (require 'package)
-  ;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
   ;; (setq package-native-compile nil)
   ;; (setq native-comp-async-report-warnings-errors nil)
   ;; (package-initialize)
@@ -16,15 +15,11 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
   ;;   (package-refresh-contents))
 
   ;; (setq custom/package-list '(magit eglot company multiple-cursors))
-  ;; (setq package-pinned-packages
-  ;;       '((magit . "nongnu")
-  ;;         (eglot . "nongnu")
-  ;;         (company . "gnu")
-  ;;         (multiple-cursors . "nongnu")))
-
   ;; (dolist (pkg custom/package-list)
   ;;   (unless (package-installed-p pkg)
   ;;     (package-install pkg)))
+
+  ;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 #+end_src
 ** Eglot
 #+begin_src emacs-lisp
@@ -192,30 +187,6 @@ References: https://github.com/rexim/simpc-mode
     (setq-local comment-start "// "))
 
   (provide 'simpc-mode)
-#+end_src
-*** Typescript
-#+begin_src emacs-lisp
-  ;; (use-package typescript-mode)
-
-  ;; (use-package tide
-  ;;   :pin "melpa-stable"
-  ;;   :hook (typescript-mode . setup-tide-mode))
-
-  ;; (defun setup-tide-mode ()
-  ;;   (interactive)
-  ;;   (tide-setup)
-  ;;   (flycheck-mode +1)
-  ;;   (company-mode +1)
-  ;;   (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  ;;   (setq tide-format-options '(:indentSize 2 :tabSize 2))
-  ;;   (eldoc-mode +1)
-  ;;   (tide-hl-identifier-mode +1))
-
-  ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-  ;; (use-package web-mode
-  ;;   :hook (web-mode . (lambda ()
-  ;;                       (when (string-equal "tsx" (file-name-extension buffer-file-name))
-  ;;                         (setup-tide-mode)))))
 #+end_src
 *** Typst
 #+begin_src emacs-lisp
