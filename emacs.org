@@ -4,37 +4,19 @@
 
 For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
 
-* Packages
-** Repos
-#+begin_src emacs-lisp
-  ;; (require 'package)
-  ;; (setq package-native-compile nil)
-  ;; (setq native-comp-async-report-warnings-errors nil)
-  ;; (package-initialize)
-  ;; (unless package-archive-contents
-  ;;   (package-refresh-contents))
-
-  ;; (setq custom/package-list '(magit eglot company multiple-cursors))
-  ;; (dolist (pkg custom/package-list)
-  ;;   (unless (package-installed-p pkg)
-  ;;     (package-install pkg)))
-
-  ;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-#+end_src
-** Eglot
+* Eglot
 #+begin_src emacs-lisp
   (with-eval-after-load 'eglot
     (add-to-list 'eglot-server-programs '((simpc-mode) "clangd")))
   (add-hook 'eglot-managed-mode-hook #'company-mode)
 #+end_src
-** Multiple cursors
+* Multiple cursors
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-beginnings-of-lines)
   (global-set-key (kbd "C->") 'mc/mark-next-like-this-word)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this-word)
 #+end_src
-* General
-** Style
+* Style
 #+begin_src emacs-lisp
   (if (version< emacs-version "27.1")
       (progn
@@ -74,13 +56,13 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
   (size-indication-mode 1)
   (setq default-frame-alist '((width . 95) (height . 32)))
 #+end_src
-** Languages
-*** C
+* Languages
+** C
 #+begin_src emacs-lisp
   (setq c-basic-offset 4)
   (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
 #+end_src
-**** Simpc-mode
+*** Simpc-mode
 References: https://github.com/rexim/simpc-mode
 #+begin_src emacs-lisp
   ;; Commit 958aeb9
@@ -212,23 +194,23 @@ References: https://github.com/rexim/simpc-mode
 
   (provide 'simpc-mode)
 #+end_src
-*** Typst
+** Typst
 #+begin_src emacs-lisp
   ;; https://github.com/Ziqi-Yang/typst-mode.el
   ;; (add-to-list 'auto-mode-alist '("\\.typ\\'" . typst-mode))
 #+end_src
-** IDO vertical
+* IDO vertical
 #+begin_src emacs-lisp
   (ido-mode t)
   (ido-everywhere t)
   (setq ido-enable-flex-matching t)
   (setq ido-decorations
-        '("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))
+        '("\n-> " "" "\n   " "\n   ..." " [" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))
 
   (define-key ido-common-completion-map (kbd "C-n") 'ido-next-match)
   (define-key ido-common-completion-map (kbd "C-p") 'ido-prev-match)
 #+end_src
-** Org mode
+* Org mode
 #+begin_src emacs-lisp
   (setq org-startup-folded t
         org-hide-emphasis-markers t
@@ -246,12 +228,12 @@ References: https://github.com/rexim/simpc-mode
    '(org-meta-line ((t (:foreground "gray" :height 0.9))))
    '(org-block ((t (:background "#181818" :foreground "gray")))))
 #+end_src
-** Dired
+* Dired
 #+begin_src emacs-lisp
   (setq dired-listing-switches "-lhAX --group-directories-first"
         dired-dwim-target t)
 #+end_src
-** Eshell
+* Eshell
 #+begin_src emacs-lisp
   (defun custom/eshell-split-vertical ()
     (interactive)
@@ -269,7 +251,7 @@ References: https://github.com/rexim/simpc-mode
   (global-set-key (kbd "C-x C-<return> 2") 'custom/eshell-split-vertical)
   (global-set-key (kbd "C-x C-<return> C-<return>") (lambda () (interactive) (eshell 'N)))
 #+end_src
-** Garbage collector
+* Garbage collector
 References: https://jackjamison.xyz/blog/emacs-garbage-collection/
 #+begin_src emacs-lisp
   (defun my-minibuffer-exit-hook ()
@@ -283,8 +265,22 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
 
   (gc-idle-timer)
 #+end_src
-** Custom functions
+* Custom functions
 #+begin_src emacs-lisp
+  (defun custom/install-pkgs ()
+    (interactive)
+    (require 'package)
+    (setq native-comp-async-report-warnings-errors nil)
+    (package-initialize)
+
+    (unless package-archive-contents
+      (package-refresh-contents))
+
+    (let ((pkgs '(magit eglot company multiple-cursors)))
+      (dolist (pkg pkgs)
+        (unless (package-installed-p pkg)
+          (package-install pkg)))))
+
   (defun custom/fix-accent ()
     (interactive)
     (beginning-of-buffer)
@@ -303,7 +299,7 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
     (backward-up-list arg (point) (point))
     (mark-sexp))
 #+end_src
-** Custom keybinds
+* Custom keybinds
 #+begin_src emacs-lisp
   (global-set-key (kbd "M-!") 'compile)
   (global-set-key (kbd "C-v") (lambda () (interactive) (scroll-up (/ (window-body-height) 2))))
@@ -314,13 +310,13 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
   (with-eval-after-load 'dired
     (define-key dired-mode-map [mouse-2] #'dired-mouse-find-file))
 #+end_src
-** Hooks
+* Hooks
 #+begin_src emacs-lisp
   (add-hook 'prog-mode-hook #'electric-pair-mode)
   (add-hook 'dired-mode-hook #'auto-revert-mode)
   (add-hook 'org-mode-hook #'org-indent-mode)
 #+end_src
-** TTY
+* TTY
 #+begin_src emacs-lisp
   (unless (display-graphic-p)
     (global-set-key (kbd "C-x RET 3") 'custom/eshell-split-horizontal)
@@ -331,7 +327,7 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
     (unless (string-match-p "N/A" (battery))
       (display-battery-mode)))
 #+end_src
-** Theme
+* Theme
 #+begin_src emacs-lisp
   ;; gruber-darker-theme.el --- Gruber Darker color theme for Emacs 24.
   ;; Version: 0.7
@@ -598,7 +594,7 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
 
   (enable-theme 'gruber-darker)
 #+end_src
-** Misc
+* Misc
 #+begin_src emacs-lisp
   (setq auto-save-default nil
         use-short-answers 1
