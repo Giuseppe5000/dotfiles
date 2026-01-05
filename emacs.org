@@ -223,7 +223,7 @@ References: https://github.com/rexim/simpc-mode
   (ido-everywhere t)
   (setq ido-enable-flex-matching t)
   (setq ido-decorations
-        '("\n-> " "" "\n   " "\n   " "\n   " "\n   " "\n   " "\n   "))
+        '("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))
 
   (define-key ido-common-completion-map (kbd "C-n") 'ido-next-match)
   (define-key ido-common-completion-map (kbd "C-p") 'ido-prev-match)
