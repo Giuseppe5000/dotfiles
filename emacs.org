@@ -7,36 +7,33 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
 * Packages
 ** Repos
 #+begin_src emacs-lisp
-  (require 'package)
-  (setq package-enable-at-startup nil)
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-  (setq package-native-compile nil
-        native-comp-async-report-warnings-errors nil)
-  (package-initialize)
+  ;; (require 'package)
+  ;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  ;; (setq package-native-compile nil)
+  ;; (setq native-comp-async-report-warnings-errors nil)
+  ;; (package-initialize)
+  ;; (unless package-archive-contents
+  ;;   (package-refresh-contents))
 
-  (require 'use-package-ensure)
-  (setq use-package-always-defer t
-        use-package-always-ensure nil
-        use-package-always-pin "nongnu")
-#+end_src
-** Magit
-#+begin_src emacs-lisp
-  (use-package magit)
-#+end_src
-** LSP
-#+begin_src emacs-lisp
-  (use-package company
-    :pin "gnu"
-    :after eglot
-    :hook (eglot-managed-mode . company-mode))
+  ;; (setq custom/package-list '(magit eglot company multiple-cursors))
+  ;; (setq package-pinned-packages
+  ;;       '((magit . "nongnu")
+  ;;         (eglot . "nongnu")
+  ;;         (company . "gnu")
+  ;;         (multiple-cursors . "nongnu")))
 
-  (use-package eglot
-    :hook (java-mode . eglot-ensure)
-    :config (add-to-list 'eglot-server-programs '((simpc-mode) "clangd")))
+  ;; (dolist (pkg custom/package-list)
+  ;;   (unless (package-installed-p pkg)
+  ;;     (package-install pkg)))
+#+end_src
+** Eglot
+#+begin_src emacs-lisp
+  (with-eval-after-load 'eglot
+    (add-to-list 'eglot-server-programs '((simpc-mode) "clangd")))
+  (add-hook 'eglot-managed-mode-hook #'company-mode)
 #+end_src
 ** Multiple cursors
 #+begin_src emacs-lisp
-  (use-package multiple-cursors)
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-beginnings-of-lines)
   (global-set-key (kbd "C->") 'mc/mark-next-like-this-word)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this-word)
@@ -50,7 +47,7 @@ For apply changes to the real configuration (~/.emacs) run `org-babel-tangle`.
   (tooltip-mode -1)
   (setq inhibit-startup-screen t)
   (when (member "IosevkaTerm Nerd Font Mono" (font-family-list))
-        (set-frame-font "IosevkaTerm Nerd Font Mono 12" nil t))
+    (set-frame-font "IosevkaTerm Nerd Font Mono 12" nil t))
   (setq-default indent-tabs-mode nil)
   (setq whitespace-style '(face tabs spaces trailing space-before-tab space-after-tab space-mark tab-mark)
         indent-line-function 'insert-tab)
