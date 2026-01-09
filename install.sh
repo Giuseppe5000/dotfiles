@@ -31,3 +31,14 @@ systemctl --user enable syncthing --now
 
 # Git remote conf
 git remote set-url origin git@github.com:Giuseppe5000/dotfiles.git
+
+# Download GitHub repos in ~/Projects
+mkdir -p ~/Projects
+cd ~/Projects
+
+REPOS=$(curl -s https://api.github.com/users/Giuseppe5000/repos)
+URLS=$(echo "$REPOS" | grep -o '\"clone_url\": \"[^\"]*\"' | sed 's/\"clone_url\": \"//;s/\"//')
+
+for url in $URLS; do
+    git clone "$url"
+done
