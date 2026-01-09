@@ -259,6 +259,7 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
 * Custom functions
 #+begin_src emacs-lisp
   (defun custom/install-pkgs ()
+    "Install some useful packages."
     (interactive)
     (require 'package)
     (setq native-comp-async-report-warnings-errors nil)
@@ -271,6 +272,22 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
       (dolist (pkg pkgs)
         (unless (package-installed-p pkg)
           (package-install pkg)))))
+
+  (defun custom/install-iosevka-font ()
+    "Install Iosevka Fonts if it doesn't exist."
+    (interactive)
+    (let ((font (expand-file-name "~/.local/share/fonts/IosevkaTermNerdFont-Regular.ttf"))
+          (font-dir (expand-file-name "~/.local/share/fonts"))
+          (tarball (expand-file-name "IosevkaTerm.tar.xz" temporary-file-directory))
+          (url "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/IosevkaTerm.tar.xz"))
+
+      (unless (file-exists-p font)
+        (make-directory font-dir t)
+        (url-copy-file url tarball t)
+        (call-process "tar" nil nil nil "-xf" tarball "-C" font-dir)
+        (call-process "fc-cache" nil nil nil "-f")
+        (delete-file tarball)
+        (message "Iosevka Fonts installed."))))
 
   (defun custom/fix-accent ()
     (interactive)
