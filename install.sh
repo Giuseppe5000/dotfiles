@@ -9,10 +9,6 @@ sudo apt update && sudo apt -y install $useful_packages
 # Emacs config
 ln -sf "$PWD"/emacs.org ~/.emacs.org
 
-# Shell
-ln -sf "$PWD"/profile ~/.profile
-ln -sf "$PWD"/bashrc ~/.bashrc
-
 # Install fonts
 if [ ! -e ~/.local/share/fonts/IosevkaTermNerdFont-Regular.ttf ]
 then
