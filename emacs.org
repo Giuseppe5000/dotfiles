@@ -1,6 +1,7 @@
 #+TITLE: Emacs Configuration
 #+AUTHOR: Giuseppe
 #+PROPERTY: header-args :tangle (eval (expand-file-name "init.el" user-emacs-directory))
+#+STARTUP: overview
 
 For apply changes to the real configuration (init.el) run `org-babel-tangle`.
 
