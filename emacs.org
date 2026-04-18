@@ -192,6 +192,11 @@ References: https://github.com/rexim/simpc-mode
   ;; https://github.com/Ziqi-Yang/typst-mode.el
   ;; (add-to-list 'auto-mode-alist '("\\.typ\\'" . typst-mode))
 #+end_src
+** Agda
+#+begin_src emacs-lisp
+  ;; (load-file (let ((coding-system-for-read 'utf-8))
+  ;;              (shell-command-to-string "agda --emacs-mode locate")))
+#+end_src
 * IDO vertical
 #+begin_src emacs-lisp
   (ido-mode t)
