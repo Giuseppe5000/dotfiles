@@ -625,6 +625,7 @@ References: https://jackjamison.xyz/blog/emacs-garbage-collection/
   (setq use-dialog-box nil)
   (setq make-backup-files nil)
   (setq gamegrid-glyph-height-mm 10.0) ;; Tetris size fix
+  (setq display-time-24hr-format t)
   (setq display-time-mail-string "")
   (setq display-time-load-average-threshold "")
 #+end_src
